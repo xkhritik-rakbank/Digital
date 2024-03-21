@@ -1,0 +1,4920 @@
+package com.newgen.custom;
+
+public class TestMQService {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//String message =  "<EE_EAI_MESSAGE><EE_EAI_HEADER><MsgFormat>CUSTOMER_SR</MsgFormat><MsgVersion>0000</MsgVersion><RequestorChannelId>EBC.RPA</RequestorChannelId><RequestorUserId>RAKUSER</RequestorUserId><RequestorLanguage>E</RequestorLanguage><RequestorSecurityInfo>secure</RequestorSecurityInfo><ReturnCode>0000</ReturnCode><ReturnDesc>0000</ReturnDesc><MessageId>RPAG24345T2412</MessageId><Extra2>2018-09-10T12:37:09.822+05:30</Extra2></EE_EAI_HEADER><CreateWorkitemReq><ProcessName>RMT</ProcessName><SubProcess/><InitiateAlso>Y</InitiateAlso><Attributes><Attribute><Name>CHANNEL</Name><Value>EBC.RPA</Value></Attribute><Attribute><Name>CIFNUMBER</Name><Value></Value></Attribute><Attribute><Name>CUSTOMERTYPE</Name><Value>Individual</Value></Attribute><Attribute><Name>CUSTOMERCATEGORY</Name><Value>Resident Individual</Value></Attribute><Attribute><Name>FIRSTNAME</Name><Value>RATHINA RAJ SURESH</Value></Attribute><Attribute><Name>LASTNAME</Name><Value>KUMAR</Value></Attribute><Attribute><Name>NATIONALITY</Name><Value>IN</Value></Attribute><Attribute><Name>DATEOFBIRTH</Name><Value>1990-11-30</Value></Attribute><Attribute><Name>EMPLOYMENTTYPE</Name><Value>SELF-EMPLOYED</Value></Attribute><Attribute><Name>SEGMENT</Name><Value>PERSONAL BANKING</Value></Attribute><Attribute><Name>SUBSEGMENT</Name><Value>PB - NORMAL</Value></Attribute><Attribute><Name>INDUSTRY</Name><Value>ARMS DEALER</Value></Attribute><Attribute><Name>POLITICALLYEXPOSEDPERSON</Name><Value>N</Value></Attribute><Attribute><Name>EMIRATESID</Name><Value>784199053526200</Value></Attribute><Attribute><Name>EMIRATESIDEXPIRYDATE</Name><Value>2021-05-30</Value></Attribute><Attribute><Name>PASSPORTNUMBER</Name><Value>M2737474</Value></Attribute><Attribute><Name>PASSPORTEXPIRYDATE</Name><Value>2019-09-10</Value></Attribute><Attribute><Name>DEMOGRAPHIC</Name><Value>AS</Value></Attribute><Attribute><Name>PRODUCTTYPE</Name><Value>RMT Account</Value></Attribute><Attribute><Name>PRODUCTCURRENCY</Name><Value>AED</Value></Attribute><Attribute><Name>CURRENTRESIDENTADDRESS</Name><Value>Test April Dubai United Arab Emirates</Value></Attribute><Attribute><Name>MAILINGADDRESS</Name><Value>Sample Iws Ras Al Khaimah United Arab Emirates</Value></Attribute><Attribute><Name>CITYOFBIRTH</Name><Value>DXB</Value></Attribute><Attribute><Name>COUNTRYOFBIRTH</Name><Value>AE</Value></Attribute><Attribute><Name>CRSUNDOCUMENTEDFLAG</Name><Value>N</Value></Attribute><Attribute><Name>REPORTCOUNTRYDETAILS</Name><Value>AE~~A-NOT ISSUED~test||</Value></Attribute><Attribute><Name>UID</Name><Value>6a6af0c4eb9b32b7d85f16f1b93c5cf617beb359</Value></Attribute><Attribute><Name>EXTERNALREFERENCENO</Name><Value>4118491</Value></Attribute><Attribute><Name>FACIALSCORE</Name><Value>6</Value></Attribute><Attribute><Name>MOBILENO</Name><Value>528858575</Value></Attribute><Attribute><Name>EMAILID</Name><Value>rath@ui.jj</Value></Attribute></Attributes></CreateWorkitemReq></EE_EAI_MESSAGE>";
+		//String message = "<EE_EAI_HEADER><EE_EAI_HEADER><MsgFormat>UPDATE_SR</MsgFormat><MsgVersion>0000</MsgVersion><RequestorChannelId>IB</RequestorChannelId><RequestorUserId>RAKUSER</RequestorUserId><RequestorLanguage>E</RequestorLanguage><RequestorSecurityInfo>secure</RequestorSecurityInfo><ReturnCode>0000</ReturnCode><ReturnDesc>Success</ReturnDesc><MessageId>UNIQUE Identifier(RQ-DDMMYYYYHHMMSSS)</MessageId><Extra1>REQ ||IB.123</Extra1><Extra2>2011-02-08T15:31:38.818+05:30</Extra2></EE_EAI_HEADER><UpdateWorkitemReq><ProcessName>RMT</ProcessName><SubProcess/><Attributes><Attribute><Name>WINUMBER</Name><Value>RMT-0000000920-Process</Value></Attribute><Attribute><Name>UID2</Name><Value>1b606eaa2a42f67f6c74b1f70731e63a7dc3eaa7446dfe2d978885e5e617ed2d15336306797382</Value></Attribute><Attribute><Name>PASSPORTNUMBER</Name><Value>P123456</Value></Attribute><Attribute><Name>PASSPORTEXPIRYDATE</Name><Value>2300/01/01</Value></Attribute><Attribute><Name>VISANUMBER</Name><Value>2300/01/01</Value></Attribute><Attribute><Name>VISAISSUEDATE</Name><Value>2300-01-01</Value></Attribute><Attribute><Name>VISAEXPIRYDATE</Name><Value>2300-01-01</Value></Attribute></Attributes></UpdateWorkitemReq></EE_EAI_HEADER>";
+		//String message="<EE_EAI_HEADER><MsgFormat>CUSTOMER_SR</MsgFormat><MsgVersion>0000</MsgVersion><RequestorChannelId>EBC.RPA</RequestorChannelId><RequestorUserId>RAKUSER</RequestorUserId><RequestorLanguage>E</RequestorLanguage><RequestorSecurityInfo>secure</RequestorSecurityInfo><ReturnCode>0000</ReturnCode><ReturnDesc>0000</ReturnDesc><MessageId>ABCTESTDEDUP1</MessageId><Extra1>REQ||CORP6EID16.CORP6EID16</Extra1><Extra2>2018-10-15T09:46:17.251+05:30</Extra2></EE_EAI_HEADER><CreateWorkitemReq><ProcessName>RMT</ProcessName><SubProcess/><InitiateAlso>Y</InitiateAlso><Attributes><Attribute><Name>CHANNEL</Name><Value>EBC.RPA</Value></Attribute><Attribute><Name>CIFNUMBER</Name><Value>5000050</Value></Attribute><Attribute><Name>CUSTOMERTYPE</Name><Value>Individual</Value></Attribute><Attribute><Name>CUSTOMERCATEGORY</Name><Value>Resident Individual</Value></Attribute><Attribute><Name>FIRSTNAME</Name><Value>RAMAINA RAJ SMAESH</Value></Attribute><Attribute><Name>LASTNAME</Name><Value>MAMAR</Value></Attribute><Attribute><Name>NATIONALITY</Name><Value>IN</Value></Attribute><Attribute><Name>DATEOFBIRTH</Name><Value>1990-11-30</Value></Attribute><Attribute><Name>EMPLOYMENTTYPE</Name><Value>SALARIED</Value></Attribute><Attribute><Name>SEGMENT</Name><Value>PERSONAL BANKING</Value></Attribute><Attribute><Name>SUBSEGMENT</Name><Value>PB - NORMAL</Value></Attribute><Attribute><Name>INDUSTRY</Name><Value>EMPLOYED INDIVIDUAL</Value></Attribute><Attribute><Name>POLITICALLYEXPOSEDPERSON</Name><Value>N</Value></Attribute><Attribute><Name>EMIRATESID</Name><Value>784199053556200</Value></Attribute><Attribute><Name>EMIRATESIDEXPIRYDATE</Name><Value>2021-05-30</Value></Attribute><Attribute><Name>DEMOGRAPHIC</Name><Value>AE</Value></Attribute><Attribute><Name>ACCOUNTNUMBER</Name><Value>0025000050001</Value></Attribute><Attribute><Name>PRODUCTTYPE</Name><Value>RMT Account</Value></Attribute><Attribute><Name>PRODUCTCURRENCY</Name><Value>AED</Value></Attribute><Attribute><Name>CURRENTRESIDENTADDRESS</Name><Value>Test  Fujairah United Arab Emirates</Value></Attribute><Attribute><Name>MAILINGADDRESS</Name><Value>Test  Fujairah United Arab Emirates</Value></Attribute><Attribute><Name>CITYOFBIRTH</Name><Value>Test</Value></Attribute><Attribute><Name>COUNTRYOFBIRTH</Name><Value>AI</Value></Attribute><Attribute><Name>CRSUNDOCUMENTEDFLAG</Name><Value>N</Value></Attribute><Attribute><Name>REPORTCOUNTRYDETAILS</Name><Value>AE~~B-UNABLE GET TIN~Test||</Value></Attribute><Attribute><Name>UID</Name><Value>ae95230de534370946e1bcf669e9a2b52f2608ac30d0fdc4ba258e36d80ee5f515395822354854</Value></Attribute><Attribute><Name>EXTERNALREFERENCENO</Name><Value>4095310</Value></Attribute><Attribute><Name>FACIALSCORE</Name><Value>4</Value></Attribute><Attribute><Name>MOBILENO</Name><Value>546458486</Value></Attribute><Attribute><Name>EMAILID</Name><Value>ratqidid@idj.com</Value></Attribute></Attributes></CreateWorkitemReq></EE_EAI_MESSAGE>";
+		//String message = "<EE_EAI_HEADER><EE_EAI_HEADER><MsgFormat>CUSTOMER_SR</MsgFormat><MsgVersion>0000</MsgVersion><RequestorChannelId>YAP</RequestorChannelId><RequestorUserId>RAKUSER</RequestorUserId><RequestorLanguage>E</RequestorLanguage><RequestorSecurityInfo>secure</RequestorSecurityInfo><ReturnCode>0000</ReturnCode><ReturnDesc>Success</ReturnDesc><MessageId>msg46737</MessageId><Extra1>REQ || YAP.123</Extra1><Extra2>2011-02-08T15:31:38.818+05:30</Extra2></EE_EAI_HEADER><CreateWorkitemReq><ProcessName>RAOP</ProcessName><SubProcess>YAP</SubProcess><InitiateAlso>Y</InitiateAlso><Documents></Documents><Attributes><Attribute><Name>CHANNEL</Name><Value>YAP</Value></Attribute><Attribute><Name>IBANNUMBER</Name><Value>AE350260120550176640</Value></Attribute><Attribute><Name>TITLEPREFIX</Name><Value></Value></Attribute><Attribute><Name>CUSTOMERCATEGORY</Name><Value>Resident Individual</Value></Attribute><Attribute><Name>FIRSTNAME</Name><Value>pooja</Value></Attribute><Attribute><Name>MIDDLENAME</Name><Value>Kumari</Value></Attribute><Attribute><Name>LASTNAME</Name><Value>Singhal</Value></Attribute><Attribute><Name>NATIONALITY</Name><Value>AE</Value></Attribute><Attribute><Name>DATEOFBIRTH</Name><Value>1997-02-15</Value></Attribute><Attribute><Name>GENDER</Name><Value>F</Value></Attribute><Attribute><Name>MARITALSTATUS</Name><Value>M</Value></Attribute><Attribute><Name>EMPLOYMENTTYPE</Name><Value>MIGR</Value></Attribute><Attribute><Name>EMPLOYERNAME</Name><Value>Vimamra Agnihotri</Value></Attribute><Attribute><Name>OCCUPATION</Name><Value>ENGG</Value></Attribute><Attribute><Name>INDUSTRYSEGMENT</Name><Value>TSC</Value></Attribute><Attribute><Name>INDUSTRYSUBSEGMENT</Name><Value>AK</Value></Attribute><Attribute><Name>POLITICALLYEXPOSEDPERSON</Name><Value>NPEP</Value></Attribute><Attribute><Name>MOBILECNTRYCODE</Name><Value>+971</Value></Attribute><Attribute><Name>MOBILENO</Name><Value>25874122112</Value></Attribute><Attribute><Name>EMAILID</Name><Value>abc@gmail.com</Value></Attribute><Attribute><Name>EMIRATESID</Name><Value>7841901797</Value></Attribute><Attribute><Name>EMIRATESIDEXPIRYDATE</Name><Value>2300-01-01</Value></Attribute><Attribute><Name>PASSPORTNUMBER</Name><Value>P123456</Value></Attribute><Attribute><Name>PASSPORTEXPIRYDATE</Name><Value>2300-01-01</Value></Attribute><Attribute><Name>VISAFILENUMBER</Name><Value>7654</Value></Attribute><Attribute><Name>VISAUIDNUMBER</Name><Value>529811166</Value></Attribute><Attribute><Name>VISAISSUEDATE</Name><Value>2300-01-01</Value></Attribute><Attribute><Name>VISAEXPDATE</Name><Value>2300-01-01</Value></Attribute><Attribute><Name>DEMOGRAPHIC</Name><Value>IN</Value></Attribute><Attribute><Name>RESIDENCEADDRLINE1</Name><Value>D1</Value></Attribute><Attribute><Name>RESIDENCEADDRLINE2</Name><Value>nirma apartment</Value></Attribute><Attribute><Name>RESIDENCEADDRPOBOX</Name><Value>01254</Value></Attribute><Attribute><Name>RESIDENCEADDRCITY</Name><Value>RYD</Value></Attribute><Attribute><Name>RESIDENCEADDRCOUNTRY</Name><Value>DE</Value></Attribute><Attribute><Name>MAILINGADDRLINE1</Name><Value>Octa Phase</Value></Attribute><Attribute><Name>MAILINGADDRLINE2</Name><Value>Bita Residency</Value></Attribute><Attribute><Name>MAILINGADDRPOBOX</Name><Value>22635</Value></Attribute><Attribute><Name>MAILINGADDRCITY</Name><Value>SAK</Value></Attribute><Attribute><Name>MAILINGADDRCOUNTRY</Name><Value>BR</Value></Attribute><Attribute><Name>CITYOFBIRTH</Name><Value>AAP</Value></Attribute><Attribute><Name>COUNTRYOFBIRTH</Name><Value>AL</Value></Attribute><Attribute><Name>REPORTCOUNTRYDETAILS</Name><Value>USA~123445~XYZ476~remarks| UAE~5577~No tax number~remarks | IND~ABC12345~Reason B~ok</Value></Attribute><Attribute><Name>USRELATION</Name><Value>R</Value></Attribute><Attribute><Name>TINNUMBER</Name><Value>1458</Value></Attribute><Attribute><Name>FATCAREASON</Name><Value>US PLACE OF BIRTH</Value></Attribute><Attribute><Name>DOCUMENTSCOLLECTED</Name><Value>W8</Value></Attribute><Attribute><Name>SIGNEDDATE</Name><Value>2017-01-01</Value></Attribute><Attribute><Name>EXPECTEDMONTHLYCREDITTURNOVERAED</Name><Value>65465.22</Value></Attribute><Attribute><Name>MONTHLYCASHCREDITTURNOVERPERCENTAGE</Name><Value>66</Value></Attribute><Attribute><Name>MONTHLYNONCASHCREDITTURNOVERPERCENTAGE</Name><Value>15.50</Value></Attribute><Attribute><Name>HIGHESTCASHCREDITTRANSACTIONAED</Name><Value>456.456</Value></Attribute><Attribute><Name>HIGHESTNONCASHCREDITTRANSACTIONAED</Name><Value>654654.45</Value></Attribute></Attributes></CreateWorkitemReq></EE_EAI_HEADER>";
+		//String message = "<EE_EAI_HEADER><EE_EAI_HEADER><MsgFormat>STATUS_SR</MsgFormat><MsgVersion>0000</MsgVersion><RequestorChannelId>ECB.INB</RequestorChannelId><RequestorUserId>RAKUSER</RequestorUserId><RequestorLanguage>E</RequestorLanguage><RequestorSecurityInfo>secure</RequestorSecurityInfo><ReturnCode>0000</ReturnCode><ReturnDesc>Success</ReturnDesc><MessageId>msg46737</MessageId><Extra1>REQ || ECB.INB.123</Extra1><Extra2>2011-02-08T15:31:38.818+05:30</Extra2></EE_EAI_HEADER><GetWorkitemStatusReq><ProcessName>BAIS</ProcessName><SubProcess></SubProcess><Attributes><Attribute><Name>WorkitemNumber</Name><Value>BAIS-0000000352-Process</Value></Attribute></Attributes></GetWorkitemStatusReq></EE_EAI_HEADER>";
+		//String message = "<EE_EAI_HEADER><EE_EAI_HEADER><MsgFormat>CUSTOMER_SR</MsgFormat><MsgVersion>0000</MsgVersion><RequestorChannelId>YAP</RequestorChannelId><RequestorUserId>RAKUSER</RequestorUserId><RequestorLanguage>E</RequestorLanguage><RequestorSecurityInfo>secure</RequestorSecurityInfo><ReturnCode>0000</ReturnCode><ReturnDesc>Success</ReturnDesc><MessageId>msg46738</MessageId><Extra1>REQ || CMP.123</Extra1><Extra2>2011-02-08T15:31:38.818+05:30</Extra2></EE_EAI_HEADER><CreateWorkitemReq><ProcessName>CMP</ProcessName><SubProcess>API.YAP</SubProcess><InitiateAlso>Y</InitiateAlso><Documents></Documents><Attributes><Attribute><Name>CHANNEL</Name><Value>CMP</Value></Attribute><Attribute><Name>FIRSTNAME</Name><Value>Meena</Value></Attribute><Attribute><Name>MIDDLENAME</Name><Value>Kumari</Value></Attribute><Attribute><Name>LASTNAME</Name><Value>Singhal</Value></Attribute><Attribute><Name>EMIRATESID</Name><Value>7841901797</Value></Attribute><Attribute><Name>EMIRATESIDEXPIRYDATE</Name><Value>2300-01-01</Value></Attribute><Attribute><Name>MOBILENO</Name><Value>25874122112</Value></Attribute><Attribute><Name>MOBILECNTRYCODE</Name><Value>2587</Value></Attribute><Attribute><Name>NATIONALITY</Name><Value>AE</Value></Attribute><Attribute><Name>DATEOFBIRTH</Name><Value>1994-04-03</Value></Attribute><Attribute><Name>GENDER</Name><Value>F</Value></Attribute><Attribute><Name>EMAILID</Name><Value>abc@gmail.com</Value></Attribute><Attribute><Name>PASSPORTNUMBER</Name><Value>P123456</Value></Attribute><Attribute><Name>PASSPORTEXPIRYDATE</Name><Value>2300-01-01</Value></Attribute><Attribute><Name>RESIDENCEADDRLINE1</Name><Value>D1</Value></Attribute><Attribute><Name>RESIDENCEADDRLINE2</Name><Value>nirma apartment</Value></Attribute><Attribute><Name>RESIDENCEADDRPOBOX</Name><Value>01254</Value></Attribute><Attribute><Name>RESIDENCEADDRCITY</Name><Value>RYD</Value></Attribute><Attribute><Name>RESIDENCEADDRCOUNTRY</Name><Value>DE</Value></Attribute></Attributes></CreateWorkitemReq></EE_EAI_HEADER>";
+		//String message = "<EE_EAI_MESSAGE><EE_EAI_HEADER><MsgFormat>CUSTOMER_SR</MsgFormat><MsgVersion>0000</MsgVersion><RequestorChannelId>YAP</RequestorChannelId><RequestorUserId>RAKUSER</RequestorUserId><RequestorLanguage>E</RequestorLanguage><RequestorSecurityInfo>secure</RequestorSecurityInfo><ReturnCode>0000</ReturnCode><ReturnDesc>Success</ReturnDesc><MessageId>test123456</MessageId><Extra1>REQ || YAP.123</Extra1><Extra2>2011-02-08T15:31:38.818+05:30</Extra2></EE_EAI_HEADER><CreateWorkitemReq><ProcessName>CBP</ProcessName><SubProcess>API.YAP</SubProcess><InitiateAlso>Y</InitiateAlso><Documents></Documents><Attributes><Attribute><Name>CHANNEL</Name><Value>YAP</Value></Attribute><Attribute><Name>ACCOUNTNUMBER</Name><Value>456456456456</Value></Attribute><Attribute><Name>PASSPORTEXPIRYDATE</Name><Value>1998-02-19</Value></Attribute><Attribute><Name>PASSPORTISSUEDATE</Name><Value>2007-05-22</Value></Attribute><Attribute><Name>PASSPORTNUMBER</Name><Value>P873645673</Value></Attribute><Attribute><Name>VISAEXPDATE</Name><Value>2006-07-11</Value></Attribute><Attribute><Name>VISAFILENUMBER</Name><Value>57567576</Value></Attribute><Attribute><Name>VISAISSUEDATE</Name><Value>1887-02-14</Value></Attribute></Attributes></CreateWorkitemReq></EE_EAI_MESSAGE>";
+		
+		// wi create RAOP
+		/*String message = "<EE_EAI_MESSAGE>"+
+		  "<EE_EAI_HEADER>"+
+		    "<MsgFormat>CUSTOMER_SR</MsgFormat>"+
+		    "<MsgVersion>0000</MsgVersion>"+
+		    "<RequestorChannelId>API.YAP</RequestorChannelId>"+
+		    "<RequestorUserId>RAKUSER</RequestorUserId>"+
+		    "<RequestorLanguage>E</RequestorLanguage>"+
+		    "<RequestorSecurityInfo>secure</RequestorSecurityInfo>"+
+		    "<ReturnCode>0000</ReturnCode>"+
+		    "<ReturnDesc>0000</ReturnDesc>"+
+		    "<MessageId>tttyxzz</MessageId>"+
+		    "<Extra1/>"+
+		    "<Extra2/>"+
+		  "</EE_EAI_HEADER>"+
+		  "<CreateWorkitemReq>"+
+		    "<ProcessName>RAOP</ProcessName>"+
+		    "<SubProcess>API.YAP</SubProcess>"+
+		    "<InitiateAlso>Y</InitiateAlso>"+
+		    "<Attributes>"+
+		      "<Attribute>"+
+		        "<Name>CHANNEL</Name>"+
+		        "<Value>YAP</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>IBANNUMBER</Name>"+
+		        "<Value>AE790400000188000001510</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>TITLEPREFIX</Name>"+
+		        "<Value>MRS.</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>FIRSTNAME</Name>"+
+		        "<Value>SHERIN VARGHESE MATH</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>LASTNAME</Name>"+
+		        "<Value>VARGHESE</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>NATIONALITY</Name>"+
+		        "<Value>AE</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>DATEOFBIRTH</Name>"+
+		        "<Value>1988-10-08</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>GENDER</Name>"+
+		        "<Value>F</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>POLITICALLYEXPOSEDPERSON</Name>"+
+		        "<Value>NPEP</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>MOBILECNTRYCODE</Name>"+
+		        "<Value>00971</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>MOBILENO</Name>"+
+		        "<Value>564802474</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>EMAILID</Name>"+
+		        "<Value>sherinvarghese07@gmail.com</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>EMIRATESID</Name>"+
+		        "<Value>784198806906206</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>EMIRATESIDEXPIRYDATE</Name>"+
+		        "<Value>2021-07-14</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>DEMOGRAPHIC</Name>"+
+		        "<Value>AE|AE</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>RESIDENCEADDRLINE1</Name>"+
+		        "<Value>Sheikh Mohammed Bin Zayed Road Al Warqaa First Dub</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>RESIDENCEADDRLINE2</Name>"+
+		        "<Value>Sheikh Mohammed Bin Zayed Road</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>RESIDENCEADDRPOBOX</Name>"+
+		        "<Value>00000</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>RESIDENCEADDRCITY</Name>"+
+		        "<Value>DXB</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>RESIDENCEADDRCOUNTRY</Name>"+
+		        "<Value>AE</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>MAILINGADDRLINE1</Name>"+
+		        "<Value>Sheikh Mohammed Bin Zayed Road Al Warqaa First Dub</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>MAILINGADDRLINE2</Name>"+
+		        "<Value>Sheikh Mohammed Bin Zayed Road</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>MAILINGADDRPOBOX</Name>"+
+		        "<Value>00000</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>MAILINGADDRCITY</Name>"+
+		        "<Value>DXB</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>MAILINGADDRCOUNTRY</Name>"+
+		        "<Value>AE</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>REPORTCOUNTRYDETAILS</Name>"+
+		        "<Value>USA~123445~~remarks|UAE~~No tax number~remarks |IND~ABC12345~Reason B~</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>USRELATION</Name>"+
+		        "<Value>O</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>TINNUMBER</Name>"+
+		        "<Value>4444</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>FATCAREASON</Name>"+
+		        "<Value>CURRENT US ADDR</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>DOCUMENTSCOLLECTED</Name>"+
+		        "<Value>ID DOC|LOSS OF NAT CERT|SELF-ATTEST FORM|W8|W9</Value>"+
+		      "</Attribute>"+
+		      "<Attribute>"+
+		        "<Name>SIGNEDDATE</Name>"+
+		        "<Value>2017-01-01</Value>"+
+		      "</Attribute>"+
+		    "</Attributes>"+
+		  "</CreateWorkitemReq>"+
+		"</EE_EAI_MESSAGE>";*/
+		
+		
+		//For CDOB Update
+		/*String message="<EE_EAI_MESSAGE>"+
+			"<EE_EAI_HEADER>"+
+				"<MsgFormat>UPDATE_SR</MsgFormat>"+
+				"<MsgVersion>0000</MsgVersion>"+
+				"<RequestorChannelId>DEH</RequestorChannelId>"+
+				"<RequestorUserId>RAKUSER</RequestorUserId>"+
+				"<RequestorLanguage>E</RequestorLanguage>"+
+				"<RequestorSecurityInfo>secure</RequestorSecurityInfo>"+
+				"<ReturnCode>0000</ReturnCode>"+
+				"<ReturnDesc>Success</ReturnDesc>"+
+				"<MessageId>UNIQUE Identifier(RQ-DDMMYYYYHHMMSSS)</MessageId>"+
+				"<Extra1>REQ ||IB.123</Extra1>"+
+				"<Extra2>2011-02-08T15:31:38.818+05:30</Extra2>"+
+			"</EE_EAI_HEADER>"+
+			"<UpdateWorkitemReq>"+
+			"<ProcessName>CDOB</ProcessName>"+
+			"<SubProcess/>"+
+			    "<Attributes>"+
+					"<Attribute>"+
+						"<Name>OperationName</Name>"+
+						"<Value>DataUpdate</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>IsDoneRequired</Name>"+
+						"<Value>TRUE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+					"<Name>PortalReferenceNumber</Name>"+
+					"<Value>6565665</Value>"+
+				"</Attribute>"+
+					"<Attribute>"+
+						"<Name>IsDocsPresent</Name>"+
+						"<Value>TRUE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>WINumber</Name>"+
+						"<Value>CDOB-0000001245-process</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>Iban_number</Name>"+
+						"<Value>54544848484845454</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>BankName</Name>"+
+						"<Value>ADCB</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>Genuine_Check</Name>"+
+						"<Value>TRUE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>BiometricStatus</Name>"+
+						"<Value>TRUE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>Delivery_status</Name>"+
+						"<Value>TRUE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>Remarks</Name>"+
+						"<Value>okokok</Value>"+
+					"</Attribute>"+
+			    "</Attributes>"+
+			  "</UpdateWorkitemReq>"+
+			"</EE_EAI_MESSAGE>";*/
+		
+		
+		//For CDOB Create WI
+		/*String message="<EE_EAI_HEADER>"+
+		"<EE_EAI_HEADER>"+
+			  "<MsgFormat>CUSTOMER_SR</MsgFormat>"+
+			  "<MsgVersion>0000</MsgVersion>"+
+			  "<RequestorChannelId>DEH</RequestorChannelId>"+
+			  "<RequestorUserId>RAKUSER</RequestorUserId>"+
+			  "<RequestorLanguage>E</RequestorLanguage>"+
+			  "<RequestorSecurityInfo>secure</RequestorSecurityInfo>"+
+			  "<ReturnCode>0000</ReturnCode>"+
+			  "<ReturnDesc>Success</ReturnDesc>"+
+			  "<MessageId>UNIQUE Identifier(RQ-DDMMYYYYHHMMSSS)</MessageId>"+
+			  "<Extra1>REQ || DEH.123</Extra1>"+
+			  "<Extra2>2011-02-08T15:31:38.818+05:30</Extra2>"+
+		"</EE_EAI_HEADER>"+
+		"<CreateWorkitemReq>"+
+			"<ProcessName>CDOB</ProcessName>"+
+			"<SubProcessName>CDOB</SubProcessName>"+
+			"<InitiateAlso>N</InitiateAlso>"+
+			"<Attributes>"+
+				"<Attribute>"+
+					"<Name>MobileNo_pri</Name>"+
+					"<Value>00971521626485</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>Title</Name>"+
+					"<Value>MR.</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>FirstName</Name>"+
+					"<Value>AUGUSTIN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>MiddleName</Name>"+
+					"<Value></Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>LastName</Name>"+
+					"<Value>SALCEDO VALENZUELA</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>EmiratesID</Name>"+
+					"<Value>784199009201203</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>dob</Name>"+
+					"<Value>1990-11-12</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>Nationality</Name>"+
+					"<Value>KW</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>PAssportNo</Name>"+
+					"<Value>AE9201203</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>Emp_Type</Name>"+
+					"<Value>Salaried</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>Basic_Sal</Name>"+
+					"<Value>30000</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>Email_ID</Name>"+
+					"<Value>deepak@test.com</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>Aecb_Consent_Received</Name>"+
+					"<Value>TRUE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Attribute>"+
+					"<Name>EmpCode</Name>"+
+					"<Value>5559</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>Skyward_Number</Name>"+
+					"<Value>SK1343434</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>NameOnCard</Name>"+
+					"<Value>Deepak</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>Iban_number</Name>"+
+					"<Value>AE328800000004532668892</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>BankName</Name>"+
+					"<Value>ADCB</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>FTS_Consent</Name>"+
+					"<Value>TRUE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>Product_Type</Name>"+
+					"<Value>C-FALCON</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>Designation</Name>"+
+					"<Value>LNLD</Value>"+
+				"</Attribute>" +
+				"<Attribute>" +
+					"<Name>EmpName</Name>" +
+					"<Value>ABU DHABI COMMERCIAL BANK</Value>" +
+				"</Attribute>" +
+				"<Attribute>" +
+					"<Name>IndusSeg</Name>" +
+					"<Value>COMPUTER ACCESSORIES</Value>" +
+				"</Attribute>" +
+				"<Attribute>" +
+					"<Name>emirateOfWork</Name>"+
+					"<Value>DXB</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>ReferenceName</Name>"+
+					"<Value>Manish</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>ReferenceMobile</Name>"+
+					"<Value>0097145455545</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>PortalApplicationNumber</Name>"+
+					"<Value>909</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>ApprovedLimit</Name>"+
+					"<Value>135000.0</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>HomeCountryHouseNo</Name>"+
+					"<Value>B102,MUMBAI</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>OFFICEADDRESSPOBOX</Name>"+
+					"<Value>1020</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>HomeCountryBuildingName</Name>"+
+					"<Value>MUMBAI V</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>HomeCountryStreetName</Name>"+
+					"<Value>BOM</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>HomeCountryNo</Name>"+
+					"<Value>009153561518484</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>Mothersname</Name>"+
+					"<Value>TestName</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>FinalDBR</Name>"+
+					"<Value>14.3</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>FinalTAI</Name>"+
+					"<Value>30000</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>EligibleCardProduct</Name>"+
+					"<Value>Credit Card|Salaried Credit Card||135000.00||A||A999-System Approve|SR. MGR|0~Credit Card|Salaried Credit Card||135000.00||A||A999-System Approve|SR. MGR|0"+
+					"</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>isNTB</Name>"+
+					"<Value>TRUE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>MaritalStatus</Name>"+
+					"<Value>O</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>EmploymentStatus</Name>"+
+					"<Value>2</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>YearsInCurrAddress</Name>"+
+					"<Value>1</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>EStatementFlag</Name>"+
+					"<Value>TRUE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>CountryOfBirth</Name>"+
+					"<Value>IN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>EmirateOfVisa</Name>"+
+					"<Value>DXB</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>CountryOfTaxResidence</Name>"+
+					"<Value>IN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>CityOfBirth</Name>"+
+					"<Value>BOM</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>isTinAvailable</Name>"+
+					"<Value>FALSE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>TINNumber</Name>"+
+					"<Value>48545554</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>TinReason</Name>"+
+					"<Value>A-NOT ISSUED</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>emirateOfResidence</Name>"+
+					"<Value>DXB</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>ResidenceAddressHouseNo</Name>"+
+					"<Value>hghghg</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>RESIDENCEADDRESSPOBOX</Name>"+
+					"<Value>22222</Value>"+
+			"</Attribute>"+
+				"<Attribute>"+
+					"<Name>ResidenceAddressBuildingName</Name>"+
+					"<Value>Buling Name</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+					"<Name>ResidenceAddressStreetName</Name>"+
+					"<Value>r Street Name</Value>"+
+				"</Attribute>"+
+			"</Attributes>"+
+		"</CreateWorkitemReq>"+
+	"</EE_EAI_HEADER>";*/
+		
+		//<EE_EAI_MESSAGE>
+		
+		//For CDOB Dedupe check
+		
+/*		String message="<EE_EAI_HEADER>" +
+					"<MsgFormat>STATUS_SR</MsgFormat>" +
+					"<MsgVersion>0000</MsgVersion>" +
+					"<RequestorChannelId>DEH</RequestorChannelId>" +
+					"<RequestorUserId>RAKUSER</RequestorUserId>" +
+					"<RequestorLanguage>E</RequestorLanguage>" +
+					"<RequestorSecurityInfo>secure</RequestorSecurityInfo>" +
+					"<ReturnCode>0000</ReturnCode>" +
+					"<ReturnDesc>Success</ReturnDesc>" +
+					"<MessageId>UNIQUE Identifier(RQ-DDMMYYYYHHMMSSS)</MessageId>" +
+					"<Extra1>REQ ||IB.123</Extra1>" +
+					"<Extra2>2011-02-08T15:31:38.818+05:30</Extra2>" +
+				"</EE_EAI_HEADER>" +
+				"<GetWorkitemStatusReq>" +
+					"<ProcessName>CDOB</ProcessName>" +
+					"<SubProcess>Status_Enquire</SubProcess>" +
+					"<Attributes>" +
+						"<Attribute>" +
+							"<Name>FirstName</Name>" +
+							"<Value>AjhjhjhjN</Value>" +
+						"</Attribute>" +
+						"<Attribute>" +
+							"<Name>LastName</Name>" +
+							"<Value>hjhjhjhj</Value>" +
+						"</Attribute>" +
+						"<Attribute>" +
+							"<Name>dob</Name>" +
+							"<Value>1940-05-05</Value>" +
+						"</Attribute>" +
+						"<Attribute>" +
+							"<Name>Nationality</Name>" +
+							"<Value>IN</Value>" +
+						"</Attribute>" +
+						"<Attribute>" +
+							"<Name>PAssportNo</Name>" +
+							"<Value>N23434sxdcd433</Value>" +
+						"</Attribute>" +
+						"<Attribute>" +
+						"<Attribute>" +
+							"<Name>EmiratesID</Name>" +
+							"<Value>7841985</Value>" +
+						"</Attribute>" +
+						"<Attribute>" +
+							"<Name>Email_ID</Name>" +
+							"<Value>test@test.com</Value>" +
+						"</Attribute>" +
+						"<Attribute>" +
+							"<Name>PortalReferenceNumber</Name>" +
+							"<Value>DEH-12345</Value>" +
+						"</Attribute>" +
+						"<Attribute>" +
+						"<Name>WINumber</Name>" +
+						"<Value>CDOB-0000001245-process</Value>" +
+					"</Attribute>" +
+					"</Attributes>" +
+				"</GetWorkitemStatusReq>" +
+				"</EE_EAI_MESSAGE>"; /*
+		
+		//For Digital_CC cas Dedupe check
+		
+			/*	String message1="<EE_EAI_MESSAGE>"+
+							"<EE_EAI_HEADER>" +
+							"<MsgFormat>STATUS_SR</MsgFormat>" +
+							"<MsgVersion>0000</MsgVersion>" +
+							"<RequestorChannelId>EBC.WBA</RequestorChannelId>" +
+							"<RequestorUserId>RAKUSER</RequestorUserId>" +
+							"<RequestorLanguage>E</RequestorLanguage>" +
+							"<RequestorSecurityInfo>secure</RequestorSecurityInfo>" +
+							"<ReturnCode>0000</ReturnCode>" +
+							"<ReturnDesc>Successful</ReturnDesc>" +
+							"<MessageId>143300521454466446</MessageId>" +
+							"<Extra1>REQ||LAXMANRET.LAXMANRET</Extra1>" +
+							"<Extra2>2015-05-30T22:30:14.544+05:30</Extra2>" +
+							"</EE_EAI_HEADER>" +
+							"<GetWorkitemStatusReq>" +
+								"<ProcessName>Digital_CC</ProcessName>" +
+								"<SubProcess>Case_Dedupe</SubProcess>" +
+								"<Attributes>" +
+									"<Attribute>" +
+										"<Name>EmiratesID</Name>" +
+										"<Value>784199683638465</Value>" +
+									"</Attribute>" +
+								"</Attributes>" +
+								"</GetWorkitemStatusReq>" +
+							"</EE_EAI_MESSAGE>";
+		*/
+				//For DOA WI Creation
+		
+		String message1="<EE_EAI_MESSAGE>"+
+                "<EE_EAI_HEADER>"+
+                "<MsgFormat>CREATE_WORKITEM</MsgFormat>"+
+                "<MsgVersion>0000</MsgVersion>"+
+                "<RequestorChannelId>EBC.WBA</RequestorChannelId>"+
+                "<RequestorUserId>RAKUSER</RequestorUserId>"+
+                "<RequestorLanguage>E</RequestorLanguage>"+
+                "<RequestorSecurityInfo>secure</RequestorSecurityInfo>"+
+                "<ReturnCode>0000</ReturnCode>"+
+                "<ReturnDesc>Success</ReturnDesc>"+
+                "<MessageId>Test1933374445</MessageId>"+
+                "<Extra1>REQ || DEH.123</Extra1>"+
+                "<Extra2>2011-02-08T15:31:38.818+05:30</Extra2>"+
+                "</EE_EAI_HEADER>"+
+                "<CreateWorkitemReq>"+
+                "<ProcessName>DigitalAO</ProcessName>"+
+                "<SubProcessName>DigitalAO</SubProcessName>"+
+                "<InitiateAlso>Y</InitiateAlso>"+
+                "<Documents/>"+
+                "<Attributes>"+
+                "<Attribute>"+
+                "<Name>Title</Name>"+
+                "<Value>Mr</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Given_Name</Name>"+
+                "<Value>PHIL</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Surname</Name>"+
+                "<Value>JAMES</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Passport_Number</Name>"+
+                "<Value>IN12345678</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Emirates_ID</Name>"+
+                "<Value>789123456999</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Gender</Name>"+
+                "<Value>Male</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Marital_Status</Name>"+
+                "<Value>Single</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Mothers_Maiden_Name</Name>"+
+                "<Value>MOM</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Country_of_residence</Name>"+
+                "<Value>India</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>DOB</Name>"+
+                "<Value>12/03/1987</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Identification_Document_Number</Name>"+
+                "<Value>10102029</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Curr_Visa_Designation</Name>"+
+                "<Value>SE</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>MANDATE_AND_DECLARATION</Name>"+
+                "<Value>Y</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Sign</Name>"+
+                "<Value>PJ</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Dual_Nationality</Name>"+
+                "<Value>N</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>CRS</Name>"+
+                "<Value>N</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Passport_Copies</Name>"+
+                "<Value>0</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Previous_Designation</Name>"+
+                "<Value>09</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Relation_Detail_w_PEP</Name>"+
+                "<Value>Relationship Details with PEP</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>PEP_Category</Name>"+
+                "<Value>as</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Name_of_PEP</Name>"+
+                "<Value>sdf</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Is_ntb</Name>"+
+                "<Value>Y</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>country_pep_hold_status</Name>"+
+                "<Value>ae</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Emirate_pep_hold_status</Name>"+
+                "<Value>dxb</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Currency</Name>"+
+                "<Value>AED</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Prefer_Branch_Det</Name>"+
+                "<Value>dubai</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Employment_Status</Name>"+
+                "<Value>Y</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Scheme_Code</Name>"+
+                "<Value>098</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Name_on_ChequeBk</Name>"+
+                "<Value></Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Product_Service_dealing</Name>"+
+                "<Value>ABCD</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Agent_Code</Name>"+
+                "<Value>DBC122</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Agent_ID</Name>"+
+                "<Value>RAK12</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Name_on_Debit_Card</Name>"+
+                "<Value>Hen</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Industry</Name>"+
+                "<Value>ABCDS</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>ChequeBk_Req</Name>"+
+                "<Value>Y</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>AECB_Consent</Name>"+
+                "<Value>N</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Do_you_have_TIN</Name>"+
+                "<Value>N</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>CIF</Name>"+
+                "<Value>7656783</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Passport_Expiry_Date</Name>"+
+                "<Value>10/10/2029</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Passport_Issuing_Country</Name>"+
+                "<Value>India</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Visa_File_Number</Name>"+
+                "<Value>12345</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Visa_issue_Date</Name>"+
+                "<Value>10/01/2015</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Visa_expiry_Date</Name>"+
+                "<Value>10/01/2025</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Nationality</Name>"+
+                "<Value>India</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Secondary_Nationality</Name>"+
+                "<Value>India</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>New_Passport_Number</Name>"+
+                "<Value>DB34512237</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Driving_License</Name>"+
+                "<Value>DL1234235</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Industry_Segment</Name>"+
+                "<Value>Macro</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Industry_Subsegment</Name>"+
+                "<Value>Car</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>PEP</Name>"+
+                "<Value>Y</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>PEP_Category</Name>"+
+                "<Value>45</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Name_of_PEP</Name>"+
+                "<Value>sdfd</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>country_pep_hold_status</Name>"+
+                "<Value>AE</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Emirate_pep_hold_status</Name>"+
+                "<Value>A</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Previous_Designation</Name>"+
+                "<Value>09</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Relation_Detail_w_PEP</Name>"+
+                "<Value>sdfs</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Product_Name</Name>"+
+                "<Value>AO</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Credit_grade</Name>"+
+                "<Value>A</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>EmiratesID_Expiry_Date</Name>"+
+                "<Value>01/06/2028</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Preferred_Mail_Address</Name>"+
+                "<Value>Current residence address</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Company_Employer_Name</Name>"+
+                "<Value>Newgen</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Employer_Code</Name>"+
+                "<Value>009</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>employer_type</Name>"+
+                "<Value>self-employed </Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Designation</Name>"+
+                "<Value>SE</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Occupation</Name>"+
+                "<Value>E</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Total_years_of_employment_Business</Name>"+
+                "<Value>01</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>PO_Box_emp</Name>"+
+                "<Value>456</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>EmirateCity_emp</Name>"+
+                "<Value>Noida</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Country_emp</Name>"+
+                "<Value>India</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Gross_Monthly_Salary_income</Name>"+
+                "<Value>10000</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Monthly_Expected_Turnover_Cash</Name>"+
+                "<Value>7845</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Monthly_Expected_Turnover_Non_Cash</Name>"+
+                "<Value>1900</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Mobile_1</Name>"+
+                "<Value>9877656621</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Email_Id_1</Name>"+
+                "<Value>abc@gmail.com</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>US_Citizenship_Residency</Name>"+
+                "<Value>Yes</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>W8Form</Name>"+
+                "<Value>yes</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>W9Form</Name>"+
+                "<Value>yes</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Country_Of_Birth</Name>"+
+                "<Value>India</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>City_of_Birth</Name>"+
+                "<Value>Delhi</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Purpose_of_Account</Name>"+
+                "<Value>ABCD</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>DEL_CB_DC</Name>"+
+                "<Value>Branch</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>CommunicationMode</Name>"+
+                "<Value>SMS EMail</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Account_Number</Name>"+
+                "<Value>56345721933</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>IBAN</Name>"+
+                "<Value>78934623</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Product_Type</Name>"+
+                "<Value>salaried</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Product_Currency</Name>"+
+                "<Value>INR</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Duplicate_CIF_Found</Name>"+
+                "<Value>N</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Blacklist_Found</Name>"+
+                "<Value>N</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Risk_Score</Name>"+
+                "<Value>2</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Prospect_id</Name>"+
+                "<Value>12312315649765</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Sol_Id</Name>"+
+                "<Value>033</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Channel</Name>"+
+                "<Value>Branch</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>STP_NonSTP</Name>"+
+                "<Value>Y</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>investment_portfolio_including_virtual_asset</Name>"+
+                "<Value>No</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>income_generated</Name>"+
+                "<Value>Yes</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>real_Est_owned</Name>"+
+                "<Value>NO</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>rental_income</Name>"+
+                "<Value>0</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>title_deed_attached</Name>"+
+                "<Value>N</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>other_Source_of_income</Name>"+
+                "<Value>No</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Desc_spec_prod_serv_your_cmpny_deals</Name>"+
+                "<Value/>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>virtual_Card_issued</Name>"+
+                "<Value>Yes</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Pasport_Issuing_Country</Name>"+
+                "<Value>ind</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Year_of_Incorporation</Name>"+
+                "<Value>2</Value>"+
+                "</Attribute>"+
+                "</Attributes>"+
+                "<UIDDetials>"+
+                "<Attribute>"+
+                "<Name>Alertdetails</Name>"+
+                "<Value>![CDATA[Suspect(s) detected by OFAC-Agent:9"+"\n"+
+                "SystemId:"+"\n"+
+                "Associate:"+"\n"+
+                "============================="+"\n"+
+                " Suspect detected #1"+"\n"+
+
+                "OFAC ID:AS06990130"+"\n"+
+                "MATCH: 775.00"+"\n"+
+                "TAG: NAM"+"\n"+
+                "MATCHINGTEXT: IQBAL, NAVEED,"+"\n"+
+                "RESULT: (0)"+"\n"+
+                "NAME: IQBAL, NAVED"+"\n"+
+                "Synonyms: none"+"\n"+
+                "ADDRESS:"+"\n"+
+                "Synonyms: none"+"\n"+
+                "CITY:"+"\n"+
+                "Synonyms: none"+"\n"+
+                "COUNTRY: INDIA"+"\n"+
+                "Synonyms:"+"\n"+
+                "- BHARAT"+"\n"+
+                "- BHARATIYA GANARAJYA"+"\n"+
+                "- INDE"+"\n"+
+                "- INDIA"+"\n"+
+                "- INDIEN"+"\n"+
+                "- REPUBLIC OF INDIA"+"\n"+
+                "STATE:"+"\n"+
+                "Synonyms: none"+"\n"+
+                "ORIGIN:"+"\n"+
+                "EDD_ASIA_PACIFIC"+"\n"+
+                "DESIGNATION:"+"\n"+
+                "GWL"+"\n"+
+                "TYPE:"+"\n"+
+                "Individual"+"\n"+
+                "SEARCH CODES:"+"\n"+
+                "none"+"\n"+
+                "USER DATA 1:"+"\n"+
+                "none"+"\n"+
+                "USER DATA 2:"+"\n"+
+                "none"+"\n"+
+                "OFFICIAL REF:"+"\n"+
+                "2017-11-07 17:36:06 EDA"+"\n"+
+                "PASSPORT:"+"\n"+
+                "none"+"\n"+
+                "BIC CODES:"+"\n"+
+                "none"+"\n"+
+                "NATID:"+"\n"+
+                "none"+"\n"+
+                "PLACE OF BIRTH:"+"\n"+
+                "none"+"\n"+
+                "DATE OF BIRTH:"+"\n"+
+                "none"+"\n"+
+                "NATIONALITY:"+"\n"+
+                "none"+"\n"+
+                "ADDITIONAL INFOS:"+"\n"+
+                "List ID: 1106 / Create Date: 11/07/2017 17:36:06 / Last Update Date:"+"\n"+
+                "11/07/2017 17:36:06 / Org_PID: 8523805 / Title: ARRESTED FOR"+"\n"+
+                "BURGLARY - OCTOBER 30, 2017 / Gender: MALE / OtherInformation:"+"\n"+
+                "According to the timesofindia.indiatimes.com; October 30, 2017: On"+"\n"+
+                "October 30, 2017, Naved Iqbal was arrested for burglary. He and his"+"\n"+
+                "co-conspirators were arrested while planning to commit a robbery in"+"\n"+
+                "Khatauli region of the district. They were involved / Relationship:"+"\n"+
+                "Co-Defendant / OriginalID: 8523809"+"\n"+
+                "FML TYPE:"+"\n"+
+                "1"+"\n"+
+                "FML PRIORITY:"+"\n"+
+                "0"+"\n"+
+                "FML CONFIDENTIALITY:"+"\n"+
+                "0"+"\n"+
+                "FML INFO:"+"\n"+
+                "none"+"\n"+
+                "PEP-FEP:"+"\n"+
+                "0 0"+"\n"+
+                "KEYWORDS:"+"\n"+
+                "OS:ADVERSE_MEDIA NS:NAMESOURCE_WEBSITE ENTITYLEVEL:LEVEL_NA SC:BURGLARY"+"\n"+
+                "HYPERLINKS:"+"\n"+
+                "https://accuity.worldcompliance.com/signin.aspx?ent=ca870ce6-eaa5-4112-ba57-7b6dbeadf8b4"+"\n"+
+                "TYS: 1"+"\n"+
+                "ISN: 0</Value>"+"\n"+
+                "</Attribute>"+
+                "</UIDDetials>"+
+                "<FATCA_CRS_GRID_details>"+
+                "<Attribute>"+
+                "<Name>Country_Tax_Residence</Name>"+
+                "<Value>India</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>TIN</Name>"+
+                "<Value>12b</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Reason_unable_tin</Name>"+
+                "<Value>None</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>future_Free_field_1</Name>"+
+                "<Value>free1</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>future_Free_field_2</Name>"+
+                "<Value>free2</Value>"+
+                "</Attribute>"+
+                "</FATCA_CRS_GRID_details>"+
+                "<Address_Details>"+
+                "<Attribute>"+
+                "<Name>Flat_Villa_No</Name>"+
+                "<Value>45464</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Building_Villa_Name</Name>"+
+                "<Value>Tower A</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Street_Location</Name>"+
+                "<Value>XYZ Rd</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Nearest_landmark</Name>"+
+                "<Value></Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>PO_Box_address</Name>"+
+                "<Value>567</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Emirate_City_address</Name>"+
+                "<Value>Delhi</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Country_address</Name>"+
+                "<Value>India</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Address_type</Name>"+
+                "<Value>Residence</Value>"+
+                "</Attribute>"+
+                "</Address_Details>"+
+                "<Background_info_employer>"+
+                "<Attribute>"+
+                "<Name>Employer_Name</Name>"+
+                "<Value></Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>other_employer</Name>"+
+                "<Value>other</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>Position_held</Name>"+
+                "<Value>PM</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>country</Name>"+
+                "<Value>India</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>dateofemployemnt</Name>"+
+                "<Value>01/06/2012</Value>"+
+                "</Attribute>"+
+                "</Background_info_employer>"+
+                "<company_Details>"+
+                	"<Attribute>"+
+                	"<Name>company_name</Name>"+
+                	"<Value>RAK</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                	"<Name>Business_act_as_TL</Name>"+
+                	"<Value>dfsd</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                	"<Name>Industry</Name>"+
+                	"<Value>edu</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                	"<Name>years_of_incorp</Name>"+
+                	"<Value>5</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                	"<Name>country_of_incorp</Name>"+
+                	"<Value>5</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                	"<Name>percent_sharehold_in_cmpny</Name>"+
+                	"<Value>26</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                	"<Name>annual_turnover</Name>"+
+                	"<Value>20000</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                	"<Name>Annual_profit</Name>"+
+                	"<Value>12345</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                	"<Name>trade_license</Name>"+
+                	"<Value>asdfsad</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                	"<Name>countries_W_business_conducted_1</Name>"+
+                	"<Value>Ind</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>countries_W_business_conducted_2</Name>"+
+                "<Value>AE</Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>countries_W_business_conducted_3</Name>"+
+                "<Value></Value>"+
+                "</Attribute>"+
+                "<Attribute>"+
+                "<Name>countries_W_business_conducted_4</Name>"+
+                "<Value></Value>"+
+                "</Attribute>"+
+                "</company_Details>"+
+                "</CreateWorkitemReq>"+
+                "</EE_EAI_MESSAGE>";
+
+		
+				
+		
+		
+		
+		
+		String message_UPDATE="<EE_EAI_HEADER>        "+
+		"	<EE_EAI_HEADER>                                                         "+
+		"		  <MsgFormat>UPDATE_SR</MsgFormat>                                  "+
+		"		  <MsgVersion>0000</MsgVersion>                                     "+
+		"		  <RequestorChannelId>IB</RequestorChannelId>                       "+
+		"		  <RequestorUserId>RAKUSER</RequestorUserId>                        "+
+		"		  <RequestorLanguage>E</RequestorLanguage>                          "+
+		"		  <RequestorSecurityInfo>secure</RequestorSecurityInfo>             "+
+		"		  <ReturnCode>0000</ReturnCode>                                     "+
+		"		  <ReturnDesc>Success</ReturnDesc>                                  "+
+		"		  <MessageId>UNIQUE Identifier(RQ-DDMMYYYYHHMMSSS)</MessageId>       "+
+		"		  <Extra1>REQ || IB.123</Extra1>                                     "+
+		"		  <Extra2>2011-02-08T15:31:38.818+05:30</Extra2>                     "+
+		"	</EE_EAI_HEADER>                                                         "+
+		"	<UpdateWorkitemReq>                                                      "+
+		"		<ProcessName>DigitalAO</ProcessName>                                 "+
+		"		<SubProcess>DigitalAO</SubProcess>                                   "+
+		"		<Attributes>                                                         "+
+		"			<Attribute>                                                      "+
+		"				<Name>WINUMBER</Name>                                        "+
+		"				<Value>DigitalAO-0000000219-process</Value>                  "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>Prospect_id</Name>                                     "+
+		"				<Value>8777</Value>                                          "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>Sol_Id</Name>                                          "+
+		"				<Value>A7475</Value>                                         "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>Event</Name>                                           "+
+		"				<Value>Completed</Value>                                     "+
+		"			</Attribute>                                                     "+
+                                     
+		"			<Attribute>                                                      "+
+		"				<Name>Previous_Designation</Name>                            "+
+		"				<Value>Prev</Value>                                          "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>Relation_Detail_w_PEP</Name>                           "+
+		"				<Value>Relations</Value>                                     "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>Name_of_PEP</Name>                                     "+
+		"				<Value>PEP</Value>                                           "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>country_pep_hold_status</Name>                         "+
+		"				<Value>AE</Value>                                            "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>Emirate_pep_hold_status</Name>                         "+
+		"				<Value>DXB</Value>                                           "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>CIF</Name>                                             "+
+		"				<Value>11</Value>                                              "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>Account_Number</Name>                                  "+
+		"				<Value>1234</Value>                                              "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>investment_portfolio_including_virtual_asset</Name>    "+
+		"				<Value>4354</Value>                                              "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>income_generated</Name>                                "+
+		"				<Value>Y</Value>                                              "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>real_Est_owned</Name>                                  "+
+		"				<Value>Y</Value>                                              "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>rental_income</Name>                                   "+
+		"				<Value>Y</Value>                                              "+
+		"			</Attribute><Attribute>                                          "+
+		"				<Name>title_deed_attached</Name>                             "+
+		"				<Value>T</Value>                                              "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>other_Source_of_income</Name>                          "+
+		"				<Value>T</Value>                                              "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>Desc_spec_prod_serv_your_cmpny_deals</Name>            "+
+		"				<Value>R</Value>                                              "+
+		"			</Attribute>                                                     "+
+		"			<Attribute>                                                      "+
+		"				<Name>virtual_Card_issued</Name>                             "+
+		"				<Value>Y</Value>                                              "+
+		"			</Attribute>			                                         "+
+		"		</Attributes>                                                        "+
+		"	</UpdateWorkitemReq>                                                     "+
+		"</EE_EAI_HEADER>                                                            ";
+		
+
+		//For CDOB workitem status check
+			/*String message="<EE_EAI_HEADER>" +
+			"<MsgFormat>STATUS_SR</MsgFormat>" +
+			"<MsgVersion>0000</MsgVersion>" +
+			"<RequestorChannelId>DEH</RequestorChannelId>" +
+			"<RequestorUserId>RAKUSER</RequestorUserId>" +
+			"<RequestorLanguage>E</RequestorLanguage>" +
+			"<RequestorSecurityInfo>secure</RequestorSecurityInfo>" +
+			"<ReturnCode>0000</ReturnCode>" +
+			"<ReturnDesc>Success</ReturnDesc>" +
+			"<MessageId>UNIQUE Identifier(RQ-DDMMYYYYHHMMSSS)</MessageId>" +
+			"<Extra1>REQ ||IB.123</Extra1>" +
+			"<Extra2>2011-02-08T15:31:38.818+05:30</Extra2>" +
+		"</EE_EAI_HEADER>" +
+		"<GetWorkitemStatusReq>" +
+			"<ProcessName>CDOB</ProcessName>" +
+			"<SubProcess>Status_Enquire</SubProcess>" +
+			"<Attributes>" +
+				"<Attribute>" +
+					"<Name>WINumber</Name>" +
+					"<Value>CDOB-0000001212-process</Value>" +
+				"</Attribute>" +
+					"<Name>PortalReferenceNumber</Name>" +
+					"<Value>DEH-12345</Value>" +
+				"</Attribute>" +
+			"</Attributes>" +
+		"</GetWorkitemStatusReq>" +
+		"</EE_EAI_MESSAGE>";*/
+		
+		
+	/*String message="<EE_EAI_MESSAGE>" +
+				"<EE_EAI_HEADER>" +
+					"<MsgFormat>UPDATE_SR</MsgFormat>" +
+					"<MsgVersion>0000</MsgVersion>" +
+					"<RequestorChannelId>DEH</RequestorChannelId>" +
+					"<RequestorUserId>RAKUSER</RequestorUserId>" +
+					"<RequestorLanguage>E</RequestorLanguage>" +
+					"<RequestorSecurityInfo>secure</RequestorSecurityInfo>" +
+					"<ReturnCode>0000</ReturnCode>" +
+					"<ReturnDesc>Success</ReturnDesc>" +
+					"<MessageId>UNIQUE Identifier(RQ-DDMMYYYYHHMMSSS)</MessageId>" +
+					"<Extra1>REQ ||IB.123</Extra1>" +
+					"<Extra2>2011-02-08T15:31:38.818+05:30</Extra2>" +
+				"</EE_EAI_HEADER>" +
+				"<UpdateWorkitemReq>" +
+					"<ProcessName>CDOB</ProcessName>" +
+					"<SubProcess></SubProcess>" +
+					"<Attributes>" +
+						"<Attribute>" +
+							"<Name>OperationName</Name>" +
+							"<Value>DataUpdate</Value>" +
+						"</Attribute>" +
+						"<Attribute>"+
+							"<Name>IsDoneRequired</Name>"+
+							"<Value>TRUE</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>IsDocsPresent</Name>"+
+							"<Value>FALSE</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>WINumber</Name>"+
+							"<Value>CDOB-0000001154-process</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>Iban_number</Name>"+
+							"<Value>AE830040000800014829100</Value>"+
+						"</Attribute>"+
+					"<Attribute>"+
+						"<Name>PortalReferenceNumber</Name>"+
+						"<Value>15485</Value>"+
+					"</Attribute>"+
+						"<Attribute>"+
+							"<Name>BankName</Name>"+
+							"<Value>ABNAMR</Value>"+
+						"</Attribute>"+
+					"</Attributes>"+
+				"</UpdateWorkitemReq>"+
+			"</EE_EAI_MESSAGE>";*/
+		
+		
+		// RAOP Update Workitem
+	/*	String message = "<EE_EAI_MESSAGE>"+
+		"<EE_EAI_HEADER>"+
+		"<MsgFormat>UPDATE_SR</MsgFormat>"+
+		"<MsgVersion>0000</MsgVersion>"+
+		"<RequestorChannelId>API.YAP</RequestorChannelId>"+
+		"<RequestorUserId>RAKUSER</RequestorUserId>"+
+		"<RequestorLanguage>E</RequestorLanguage>"+
+		"<RequestorSecurityInfo>secure</RequestorSecurityInfo>"+
+		"<ReturnCode>9999</ReturnCode>"+
+		"<ReturnDesc>Request</ReturnDesc>"+
+		"<MessageId>Ab026s23</MessageId>"+
+		"<Extra1/>"+
+		"<Extra2/>"+
+		"</EE_EAI_HEADER>"+
+		"<UpdateWorkitemReq>"+
+		"<ProcessName>RAOP</ProcessName>"+
+		"<SubProcess>API.YAP</SubProcess>"+
+		"<Attributes>"+
+		"<Attribute>"+
+		"<Name>WINUMBER</Name>"+
+		"<Value>RAOP-0000010354-Process</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>CUSTOMERAUTHENTICATED</Name>"+
+		"<Value>Y</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>MARITALSTATUS</Name>"+
+		"<Value>M</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>EMPLOYMENTTYPE</Name>"+
+		"<Value>A</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>EMPLOYERNAME</Name>"+
+		"<Value>ABC Company</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>OCCUPATION</Name>"+
+		"<Value>11</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>INDUSTRYSEGMENT</Name>"+
+		"<Value>A</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>INDUSTRYSUBSEGMENT</Name>"+
+		"<Value>KC</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>PASSPORTNUMBER</Name>"+
+		"<Value>784456544999</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>PASSPORTISSUEDATE</Name>"+
+		"<Value>2019-12-31</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>PASSPORTEXPIRYDATE</Name>"+
+		"<Value>2022-12-31</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>VISAFILENUMBER</Name>"+
+		"<Value>1234568</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>VISAISSUEDATE</Name>"+
+		"<Value>2010-01-01</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>VISAEXPDATE</Name>"+
+		"<Value>2019-12-31</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>VISAUIDNUMBER</Name>"+
+		"<Value>1234568</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>EXPECTEDMONTHLYCREDITTURNOVERAED</Name>"+
+		"<Value>50000</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>MONTHLYCASHCREDITTURNOVERPERCENTAGE</Name>"+
+		"<Value>25.5</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>MONTHLYNONCASHCREDITTURNOVERPERCENTAGE</Name>"+
+		"<Value>70.0</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>HIGHESTCASHCREDITTRANSACTIONAED</Name>"+
+		"<Value>5000.00</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>HIGHESTNONCASHCREDITTRANSACTIONAED</Name>"+
+		"<Value>10000.00</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>CITYOFBIRTH</Name>"+
+		"<Value>DXB</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>COUNTRYOFBIRTH</Name>"+
+		"<Value>PK</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>MONTHLYSALARY</Name>"+
+		"<Value>12345</Value>"+
+		"</Attribute>"+
+		"</Attributes>"+
+		"</UpdateWorkitemReq>"+
+		"</EE_EAI_MESSAGE>";*/
+		
+		//For DAC process MONTHLYSALARY
+		//String message = "<EE_EAI_MESSAGE><EE_EAI_HEADER><MsgFormat>CUSTOMER_SR</MsgFormat><MsgVersion>0000</MsgVersion><RequestorChannelId>IBPS</RequestorChannelId><RequestorUserId>RAKUSER</RequestorUserId><RequestorLanguage>E</RequestorLanguage><RequestorSecurityInfo>secure</RequestorSecurityInfo><ReturnCode>0000</ReturnCode><ReturnDesc>Success</ReturnDesc><MessageId>msg46738</MessageId><Extra1>REQ || DAC.123</Extra1><Extra2>2011-02-08T15:31:38.818+05:30</Extra2></EE_EAI_HEADER><CreateWorkitemReq><ProcessName>DAC</ProcessName><SubProcess>DAC</SubProcess><InitiateAlso>Y</InitiateAlso><Documents></Documents><Attributes><Attribute><Name>CHANNEL</Name><Value>DAC</Value></Attribute><Attribute><Name>FIRSTNAME</Name><Value>Angad</Value></Attribute><Attribute><Name>MIDDLENAME</Name><Value>Kumar</Value></Attribute><Attribute><Name>LASTNAME</Name><Value>Shah</Value></Attribute><Attribute><Name>EMIRATESID</Name><Value>784190179745126</Value></Attribute><Attribute><Name>CORPORATECIF</Name><Value>2432620</Value></Attribute><Attribute><Name>MOBILENO</Name><Value>529811166</Value></Attribute><Attribute><Name>MOBILECNTRYCODE</Name><Value>971</Value></Attribute><Attribute><Name>UAERESIDENT</Name><Value>Y</Value></Attribute><Attribute><Name>DATEOFBIRTH</Name><Value>1994-04-03</Value></Attribute><Attribute><Name>GENDER</Name><Value>F</Value></Attribute><Attribute><Name>EMAILID</Name><Value>abc@gmail.com</Value></Attribute><Attribute><Name>PASSPORTNUMBER</Name><Value>P123456</Value></Attribute><Attribute><Name>NATIONALITY</Name><Value>IN</Value></Attribute><Attribute><Name>REQUESTBYCIF</Name><Value>0263401</Value></Attribute><Attribute><Name>REQUESTEDFORCIF</Name><Value>0100623</Value></Attribute><Attribute><Name>TITLEPREFIX</Name><Value>MR</Value></Attribute><Attribute><Name>VISAUIDNUMBER</Name><Value>6665656</Value></Attribute><Attribute><Name>MOTHERSMAIDENNAME</Name><Value>test</Value></Attribute><Attribute><Name>CARDEMBOSSINGNAME</Name><Value>Angad Kumar Shah</Value></Attribute></Attributes></CreateWorkitemReq></EE_EAI_MESSAGE>";
+		
+		/*String message ="<EE_EAI_MESSAGE>"+
+				"<EE_EAI_HEADER>"+
+				"<MsgFormat>CUSTOMER_SR</MsgFormat>"+
+				"<MsgVersion>0000</MsgVersion>"+
+				"<RequestorChannelId>EBC.WBA</RequestorChannelId>"+
+				"<RequestorUserId>RAKUSER</RequestorUserId>"+
+				"<RequestorLanguage>E</RequestorLanguage>"+
+				"<RequestorSecurityInfo>secure</RequestorSecurityInfo>"+
+				"<ReturnCode>0000</ReturnCode>"+
+				"<ReturnDesc>0000</ReturnDesc>"+
+				"<MessageId>RPAKCK4V1584273987596</MessageId>"+
+				"<Extra1>REQ||RAK.VTUSER</Extra1>"+
+				"<Extra2>2020-03-15T16:06:27.596</Extra2>"+
+				"</EE_EAI_HEADER>"+
+				"<CreateWorkitemReq>"+
+				"<ProcessName>BAIS</ProcessName>"+
+				"<SubProcess>WBA</SubProcess>"+
+				"<InitiateAlso>Y</InitiateAlso>"+
+				"<Attributes>"+
+				"<Attribute>"+
+				"<Name>CHANNEL</Name>"+
+				"<Value>WBA</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SOLID</Name>"+
+				"<Value>0157</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TLNUMBER</Name>"+
+				"<Value>555555555</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RAKTRACKNUMBER</Name>"+
+				"<Value>NOLEAD</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ROCODE</Name>"+
+				"<Value>ROCode</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ALLDOCUMENTSATTACHED</Name>"+
+				"<Value>No</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>FINACLESRNUMBER</Name>"+
+				"<Value>SR4459375</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CIFID</Name>"+
+				"<Value>2768686</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PRIORITY</Name>"+
+				"<Value>Starter</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RISKSCORE</Name>"+
+				"<Value>4.05</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CHANNELREFERRAL</Name>"+
+				"<Value>None</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CUSTOMERNAME</Name>"+
+				"<Value>jack</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RMCODE</Name>"+
+				"<Value>RMCode</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SMCODE</Name>"+
+				"<Value>SMCode</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>EMAILID</Name>"+
+				"<Value>ttt@tty.com</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>MOBILECNTRYCODE</Name>"+
+				"<Value>+971</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>MOBILENO</Name>"+
+				"<Value>565658941</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DNFBP</Name>"+
+				"<Value>NA</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NOOFDOCUMENTS</Name>"+
+				"<Value>2</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SALESAGENTINITIATED</Name>"+
+				"<Value>angad</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>EXPRESSCONSENT</Name>"+
+				"<Value>Yes</Value>"+
+				"</Attribute>"+
+				"</Attributes>"+
+				"</CreateWorkitemReq>"+
+				"</EE_EAI_MESSAGE>";*/
+		
+		/*String message = "<EE_EAI_MESSAGE>"+
+				"  <EE_EAI_HEADER>"+
+				"    <MsgFormat>CUSTOMER_SR</MsgFormat>"+
+				"    <MsgVersion>0000</MsgVersion>"+
+				"    <RequestorChannelId>EBC.WBA</RequestorChannelId>"+
+				"    <RequestorUserId>RAKUSER</RequestorUserId>"+
+				"    <RequestorLanguage>E</RequestorLanguage>"+
+				"    <RequestorSecurityInfo>secure</RequestorSecurityInfo>"+
+				"    <ReturnCode>0000</ReturnCode>"+
+				"    <ReturnDesc>0000</ReturnDesc>"+
+				"    <MessageId>RPAIF0MZ1585847605871</MessageId>"+
+				"    <Extra1>REQ||RAK.VTUSER</Extra1>"+
+				"    <Extra2>2020-04-02T21:13:25.875</Extra2>"+
+				"  </EE_EAI_HEADER>"+
+				"  <CreateWorkitemReq>"+
+				"    <ProcessName>DOB</ProcessName>"+
+				"    <SubProcess>EBC.WBA</SubProcess>"+
+				"    <InitiateAlso>Y</InitiateAlso>"+
+				"    <Attributes>"+
+				"      <Attribute>"+
+				"        <Name>Product_Type</Name>"+
+				"        <Value>C-FALCON WORLD ELITE</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>MobileNo_pri</Name>"+
+				"        <Value>00971509203039</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>Title</Name>"+
+				"        <Value>MR.</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>FirstName</Name>"+
+				"        <Value>Amy</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>LastName</Name>"+
+				"        <Value>Baird</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>dob</Name>"+
+				"        <Value>1985-07-08</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>Nationality</Name>"+
+				"        <Value>IN</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>PAssportNo</Name>"+
+				"        <Value>IN9205642</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>Email_ID</Name>"+
+				"        <Value>XCVG55@GMAIL.COM</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>EmiratesID</Name>"+
+				"        <Value>784198509205642</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>Designation</Name>"+
+				"        <Value>ACCT</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>Basic_Sal</Name>"+
+				"        <Value>60000</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>EmpCode</Name>"+
+				"        <Value>929</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>EmpName</Name>"+
+				"        <Value>RAK CEMENT CO</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>Emp_Type</Name>"+
+				"        <Value>Salaried</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>Aecb_Consent_Received</Name>"+
+				"        <Value>True</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>NameOnCard</Name>"+
+				"        <Value>VIPUL</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>Iban_number</Name>"+
+				"        <Value>AE160030010588175132001</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>isNTB</Name>"+
+				"        <Value>true</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>EmirateOfVisa</Name>"+
+				"        <Value>DXB</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>BankName</Name>"+
+				"        <Value>ADCB</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>FTS_Consent</Name>"+
+				"        <Value>True</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>IndusSeg</Name>"+
+				"        <Value>CEMENT</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>emirateOfWork</Name>"+
+				"        <Value>DXB</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>ReferenceName</Name>"+
+				"        <Value>SINGHA</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>ReferenceMobile</Name>"+
+				"        <Value>0579884710</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>PortalApplicationNumber</Name>"+
+				"        <Value>204</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>ApprovedLimit</Name>"+
+				"        <Value>200000.0</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>Mothersname</Name>"+
+				"        <Value>MAAAAA</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>FinalDBR</Name>"+
+				"        <Value>10.4</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>FinalTAI</Name>"+
+				"        <Value>60000</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>EligibleCardProduct</Name>"+
+				"        <Value>Credit Card|Salaried Credit Card||200000.00||A||A999-System Approve|SR. MGR|0~Credit Card|Salaried Credit Card||200000.00||A||A999-System Approve|SR. MGR|0</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>MaritalStatus</Name>"+
+				"        <Value>O</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>EmploymentStatus</Name>"+
+				"        <Value>2</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>YearsInCurrAddress</Name>"+
+				"        <Value>1</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>EStatementFlag</Name>"+
+				"        <Value>Y</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>HomeCountryHouseNo</Name>"+
+				"        <Value>KJSVGIUS</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>HomeCountryBuildingName</Name>"+
+				"        <Value>UIAGVEEBRFISSUAW</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>HomeCountryStreetName</Name>"+
+				"        <Value>AKHUFOSSEU</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>HomeCountryNo</Name>"+
+				"        <Value>009851687964596</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>CountryOfBirth</Name>"+
+				"        <Value>IN</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>CityOfBirth</Name>"+
+				"        <Value>PATNA</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>CountryOfTaxResidence</Name>"+
+				"        <Value>IN</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>isTinAvailable</Name>"+
+				"        <Value>false</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>TinReason</Name>"+
+				"        <Value>B-UNABLE GET TIN</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>emirateOfResidence</Name>"+
+				"        <Value>DXB</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>ResidenceAddressHouseNo</Name>"+
+				"        <Value>GWSR</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>ResidenceAddressBuildingName</Name>"+
+				"        <Value>JHJIAD</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>ResidenceAddressStreetName</Name>"+
+				"        <Value>SUJHOVIUWS</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>RESIDENCEADDRESSPOBOX</Name>"+
+				"        <Value>121212</Value>"+
+				"      </Attribute>"+
+				"      <Attribute>"+
+				"        <Name>OFFICEADDRESSPOBOX</Name>"+
+				"        <Value>123456</Value>"+
+				"      </Attribute>"+
+				"    </Attributes>"+
+				"  </CreateWorkitemReq>"+
+				"</EE_EAI_MESSAGE>"; */
+		
+		//String message = "<EE_EAI_MESSAGE><EE_EAI_HEADER><MsgFormat>CUSTOMER_SR</MsgFormat><MsgVersion>0000</MsgVersion><RequestorChannelId>YAP</RequestorChannelId><RequestorUserId>RAKUSER</RequestorUserId><RequestorLanguage>E</RequestorLanguage><RequestorSecurityInfo>secure</RequestorSecurityInfo><ReturnCode>0000</ReturnCode><ReturnDesc>Success</ReturnDesc><MessageId>test123456</MessageId><Extra1>REQ || YAP.123</Extra1><Extra2>2011-02-08T15:31:38.818+05:30</Extra2></EE_EAI_HEADER><CreateWorkitemReq><ProcessName>TT</ProcessName><SubProcess>YAP</SubProcess><InitiateAlso>Y</InitiateAlso><Documents /><Attributes><Attribute><Name>CHANNEL</Name><Value>YAP</Value></Attribute><Attribute><Name>PAYMENTORDERID</Name><Value>000023534641</Value></Attribute><Attribute><Name>DEBITACNUMBER</Name><Value>0302269347001</Value></Attribute><Attribute><Name>TRANSFERAMOUNT</Name><Value>8000.00</Value></Attribute><Attribute><Name>TRANSFERCURRENCY</Name><Value>AED</Value></Attribute><Attribute><Name>EXCHANGERATE</Name><Value>0.0530570000</Value></Attribute><Attribute><Name>REMITTINGCURRENCY</Name><Value>INR</Value></Attribute><Attribute><Name>CHARGES</Name><Value>OUR</Value></Attribute><Attribute><Name>TRANSACTIONTYPE</Name><Value>Individual</Value></Attribute><Attribute><Name>TRANSACTIONCODE</Name><Value>FAM</Value></Attribute><Attribute><Name>PURPOSEOFPAYMENT1</Name><Value>Family Support</Value></Attribute><Attribute><Name>PURPOSEOFPAYMENT2</Name><Value>Family Support2</Value></Attribute><Attribute><Name>PURPOSEOFPAYMENT3</Name><Value>Family Support3</Value></Attribute><Attribute><Name>BENEFICIARYNAME1</Name><Value>Betsy Narayan</Value></Attribute><Attribute><Name>BENEFICIARYCITY</Name><Value>Dubai</Value></Attribute><Attribute><Name>BENEFICIARYCOUNTRYOFRESIDENCEINCORPORATION</Name><Value>India</Value></Attribute><Attribute><Name>ACCOUNTNOIBAN</Name><Value>11111111111111111111</Value></Attribute><Attribute><Name>BENEFICIARYBANKNAME</Name><Value>RAK Bank</Value></Attribute><Attribute><Name>BENEFICIARYBANKBRANCH</Name><Value>RAK</Value></Attribute><Attribute><Name>BENEFICIARYBANKCITYSTATE</Name><Value>Dubai</Value></Attribute><Attribute><Name>BENEFICIARYBANKCOUNTRY</Name><Value>India</Value></Attribute><Attribute><Name>INTERMEDIARYBANKNAME</Name><Value>Standard Chartered</Value></Attribute><Attribute><Name>INTERMEDIARYBANKCOUNTRY</Name><Value>United Arab Emirates</Value></Attribute><Attribute><Name>INTERMEDIARYBANKBRANCH</Name><Value>BurDubai</Value></Attribute><Attribute><Name>INTERMEDIARYBANKCITYSTATE</Name><Value>Dubai</Value></Attribute><Attribute><Name>BENEFICIARYBANKCODETYPE</Name><Value>SWIFT Code</Value></Attribute><Attribute><Name>BENEFICIARYBANKCODEVALUE</Name><Value>UIBXX001</Value></Attribute><Attribute><Name>INTERMEDIARYBANKCODETYPE</Name><Value>IFSC Code</Value></Attribute><Attribute><Name>INTERMEDIARYBANKCODEVALUE</Name><Value>UIWW001</Value></Attribute></Attributes></CreateWorkitemReq></EE_EAI_MESSAGE>";
+		
+		/*String message = "<EE_EAI_MESSAGE>"+
+				"<EE_EAI_HEADER>"+
+				"<MsgFormat>UPDATE_SR</MsgFormat>"+
+				"<MsgVersion>0000</MsgVersion>"+
+				"<RequestorChannelId>API.YAP.AddInfo</RequestorChannelId>"+
+				"<RequestorUserId>RAKUSER</RequestorUserId>"+
+				"<RequestorLanguage>E</RequestorLanguage>"+
+				"<RequestorSecurityInfo>secure</RequestorSecurityInfo>"+
+				"<ReturnCode>9999</ReturnCode>"+
+				"<ReturnDesc>Request</ReturnDesc>"+
+				"<MessageId>Ab026s23</MessageId>"+
+				"<Extra1/>"+
+				"<Extra2/>"+
+				"</EE_EAI_HEADER>"+
+				"<UpdateWorkitemReq>"+
+				"<ProcessName>RAOP</ProcessName>"+
+				"<SubProcess>API.YAP.AddInfo</SubProcess>"+
+				"<Attributes>"+
+				"<Attribute>"+
+				"<Name>WINUMBER</Name>"+
+				"<Value>RAOP-0000010058-Process</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ISDOCPROVIDED</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>REMARKS</Name>"+
+				"<Value>Required informations are provided</Value>"+
+				"</Attribute>"+
+				"</UpdateWorkitemReq>"+
+				"</EE_EAI_MESSAGE>";*/
+		
+		/*String message = "<EE_EAI_MESSAGE>"+
+		"<EE_EAI_HEADER>"+
+		"<MsgFormat>UPDATE_SR</MsgFormat>"+
+		"<MsgVersion>0000</MsgVersion>"+
+		"<RequestorChannelId>API.YAP</RequestorChannelId>"+
+		"<RequestorUserId>RAKUSER</RequestorUserId>"+
+		"<RequestorLanguage>E</RequestorLanguage>"+
+		"<RequestorSecurityInfo>secure</RequestorSecurityInfo>"+
+		"<ReturnCode>9999</ReturnCode>"+
+		"<ReturnDesc>Request</ReturnDesc>"+
+		"<MessageId>Ab026s23</MessageId>"+
+		"<Extra1/>"+
+		"<Extra2/>"+
+		"</EE_EAI_HEADER>"+
+		"<UpdateWorkitemReq>"+
+		"<ProcessName>RAOP</ProcessName>"+
+		"<SubProcess>API.YAP</SubProcess>"+
+		"<Attributes>"+
+		"<Attribute>"+
+		"<Name>WINUMBER</Name>"+
+		"<Value>RAOP-00000100190-Process</Value>"+
+		"</Attribute>"+
+		"<Attribute>"+
+		"<Name>CUSTOMERAUTHENTICATED</Name>"+
+		"<Value>N</Value>"+
+		"</Attribute>"+
+		"</Attributes>"+
+		"</UpdateWorkitemReq>"+
+		"</EE_EAI_MESSAGE>";*/
+		
+		// OECD
+		/*String message1 = "<EE_EAI_HEADER>"+
+				"<EE_EAI_HEADER>"+
+				 "<MsgFormat>CREATE_WORKITEM</MsgFormat>"+
+				 "<MsgVersion>0000</MsgVersion>"+
+				 "<RequestorChannelId>IB</RequestorChannelId>"+
+				 "<RequestorUserId>RAKUSER</RequestorUserId>"+
+				 "<RequestorLanguage>E</RequestorLanguage>"+
+				 "<RequestorSecurityInfo>secure</RequestorSecurityInfo>"+
+				 "<ReturnCode>0000</ReturnCode>"+
+				 "<ReturnDesc>Success</ReturnDesc>"+
+				 "<MessageId>UNIQUE Identifier(RQ-DDMMYYYYHHMMSSS)</MessageId>"+
+				 "<Extra1>REQ||VIKASRET.VIKASRET</Extra1>"+
+				 "<Extra2>2011-02-08T15:31:38.818+05:30(Requested Date)</Extra2>"+
+			"</EE_EAI_HEADER>"+
+			"<CreateWorkitemReq>"+
+				"<ProcessName>OECD</ProcessName>"+
+				"<SubProcess></SubProcess>"+
+				"<InitiateAlso>Y</InitiateAlso>"+
+				"<Documents>"+
+				"</Documents>"+
+				"<Attributes>"+
+					"<Attribute>"+
+						"<Name>FINACLESRNUMBER</Name>"+
+						"<Value>SR123456</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>CHANNEL</Name>"+
+						"<Value>EBC.IB</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>INITIATORCIFNUMBER</Name>"+
+						"<Value>0263401</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>INITIATORNAME</Name>"+
+						"<Value>Ankur Jha</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>SUBMISSIONMODE</Name>"+
+						"<Value>Online</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>CIFNUMBER</Name>"+
+						"<Value>0263401</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RMCODE</Name>"+
+						"<Value>xsangad</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>CIFTYPE</Name>"+
+						"<Value>R</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>NAME</Name>"+
+						"<Value>Amit Mishra</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>SEGMENT</Name>"+
+						"<Value>PBD</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>SUBSEGMENT</Name>"+
+						"<Value>PBN</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>NATIONALITY</Name>"+
+						"<Value>AE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>DATEOFBIRTH</Name>"+
+						"<Value>1990-02-26</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>COUNTRYOFINCORPORATION</Name>"+
+						"<Value>AE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>NFETYPE</Name>"+
+						"<Value>Active NFE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>PREFERREDADDRESS</Name>"+
+						"<Value>test1</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>PERMANENTADDRLINE1</Name>"+
+						"<Value>612</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>PERMANENTADDRLINE2</Name>"+
+						"<Value>Mayur Vihar</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>PERMANENTADDRPOBOX</Name>"+
+						"<Value>4534</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>PERMANENTADDRCITY</Name>"+
+						"<Value>DEL</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>PERMANENTADDRSTATE</Name>"+
+						"<Value>DEL</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>PERMANENTADDRCOUNTRY</Name>"+
+						"<Value>IN</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRLINE1</Name>"+
+						"<Value>611</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRLINE2</Name>"+
+						"<Value>S H 1, DSO</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRPOBOX</Name>"+
+						"<Value>54343</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRCITY</Name>"+
+						"<Value>DXB</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRSTATE</Name>"+
+						"<Value>DXB</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRCOUNTRY</Name>"+
+						"<Value>AE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>USRELATIONMAIN</Name>"+
+						"<Value>O</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>FINANCIALENTITY</Name>"+
+						"<Value>LOCAL FINANCIAL ENTITY</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>GIIN</Name>"+
+						"<Value>3467345345</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>FATCAENTITYTYPE</Name>"+
+						"<Value>Corporation</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>NAMEOFSECURITYMARKET</Name>"+
+						"<Value>Name Secure</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>NAMETRADEDCORPORATION</Name>"+
+						"<Value>Name Trade</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>CONTROLLINGPERSONUSRELATIONSHIP</Name>"+
+						"<Value>Yes</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>CITYOFBIRTH</Name>"+
+						"<Value>Delhi</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>COUNTRYOFBIRTH</Name>"+
+						"<Value>IN</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>CRSUNDOCUMENTEDFLAG</Name>"+
+						"<Value>N</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>REPORTCOUNTRYDETAILS</Name>"+
+						"<Value>US~123445~~| AE~~Reason B~No tax number | IN~ABC12345~~</Value>"+
+					"</Attribute>"+
+				"</Attributes>"+
+				"<RelatedPartyDetails>"+	
+					"<Attribute>"+
+						"<Name>CIFID</Name>"+
+						"<Value></Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>FINANCIALDETAILID</Name>"+
+						"<Value>234567890</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>NAME</Name>"+
+						"<Value>Rel Non 1</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RELATIONSHIPTYPE</Name>"+
+						"<Value>Sole</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRLINE1</Name>"+
+						"<Value>613</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRLINE2</Name>"+
+						"<Value>DSO</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRPOBOX</Name>"+
+						"<Value>354334</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRCITY</Name>"+
+						"<Value>DXB</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRCOUNTRY</Name>"+
+						"<Value>AE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRLINE1</Name>"+
+						"<Value>614</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRLINE2</Name>"+
+						"<Value>DSO</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRPOBOX</Name>"+
+						"<Value>45645</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRCITY</Name>"+
+						"<Value>DXB</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRSTATE</Name>"+
+						"<Value>DXB</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRCOUNTRY</Name>"+
+						"<Value>AE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>USRELATION</Name>"+
+						"<Value>O</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>CONTROLLINGPERSONTYPE</Name>"+
+						"<Value>Legal Person-Ownership</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>ReportCountryDetails</Name>"+
+						"<Value>AE~45645~~| US~~Reason B~No tax number | IN~ABC1222345~~</Value>"+
+					"</Attribute>"+
+				"</RelatedPartyDetails>"+
+				"<RelatedPartyDetails>"+	
+					"<Attribute>"+
+						"<Name>CIFID</Name>"+
+						"<Value>9874561</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>FINANCIALDETAILID</Name>"+
+						"<Value></Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>NAME</Name>"+
+						"<Value>Rel CIF 1</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RELATIONSHIPTYPE</Name>"+
+						"<Value>Any of us</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRLINE1</Name>"+
+						"<Value>615</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRLINE2</Name>"+
+						"<Value>DSO1</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRPOBOX</Name>"+
+						"<Value>5645</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRCITY</Name>"+
+						"<Value>DXB</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRCOUNTRY</Name>"+
+						"<Value>AE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRLINE1</Name>"+
+						"<Value>616</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRLINE2</Name>"+
+						"<Value>DSO2</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRPOBOX</Name>"+
+						"<Value>433434</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRCITY</Name>"+
+						"<Value>DXB</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRSTATE</Name>"+
+						"<Value>DXB</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRCOUNTRY</Name>"+
+						"<Value>AE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>USRELATION</Name>"+
+						"<Value>O</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>CONTROLLINGPERSONTYPE</Name>"+
+						"<Value>Legal Person-Other Means</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>ReportCountryDetails</Name>"+
+						"<Value>PK~12333445~~| IN~~Reason B~No tax number | AE~ABC1233346~~</Value>"+
+					"</Attribute>"+
+				"</RelatedPartyDetails>"+
+				"<RelatedPartyDetails>"+	
+					"<Attribute>"+
+						"<Name>CIFID</Name>"+
+						"<Value>7292298</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>FINANCIALDETAILID</Name>"+
+						"<Value></Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>NAME</Name>"+
+						"<Value>Rel CIF 2</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RELATIONSHIPTYPE</Name>"+
+						"<Value>Sole</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRLINE1</Name>"+
+						"<Value>233</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRLINE2</Name>"+
+						"<Value>Al Nahda</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRPOBOX</Name>"+
+						"<Value>4334</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRCITY</Name>"+
+						"<Value>DXB</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRCOUNTRY</Name>"+
+						"<Value>AE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRLINE1</Name>"+
+						"<Value>645</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRLINE2</Name>"+
+						"<Value>DSO9</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRPOBOX</Name>"+
+						"<Value>32233</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRCITY</Name>"+
+						"<Value>SHA</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRSTATE</Name>"+
+						"<Value>SHA</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRCOUNTRY</Name>"+
+						"<Value>AE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>USRELATION</Name>"+
+						"<Value>N</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>CONTROLLINGPERSONTYPE</Name>"+
+						"<Value>Legal Arrangement-Trust-Trustee</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>ReportCountryDetails</Name>"+
+						"<Value>UK~12333445~~| AS~~Reason B~No tax number | AE~ABC14542340~~</Value>"+
+					"</Attribute>"+
+				"</RelatedPartyDetails>"+
+				"<RelatedPartyDetails>"+	
+					"<Attribute>"+
+						"<Name>CIFID</Name>"+
+						"<Value></Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>FINANCIALDETAILID</Name>"+
+						"<Value>57896541</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>NAME</Name>"+
+						"<Value>Non Rel CIF 2</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RELATIONSHIPTYPE</Name>"+
+						"<Value>POA</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRLINE1</Name>"+
+						"<Value>3453</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRLINE2</Name>"+
+						"<Value>Burj</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRPOBOX</Name>"+
+						"<Value>4564</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRCITY</Name>"+
+						"<Value>DXB</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>RESIDENCEADDRCOUNTRY</Name>"+
+						"<Value>AE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRLINE1</Name>"+
+						"<Value>4564</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRLINE2</Name>"+
+						"<Value>Dubai Land</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRPOBOX</Name>"+
+						"<Value>456224</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRCITY</Name>"+
+						"<Value>DXB</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRSTATE</Name>"+
+						"<Value>DXB</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>MAILINGADDRCOUNTRY</Name>"+
+						"<Value>AE</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>USRELATION</Name>"+
+						"<Value>N</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>CONTROLLINGPERSONTYPE</Name>"+
+						"<Value>Legal Arrangement-Protector</Value>"+
+					"</Attribute>"+
+					"<Attribute>"+
+						"<Name>ReportCountryDetails</Name>"+
+						"<Value>OM~12334445~~| BD~~Reason B~No tax number | NP~ABC1442347~~</Value>"+
+					"</Attribute>"+
+				"</RelatedPartyDetails>"+
+			"</CreateWorkitemReq>"+
+		"</EE_EAI_HEADER>";*/
+		
+		/*String message1 = "<EE_EAI_MESSAGE>"+
+				"<EE_EAI_HEADER>"+
+				"<MsgFormat>CUSTOMER_SR</MsgFormat>"+
+				"<MsgVersion>0000</MsgVersion>"+
+				"<RequestorChannelId>EBC.WBA</RequestorChannelId>"+
+				"<RequestorUserId>RAKUSER</RequestorUserId>"+
+				"<RequestorLanguage>E</RequestorLanguage>"+
+				"<RequestorSecurityInfo>secure</RequestorSecurityInfo>"+
+				"<ReturnCode>0000</ReturnCode>"+
+				"<ReturnDesc>0000</ReturnDesc>"+
+				"<MessageId>RPAOKNJG1637733395645</MessageId>"+
+				"<Extra1>REQ||RAK.RBLRO03</Extra1>"+
+				"<Extra2>2021-11-24T09:56:35.652+05:30</Extra2>"+
+				"</EE_EAI_HEADER>"+
+				"<CreateWorkitemReq>"+
+				"<ProcessName>iRBL</ProcessName>"+
+				"<SubProcess>WBA</SubProcess>"+
+				"<InitiateAlso>Y</InitiateAlso>"+
+				"<Attributes>"+
+				"<Attribute>"+
+				"<Name>NAMEOFCOMPANY</Name>"+
+				"<Value>ABCDEFG</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>FULLNAMEOFAPPLICANT</Name>"+
+				"<Value>Tribes of Andaman and Nicobar Islands</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>MOBILENUMBERCOUNTRYCODE</Name>"+
+				"<Value>971</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>MOBILENUMBER</Name>"+
+				"<Value>399998888</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>EMAILID</Name>"+
+				"<Value>test11@rakbanktst.ae</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE1</Name>"+
+				"<Value>dummy</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TLISSUEDATE</Name>"+
+				"<Value>1990-01-01</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>BUSINESSCONSTITUTION</Name>"+
+				"<Value>PART</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>VATEXEMPTIONFLAG</Name>"+
+				"<Value>no</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NUMBEROFEMPLOYEES</Name>"+
+				"<Value>25</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERCENTAGEWHOLESALE</Name>"+
+				"<Value>50</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDCITY</Name>"+
+				"<Value>AAN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDCOUNTRYCODE</Name>"+
+				"<Value>AE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>INDUSTRYSTATUS</Name>"+
+				"<Value>dummy</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RAKTRACKNUMBER</Name>"+
+				"<Value>0aa2e8</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TYPEOFFINANCE</Name>"+
+				"<Value>RBL</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PRIORITYLOAN</Name>"+
+				"<Value>Standard</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PRIORITY</Name>"+
+				"<Value>Standard</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CIFNUMBER</Name>"+
+				"<Value>0259491</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NTBEXISTING</Name>"+
+				"<Value>Existing</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CONVENTIONALISLAMIC</Name>"+
+				"<Value>conventional</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RISKSCORE</Name>"+
+				"<Value>1.7</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PEPSTATUS</Name>"+
+				"<Value>NPEP</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TLNUMBER</Name>"+
+				"<Value>A2N5452121</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TLVALIDTILL</Name>"+
+				"<Value>2023-11-22</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ISSUINGEMIRATE</Name>"+
+				"<Value>28</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>FINACLESRNUMBER</Name>"+
+				"<Value>SR4992552</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>IFNEWORTOPUP</Name>"+
+				"<Value>New</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CHANNELSOURCE</Name>"+
+				"<Value>Ineligible</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CHANNEL</Name>"+
+				"<Value>WBA</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RO</Name>"+
+				"<Value>rouser1</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RAKTRACKNUMBERBAIS</Name>"+
+				"<Value>0aa2e8</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>WPSROUTEDFROM</Name>"+
+				"<Value>Exchange House</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>OWNERSHIPOFPREMISES</Name>"+
+				"<Value>T1</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TYPEOFPREMISES</Name>"+
+				"<Value>2</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TOTALELIGIBILITYAMOUNT</Name>"+
+				"<Value>100000</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PROPOSEDTENOR</Name>"+
+				"<Value>60</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>INTEREST</Name>"+
+				"<Value>18</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PROCESSINGFEE</Name>"+
+				"<Value>2.5</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREMISESEMIRATE</Name>"+
+				"<Value>UAE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERCENTAGEANNUALSALES</Name>"+
+				"<Value>0</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERCENTAGELOCALINTERNATIONAL</Name>"+
+				"<Value>100</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERCENTAGERETAIL</Name>"+
+				"<Value>50</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COUNTRYOFINCORPORATION</Name>"+
+				"<Value>AE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DATEOFINCORPORATION</Name>"+
+				"<Value>1990-01-01</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>REQUESTEDLOANAMOUNT</Name>"+
+				"<Value>4000000</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TESSLOANOUTSNDRAK</Name>"+
+				"<Value>34323</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NOOFEMIREPAIDTESSLOAN</Name>"+
+				"<Value>11</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PRODUCTTYPE</Name>"+
+				"<Value>conventional</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PRODUCTCURRENCY</Name>"+
+				"<Value>AED</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CIFSTATUS</Name>"+
+				"<Value>Active</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CIFUPDATEREQMAIN</Name>"+
+				"<Value>Y</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>AEDCURRENCY</Name>"+
+				"<Value>AED</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DOCUMENTLIST</Name>"+
+				"<Value>AECB_Consent_Form_Company|VAT_Return|AECB_Consent_Form_Others|CV_Personal_Background|Constitutional_Docs|Passport_Visa_EID|TL_On_Website|Telephonebill_Tenancycontract_WPS_Proofofstaff|KYC|BVR_RM|Risk_Score|Account_Opening_Application|BVR_Annexure_Form</Value>"+
+				"</Attribute>"+
+				"</Attributes>"+
+				"<AdditionalAttributes>"+
+				"<Attribute>"+
+				"<Name>WHATSTHEREASON</Name>"+
+				"<Value>100000</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DNFBPSTATUS</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PARTNERCODE</Name>"+
+				"<Value>9160</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PROMOCODE</Name>"+
+				"<Value>ABCD1234</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>USRELATION</Name>"+
+				"<Value>Y</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>AECBCONSENTSTATUSMAIN</Name>"+
+				"<Value>Digital</Value>"+
+				"</Attribute>"+
+				"</AdditionalAttributes>"+
+				"<FinancialEligibilityCheckDetails>"+
+				"<Attribute>"+
+				"<Name>TURNOVERAMOUNT</Name>"+
+				"<Value>100000000.00</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TURNOVERTIMEPERIOD</Name>"+
+				"<Value>12</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TURNOVERFROM</Name>"+
+				"<Value>2020-11-23</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TURNOVERTO</Name>"+
+				"<Value>2021-11-24</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TURNOVERDATEOFCHECK</Name>"+
+				"<Value>2021-11-24</Value>"+
+				"</Attribute>"+
+				"<Attribute/>"+
+				"<Attribute/>"+
+				"<Attribute/>"+
+				"<Attribute/>"+
+				"<Attribute/>"+
+				"<Attribute>"+
+				"<Name>POSTURNOVERDATEOFCHECK</Name>"+
+				"<Value>2021-11-24</Value>"+
+				"</Attribute>"+
+				"<Attribute/>"+
+				"<Attribute/>"+
+				"<Attribute>"+
+				"<Name>VATTURNOVERDATEOFCHECK</Name>"+
+				"<Value>2021-11-24</Value>"+
+				"</Attribute>"+
+				"<Attribute/>"+
+				"<Attribute/>"+
+				"<Attribute>"+
+				"<Name>VATPERIODDATEOFCHECK</Name>"+
+				"<Value>2021-11-24</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NETPROFIT</Name>"+
+				"<Value>20.00</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TOTALMONTHLYCREDITS</Name>"+
+				"<Value>8333333</Value>"+
+				"</Attribute>"+
+				"</FinancialEligibilityCheckDetails>"+
+				"<IndustryCodeDetails>"+
+				"<Attribute>"+
+				"<Name>INDUSTRYCODE</Name>"+
+				"<Value>MFG</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>INDUSTRYSUBCATEGORY</Name>"+
+				"<Value>89</Value>"+
+				"</Attribute>"+
+				"</IndustryCodeDetails>"+
+				"<EUMProposedDetails>"+
+				"<Attribute>"+
+				"<Name>EUMPROPOSED</Name>"+
+				"<Value>Upfront</Value>"+
+				"</Attribute>"+
+				"</EUMProposedDetails>"+
+				"<ConductHistoryRelatedPartiesDetails>"+
+				"<Attribute>"+
+				"<Name>RELATEDPARTYID</Name>"+
+				"<Value>1469045</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COMPANYFLAG</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELATIONSHIPTYPE</Name>"+
+				"<Value>Guarantor</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>FIRSTNAME</Name>"+
+				"<Value>Nayif</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>MIDDLENAME</Name>"+
+				"<Value>Shindakh Thamir</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>LASTNAME</Name>"+
+				"<Value>Ghal</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DATEOFBIRTH</Name>"+
+				"<Value>1989-01-01</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>EMIRATESID</Name>"+
+				"<Value>784198911469045</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ISGOVERNMENTRELATION</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SIGNATORYFLAG</Name>"+
+				"<Value>Yes</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TYPEOFOWNERSHIP</Name>"+
+				"<Value>10</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TYPEOFPROOFPROVIDEDFORLOB</Name>"+
+				"<Value>dummy</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SIGNATORYPOWERHELDSINCEDATE</Name>"+
+				"<Value>2007-11-21</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SHAREHOLDINGPERCENTAGE</Name>"+
+				"<Value>50</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>AUTHORITYTYPE</Name>"+
+				"<Value>10</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NATIONALITY</Name>"+
+				"<Value>IN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>VISASPONSOR</Name>"+
+				"<Value>SPONSOR2</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SISCOTLNO</Name>"+
+				"<Value>Y</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>GUARANTORYCATEGORY</Name>"+
+				"<Value>C</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ISSUINGEMIRATE</Name>"+
+				"<Value>28</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>GENDER</Name>"+
+				"<Value>M</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COUNTRYOFRESIDENCE</Name>"+
+				"<Value>AE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PASSPORTNUMBER</Name>"+
+				"<Value>AE1469045</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COUNTRYOFBIRTH</Name>"+
+				"<Value>AE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>FATHERNAME</Name>"+
+				"<Value>PLUTO father UBO</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>MOTHERNAME</Name>"+
+				"<Value>Mother of Partner One</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELMOBILENUMBERCOUNTRYCODE</Name>"+
+				"<Value>971</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELMOBILENUMBER</Name>"+
+				"<Value>444444444</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELEMAILID</Name>"+
+				"<Value>tjuneja@rakbanktst.ae</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COBORROWERGUARANTORSTATUS</Name>"+
+				"<Value>Yes</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERIOD</Name>"+
+				"<Value>3</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CIF</Name>"+
+				"<Value>1469045</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>EXISTINGNTB</Name>"+
+				"<Value>Existing</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TLNO</Name>"+
+				"<Value>123456</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE1</Name>"+
+				"<Value>003</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE2</Name>"+
+				"<Value>Street name</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE3</Name>"+
+				"<Value>102</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE4</Name>"+
+				"<Value>Area or District</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDPOBOX</Name>"+
+				"<Value>1423</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDCITY</Name>"+
+				"<Value>AAN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDCOUNTRYCODE</Name>"+
+				"<Value>AE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NAMEOFORGANIZATION</Name>"+
+				"<Value>ABCDEFG</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DEPARTMENT</Name>"+
+				"<Value>ABC</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>OCCUPATION</Name>"+
+				"<Value>XYZ</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>USTAXPAYER</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CIFUPDATEREQREL</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>AECBCONSENTSTATUS</Name>"+
+				"<Value>Digital</Value>"+
+				"</Attribute>"+
+				"</ConductHistoryRelatedPartiesDetails>"+
+				"<ConductHistoryRelatedPartiesDetails>"+
+				"<Attribute>"+
+				"<Name>RELATEDPARTYID</Name>"+
+				"<Value>1492396</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COMPANYFLAG</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELATIONSHIPTYPE</Name>"+
+				"<Value>Guarantor</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>FIRSTNAME</Name>"+
+				"<Value>Callixte</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>LASTNAME</Name>"+
+				"<Value>Mbarushimana</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DATEOFBIRTH</Name>"+
+				"<Value>1963-07-24</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ISGOVERNMENTRELATION</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SIGNATORYFLAG</Name>"+
+				"<Value>No</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TYPEOFOWNERSHIP</Name>"+
+				"<Value>14</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TYPEOFPROOFPROVIDEDFORLOB</Name>"+
+				"<Value>dummy</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>INVOLVEDINBUSINESS</Name>"+
+				"<Value>Y</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SHAREHOLDINGPERCENTAGE</Name>"+
+				"<Value>25</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>AUTHORITYTYPE</Name>"+
+				"<Value>dummy</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NATIONALITY</Name>"+
+				"<Value>IN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>VISASPONSOR</Name>"+
+				"<Value>dummy</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SISCOTLNO</Name>"+
+				"<Value>Y</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ISSISCOCOBORROWERGUARANTOR</Name>"+
+				"<Value>No</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>GUARANTORYCATEGORY</Name>"+
+				"<Value>C</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ISSUINGEMIRATE</Name>"+
+				"<Value>28</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>GENDER</Name>"+
+				"<Value>M</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COUNTRYOFRESIDENCE</Name>"+
+				"<Value>IN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PASSPORTNUMBER</Name>"+
+				"<Value>AE1492396</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COUNTRYOFBIRTH</Name>"+
+				"<Value>IN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>FATHERNAME</Name>"+
+				"<Value>PLUTO father UBO</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>MOTHERNAME</Name>"+
+				"<Value>Pluto Mother</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELMOBILENUMBERCOUNTRYCODE</Name>"+
+				"<Value>971</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELMOBILENUMBER</Name>"+
+				"<Value>333333333</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELEMAILID</Name>"+
+				"<Value>test1@rakbanktst.ae</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COBORROWERGUARANTORSTATUS</Name>"+
+				"<Value>Yes</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERIOD</Name>"+
+				"<Value>3</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CIF</Name>"+
+				"<Value>1492396</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>EXISTINGNTB</Name>"+
+				"<Value>Existing</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TLNO</Name>"+
+				"<Value>123456</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE1</Name>"+
+				"<Value>003</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE2</Name>"+
+				"<Value>Street name</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE3</Name>"+
+				"<Value>102</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE4</Name>"+
+				"<Value>Area or District</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDPOBOX</Name>"+
+				"<Value>1423</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDCITY</Name>"+
+				"<Value>AAN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDCOUNTRYCODE</Name>"+
+				"<Value>AE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NAMEOFORGANIZATION</Name>"+
+				"<Value>ABCDEFG</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DEPARTMENT</Name>"+
+				"<Value>ABC</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>OCCUPATION</Name>"+
+				"<Value>XYZ</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>USTAXPAYER</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CIFUPDATEREQREL</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>AECBCONSENTSTATUS</Name>"+
+				"<Value>Digital</Value>"+
+				"</Attribute>"+
+				"</ConductHistoryRelatedPartiesDetails>"+
+				"<ConductHistoryRelatedPartiesDetails>"+
+				"<Attribute>"+
+				"<Name>RELATEDPARTYID</Name>"+
+				"<Value>2717748</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COMPANYFLAG</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELATIONSHIPTYPE</Name>"+
+				"<Value>Guarantor</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>FIRSTNAME</Name>"+
+				"<Value>Abdul</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>LASTNAME</Name>"+
+				"<Value>Haq</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DATEOFBIRTH</Name>"+
+				"<Value>1971-10-10</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>EMIRATESID</Name>"+
+				"<Value>784197109314591</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ISGOVERNMENTRELATION</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SIGNATORYFLAG</Name>"+
+				"<Value>Yes</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TYPEOFOWNERSHIP</Name>"+
+				"<Value>dummy</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TYPEOFPROOFPROVIDEDFORLOB</Name>"+
+				"<Value>dummy</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SIGNATORYPOWERHELDSINCEDATE</Name>"+
+				"<Value>2011-11-21</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SHAREHOLDINGPERCENTAGE</Name>"+
+				"<Value>0</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>AUTHORITYTYPE</Name>"+
+				"<Value>14</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NATIONALITY</Name>"+
+				"<Value>IN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>VISASPONSOR</Name>"+
+				"<Value>SPONSOR4</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SISCOTLNO</Name>"+
+				"<Value>Y</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ISSISCOCOBORROWERGUARANTOR</Name>"+
+				"<Value>No</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>GUARANTORYCATEGORY</Name>"+
+				"<Value>C</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ISSUINGEMIRATE</Name>"+
+				"<Value>28</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>GENDER</Name>"+
+				"<Value>O</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COUNTRYOFRESIDENCE</Name>"+
+				"<Value>AE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PASSPORTNUMBER</Name>"+
+				"<Value>IN9314591</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COUNTRYOFBIRTH</Name>"+
+				"<Value>AE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>FATHERNAME</Name>"+
+				"<Value>Father of Partner Two</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>MOTHERNAME</Name>"+
+				"<Value>Pluto Mother UBO</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELMOBILENUMBERCOUNTRYCODE</Name>"+
+				"<Value>971</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELMOBILENUMBER</Name>"+
+				"<Value>523313121</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELEMAILID</Name>"+
+				"<Value>wgshakia@rakbanktst.ae</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COBORROWERGUARANTORSTATUS</Name>"+
+				"<Value>Yes</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERIOD</Name>"+
+				"<Value>3</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CIF</Name>"+
+				"<Value>2717748</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>EXISTINGNTB</Name>"+
+				"<Value>Existing</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TLNO</Name>"+
+				"<Value>123456</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE1</Name>"+
+				"<Value>003</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE2</Name>"+
+				"<Value>Street name</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE3</Name>"+
+				"<Value>102</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE4</Name>"+
+				"<Value>Area or District</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDPOBOX</Name>"+
+				"<Value>1423</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDCITY</Name>"+
+				"<Value>AAN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDCOUNTRYCODE</Name>"+
+				"<Value>AE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NAMEOFORGANIZATION</Name>"+
+				"<Value>ABCDEFG</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DEPARTMENT</Name>"+
+				"<Value>ABC</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>OCCUPATION</Name>"+
+				"<Value>XYZ</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>USTAXPAYER</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CIFUPDATEREQREL</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>AECBCONSENTSTATUS</Name>"+
+				"<Value>Digital</Value>"+
+				"</Attribute>"+
+				"</ConductHistoryRelatedPartiesDetails>"+
+				"<ConductHistoryRelatedPartiesDetails>"+
+				"<Attribute>"+
+				"<Name>RELATEDPARTYID</Name>"+
+				"<Value>8534-1</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COMPANYFLAG</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELATIONSHIPTYPE</Name>"+
+				"<Value>Shareholder</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>FIRSTNAME</Name>"+
+				"<Value>ULVA</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>LASTNAME</Name>"+
+				"<Value>FARM</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DATEOFBIRTH</Name>"+
+				"<Value>1914-07-20</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>EMIRATESID</Name>"+
+				"<Value>784191487777777</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ISGOVERNMENTRELATION</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SIGNATORYFLAG</Name>"+
+				"<Value>No</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TYPEOFOWNERSHIP</Name>"+
+				"<Value>4</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TYPEOFPROOFPROVIDEDFORLOB</Name>"+
+				"<Value>dummy</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>INVOLVEDINBUSINESS</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SHAREHOLDINGPERCENTAGE</Name>"+
+				"<Value>20</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>AUTHORITYTYPE</Name>"+
+				"<Value>dummy</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NATIONALITY</Name>"+
+				"<Value>AE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>VISASPONSOR</Name>"+
+				"<Value>dummy</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SISCOTLNO</Name>"+
+				"<Value>Y</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ISSISCOCOBORROWERGUARANTOR</Name>"+
+				"<Value>No</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>GENDER</Name>"+
+				"<Value>O</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COUNTRYOFRESIDENCE</Name>"+
+				"<Value>AE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PASSPORTNUMBER</Name>"+
+				"<Value>BHS50048</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COUNTRYOFBIRTH</Name>"+
+				"<Value>AE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELMOBILENUMBERCOUNTRYCODE</Name>"+
+				"<Value>971</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELMOBILENUMBER</Name>"+
+				"<Value>123456789</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELEMAILID</Name>"+
+				"<Value>dummy@gmail.com</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COBORROWERGUARANTORSTATUS</Name>"+
+				"<Value>No</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERIOD</Name>"+
+				"<Value>3</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>EXISTINGNTB</Name>"+
+				"<Value>NTB</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TLNO</Name>"+
+				"<Value>123456</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE1</Name>"+
+				"<Value>003</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE2</Name>"+
+				"<Value>Street name</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE3</Name>"+
+				"<Value>102</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE4</Name>"+
+				"<Value>Area or District</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDPOBOX</Name>"+
+				"<Value>1423</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDCITY</Name>"+
+				"<Value>AAN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDCOUNTRYCODE</Name>"+
+				"<Value>AE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NAMEOFORGANIZATION</Name>"+
+				"<Value>ABCDEFG</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DEPARTMENT</Name>"+
+				"<Value>ABC</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>OCCUPATION</Name>"+
+				"<Value>XYZ</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>USTAXPAYER</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CIFUPDATEREQREL</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>AECBCONSENTSTATUS</Name>"+
+				"<Value>Digital</Value>"+
+				"</Attribute>"+
+				"</ConductHistoryRelatedPartiesDetails>"+
+				"<ConductHistoryRelatedPartiesDetails>"+
+				"<Attribute>"+
+				"<Name>RELATEDPARTYID</Name>"+
+				"<Value>2128778</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COMPANYFLAG</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELATIONSHIPTYPE</Name>"+
+				"<Value>Shareholder</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>FIRSTNAME</Name>"+
+				"<Value>VIGILAR</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>MIDDLENAME</Name>"+
+				"<Value>COLOMBIA</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>LASTNAME</Name>"+
+				"<Value>LTDA</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DATEOFBIRTH</Name>"+
+				"<Value>1925-12-12</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>EMIRATESID</Name>"+
+				"<Value>784</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ISGOVERNMENTRELATION</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SIGNATORYFLAG</Name>"+
+				"<Value>No</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TYPEOFOWNERSHIP</Name>"+
+				"<Value>10</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TYPEOFPROOFPROVIDEDFORLOB</Name>"+
+				"<Value>dummy</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>INVOLVEDINBUSINESS</Name>"+
+				"<Value>Y</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SHAREHOLDINGPERCENTAGE</Name>"+
+				"<Value>5</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>AUTHORITYTYPE</Name>"+
+				"<Value>dummy</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NATIONALITY</Name>"+
+				"<Value>US</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>VISASPONSOR</Name>"+
+				"<Value>dummy</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>SISCOTLNO</Name>"+
+				"<Value>Y</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ISSISCOCOBORROWERGUARANTOR</Name>"+
+				"<Value>No</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>GENDER</Name>"+
+				"<Value>F</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COUNTRYOFRESIDENCE</Name>"+
+				"<Value>US</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PASSPORTNUMBER</Name>"+
+				"<Value>VG8787H6</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COUNTRYOFBIRTH</Name>"+
+				"<Value>US</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELMOBILENUMBERCOUNTRYCODE</Name>"+
+				"<Value>95</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELMOBILENUMBER</Name>"+
+				"<Value>7777777777</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>RELEMAILID</Name>"+
+				"<Value>test5@rakbanktst.ae</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>COBORROWERGUARANTORSTATUS</Name>"+
+				"<Value>No</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERIOD</Name>"+
+				"<Value>3</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CIF</Name>"+
+				"<Value>2128778</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>EXISTINGNTB</Name>"+
+				"<Value>Existing</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>TLNO</Name>"+
+				"<Value>123456</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE1</Name>"+
+				"<Value>003</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE2</Name>"+
+				"<Value>Street name</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE3</Name>"+
+				"<Value>102</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDADDRLINE4</Name>"+
+				"<Value>Area or District</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDPOBOX</Name>"+
+				"<Value>1423</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDCITY</Name>"+
+				"<Value>AAN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PREFERREDCOUNTRYCODE</Name>"+
+				"<Value>AE</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NAMEOFORGANIZATION</Name>"+
+				"<Value>ABCDEFG</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DEPARTMENT</Name>"+
+				"<Value>ABC</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>OCCUPATION</Name>"+
+				"<Value>XYZ</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>USTAXPAYER</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CIFUPDATEREQREL</Name>"+
+				"<Value>N</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>AECBCONSENTSTATUS</Name>"+
+				"<Value>Digital</Value>"+
+				"</Attribute>"+
+				"</ConductHistoryRelatedPartiesDetails>"+
+				"<SignatoryDetails>"+
+				"<Attribute>"+
+				"<Name>RELATEDPARTYID</Name>"+
+				"<Value>1469045</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NAMEOFSIGNATORY</Name>"+
+				"<Value>Nayif Shindakh Thamir Ghal</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NATIONALITY</Name>"+
+				"<Value>IN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>EFFECTIVELOB</Name>"+
+				"<Value>168</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DATEOFBIRTH</Name>"+
+				"<Value>1989-01-01</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CIF</Name>"+
+				"<Value>1469045</Value>"+
+				"</Attribute>"+
+				"</SignatoryDetails>"+
+				"<SignatoryDetails>"+
+				"<Attribute>"+
+				"<Name>RELATEDPARTYID</Name>"+
+				"<Value>2717748</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NAMEOFSIGNATORY</Name>"+
+				"<Value>Abdul Haq</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NATIONALITY</Name>"+
+				"<Value>IN</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>EFFECTIVELOB</Name>"+
+				"<Value>120</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DATEOFBIRTH</Name>"+
+				"<Value>1971-10-10</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CIF</Name>"+
+				"<Value>2717748</Value>"+
+				"</Attribute>"+
+				"</SignatoryDetails>"+
+				"<EvaluationChecksAECB>"+
+				"<Attribute>"+
+				"<Name>RELATEDPARTYID</Name>"+
+				"<Value>1469045</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NAME</Name>"+
+				"<Value>Nayif Shindakh Thamir Ghal</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CONSENTSTATUS</Name>"+
+				"<Value>Digital</Value>"+
+				"</Attribute>"+
+				"</EvaluationChecksAECB>"+
+				"<EvaluationChecksAECB>"+
+				"<Attribute>"+
+				"<Name>RELATEDPARTYID</Name>"+
+				"<Value>2717748</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>NAME</Name>"+
+				"<Value>Abdul Haq</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CONSENTSTATUS</Name>"+
+				"<Value>Digital</Value>"+
+				"</Attribute>"+
+				"</EvaluationChecksAECB>"+
+				"<EvaluationChecksFTSEvaluation>"+
+				"<Attribute>"+
+				"<Name>BANKNAME</Name>"+
+				"<Value>XXX</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ACCOUNTNUMBER</Name>"+
+				"<Value>AE456546464646454546545</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERIODFROM</Name>"+
+				"<Value>2021-05-26</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERIODTO</Name>"+
+				"<Value>2021-11-20</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CONSENTSTATUS</Name>"+
+				"<Value>true</Value>"+
+				"</Attribute>"+
+				"</EvaluationChecksFTSEvaluation>"+
+				"<EvaluationChecksFTSEvaluation>"+
+				"<Attribute>"+
+				"<Name>BANKNAME</Name>"+
+				"<Value>MASREQ</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ACCOUNTNUMBER</Name>"+
+				"<Value>AE456546464646454546550</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERIODFROM</Name>"+
+				"<Value>2021-05-26</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERIODTO</Name>"+
+				"<Value>2021-11-20</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CONSENTSTATUS</Name>"+
+				"<Value>true</Value>"+
+				"</Attribute>"+
+				"</EvaluationChecksFTSEvaluation>"+
+				"<EvaluationChecksFTSEvaluation>"+
+				"<Attribute>"+
+				"<Name>BANKNAME</Name>"+
+				"<Value>XXX</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ACCOUNTNUMBER</Name>"+
+				"<Value>AE456546464646454546545</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERIODFROM</Name>"+
+				"<Value>2021-05-26</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERIODTO</Name>"+
+				"<Value>2021-11-20</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CONSENTSTATUS</Name>"+
+				"<Value>true</Value>"+
+				"</Attribute>"+
+				"</EvaluationChecksFTSEvaluation>"+
+				"<EvaluationChecksFTSEvaluation>"+
+				"<Attribute>"+
+				"<Name>BANKNAME</Name>"+
+				"<Value>MASREQ</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ACCOUNTNUMBER</Name>"+
+				"<Value>AE456546464646454546550</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERIODFROM</Name>"+
+				"<Value>2021-05-26</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>PERIODTO</Name>"+
+				"<Value>2021-11-20</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>CONSENTSTATUS</Name>"+
+				"<Value>true</Value>"+
+				"</Attribute>"+
+				"</EvaluationChecksFTSEvaluation>"+
+				"<DemographicDetails>"+
+				"<Attribute>"+
+				"<Name>DEMOGRAPHIC</Name>"+
+				"<Value>US</Value>"+
+				"</Attribute>"+
+				"</DemographicDetails>"+
+				"<AssetDetails>"+
+				"<Attribute>"+
+				"<Name>APPLICANTID</Name>"+
+				"<Value>NTB</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>DOWNPAYMENT</Name>"+
+				"<Value>10000</Value>"+
+				"</Attribute>"+
+				"<Attribute>"+
+				"<Name>ASSETTYPE</Name>"+
+				"<Value>Self</Value>"+
+				"</Attribute>"+
+				"</AssetDetails>"+
+				"</CreateWorkitemReq>"+
+				"</EE_EAI_MESSAGE>";*/
+		
+		/*String message1 = "<EE_EAI_MESSAGE>"+
+				"<EE_EAI_HEADER>"+
+				 "<MsgFormat>CUSTOMER_SR</MsgFormat>"+
+				 "<MsgVersion>0000</MsgVersion>"+
+				 "<RequestorChannelId>IB</RequestorChannelId>"+
+				 "<RequestorUserId>RAKUSER</RequestorUserId>"+
+				 "<RequestorLanguage>E</RequestorLanguage>"+
+				 "<RequestorSecurityInfo>secure</RequestorSecurityInfo>"+
+				 "<ReturnCode>0000</ReturnCode>"+
+				 "<ReturnDesc>Success</ReturnDesc>"+
+				 "<MessageId>UNIQUE Identifier(RQ-DDMMYYYYHHMMSSS)</MessageId>"+
+				 "<Extra1>REQ||VIKASRET.VIKASRET</Extra1>"+
+				 "<Extra2>2011-02-08T15:31:38.818+05:30(Requested Date)</Extra2>"+
+				"</EE_EAI_HEADER>"+
+				"<CreateWorkitemReq>"+
+					"<ProcessName>TWC</ProcessName>"+
+					"<SubProcess>WBA</SubProcess>"+
+					"<InitiateAlso>Y</InitiateAlso>"+
+					"<Documents>"+
+					"</Documents>"+
+					"<Attributes>"+
+						"<Attribute>"+
+							"<Name>CHANNEL</Name>"+
+							"<Value>WBA</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>CHANNELSUBGROUP</Name>"+
+							"<Value>RM apply</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>SOLID</Name>"+
+							"<Value>003</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>BAISWINUMBER</Name>"+
+							"<Value> </Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>PRIORITY</Name>"+
+							"<Value>Express</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>TWCABF</Name>"+
+							"<Value>TWC</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>CIFID</Name>"+
+							"<Value>2568121</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>RAKTRACKNUMBER</Name>"+
+							"<Value>12345678910</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>CUSTOMERNAME</Name>"+
+							"<Value>Siddharth V</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>ROCODE</Name>"+
+							"<Value>ankit2</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>EMAILID</Name>"+
+							"<Value>dummyemail@gmail.com</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>MOBILENUMBERISD</Name>"+
+							"<Value>+123</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>MOBILENUMBER</Name>"+
+							"<Value>6311569207</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>DOCUMENTLIST</Name>"+
+							"<Value>ABF|AECB|Bank_Statements</Value>"+
+						"</Attribute>"+
+					"</Attributes>"+
+				"</CreateWorkitemReq>"+
+				"</EE_EAI_MESSAGE>";*/
+		
+		
+
+		String message_cc=
+				"<EE_EAI_MESSAGE>"+
+					"<EE_EAI_HEADER>"+
+						"<MsgFormat>CREATE_WORKITEM</MsgFormat>"+
+						"<MsgVersion>0000</MsgVersion>"+
+						"<RequestorChannelId>EBC.WBA</RequestorChannelId>"+
+						"<RequestorUserId>RAKUSER</RequestorUserId>"+
+						"<RequestorLanguage>E</RequestorLanguage>"+
+						"<RequestorSecurityInfo>secure</RequestorSecurityInfo>"+
+						"<ReturnCode>0000</ReturnCode>"+
+						"<ReturnDesc>Success</ReturnDesc>"+
+						"<MessageId>Test1933374445</MessageId>"+
+						"<Extra1>REQ||DEH.123</Extra1>"+
+						"<Extra2>2011-02-08T15:31:38.818+05:30</Extra2>"+
+					"</EE_EAI_HEADER>"+
+					"<CreateWorkitemReq>"+
+						"<ProcessName>Digital_CC</ProcessName>"+
+						"<SubProcessName>Digital_CC</SubProcessName>"+
+						"<InitiateAlso>Y</InitiateAlso>"+
+						"<Documents>"+
+						"</Documents>"+
+						"<Attributes>"+
+							"<Attribute>"+
+								"<Name>MobileNo</Name>"+
+								"<Value>00971509203039</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Title</Name>"+
+								"<Value>MR</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FirstName</Name>"+
+								"<Value>Amy</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>LastName</Name>"+
+								"<Value>Baird</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>dob</Name>"+
+								"<Value>1985-07-08</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>MiddleName</Name>"+
+								"<Value>K</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Gender</Name>"+
+								"<Value>Male</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Nationality</Name>"+
+								"<Value>UAE</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>PassportNo</Name>"+
+								"<Value>IN9205642</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>email_id</Name>"+
+								"<Value>XCVG55@GMAIL.COM</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EmirateID</Name>"+
+								"<Value>784191487777777</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Designation</Name>"+
+								"<Value>ABCD21345</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Basic_Sal</Name>"+
+								"<Value>50000</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>employercode</Name>"+
+								"<Value>ABCD21345</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Employer_Name</Name>"+
+								"<Value>EmployerName</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EmploymentType</Name>"+
+								"<Value>SOFT</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Product</Name>"+
+								"<Value>CC</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>AECB_CONSENT_HELD</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>NameOnCard</Name>"+
+								"<Value>RAJ</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Skyward_Number</Name>"+
+								"<Value>SK1343434</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Loyalty_Number</Name>"+
+								"<Value>43</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>NTB</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FTS_Consent</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>IndusSeg</Name>"+
+								"<Value></Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Prospect_id</Name>"+
+								"<Value>564</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>ApprovedLimit</Name>"+
+								"<Value>20000</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Supp_Card_Required</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FinalDBR</Name>"+
+								"<Value>565</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FinalTAI</Name>"+
+								"<Value>4</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EligibleCardProduct</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>MaritalStatus</Name>"+
+								"<Value>M</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EStatementFlag</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EmID_Expiry</Name>"+
+								"<Value>1999-07-08</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EmiD_Issue</Name>"+
+								"<Value>1985-07-08</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Passport_expiry</Name>"+
+								"<Value>1990-07-08</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Passport_issue</Name>"+
+								"<Value>1985-07-08</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Is_STP</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EFMS_FLAG</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EFMS_Status</Name>"+
+								"<Value>U</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FIRCO_Flag</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FIRCO_Status</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FTS_FLAG</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FTS_Ack_flg</Name>"+
+								"<Value>REJ</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>AECB_REF_NUM</Name>"+
+								"<Value>3453</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FTS_Salary</Name>"+
+								"<Value>5000</Value>"+
+							"</Attribute>"+
+						"</Attributes>"+
+						"<Address_Details>"+
+							"<Attribute>"+
+								"<Name>House_No</Name>"+
+								"<Value>45464</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Building_Name</Name>"+
+								"<Value>TowerA</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Street_Name</Name>"+
+								"<Value>XYZRd</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Country_No</Name>"+
+								"<Value>235334</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Emirate_Of_Residence</Name>"+
+								"<Value>Delhi</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>PO_Box_Address</Name>"+
+								"<Value>India</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Address_Type</Name>"+
+								"<Value>Residence</Value>"+
+							"</Attribute>"+
+						"</Address_Details>"+
+		                "<UID_details>"+
+		                "<Attribute>"+
+		                "<Name>Alertdetails</Name>"+
+		                "<Value>![CDATA[Suspect(s) detected by OFAC-Agent:9"+"\n"+
+		                "SystemId:"+"\n"+
+		                "Associate:"+"\n"+
+		                "============================="+"\n"+
+		                " Suspect detected #1"+"\n"+
+
+		                "OFAC ID:AS06990130"+"\n"+
+		                "MATCH: 775.00"+"\n"+
+		                "TAG: NAM"+"\n"+
+		                "MATCHINGTEXT: IQBAL, NAVEED,"+"\n"+
+		                "RESULT: (0)"+"\n"+
+		                "NAME: IQBAL, NAVED"+"\n"+
+		                "Synonyms: none"+"\n"+
+		                "ADDRESS:"+"\n"+
+		                "Synonyms: none"+"\n"+
+		                "CITY:"+"\n"+
+		                "Synonyms: none"+"\n"+
+		                "COUNTRY: INDIA"+"\n"+
+		                "Synonyms:"+"\n"+
+		                "- BHARAT"+"\n"+
+		                "- BHARATIYA GANARAJYA"+"\n"+
+		                "- INDE"+"\n"+
+		                "- INDIA"+"\n"+
+		                "- INDIEN"+"\n"+
+		                "- REPUBLIC OF INDIA"+"\n"+
+		                "STATE:"+"\n"+
+		                "Synonyms: none"+"\n"+
+		                "ORIGIN:"+"\n"+
+		                "EDD_ASIA_PACIFIC"+"\n"+
+		                "DESIGNATION:"+"\n"+
+		                "GWL"+"\n"+
+		                "TYPE:"+"\n"+
+		                "Individual"+"\n"+
+		                "SEARCH CODES:"+"\n"+
+		                "none"+"\n"+
+		                "USER DATA 1:"+"\n"+
+		                "none"+"\n"+
+		                "USER DATA 2:"+"\n"+
+		                "none"+"\n"+
+		                "OFFICIAL REF:"+"\n"+
+		                "2017-11-07 17:36:06 EDA"+"\n"+
+		                "PASSPORT:"+"\n"+
+		                "none"+"\n"+
+		                "BIC CODES:"+"\n"+
+		                "none"+"\n"+
+		                "NATID:"+"\n"+
+		                "none"+"\n"+
+		                "PLACE OF BIRTH:"+"\n"+
+		                "none"+"\n"+
+		                "DATE OF BIRTH:"+"\n"+
+		                "none"+"\n"+
+		                "NATIONALITY:"+"\n"+
+		                "none"+"\n"+
+		                "ADDITIONAL INFOS:"+"\n"+
+		                "List ID: 1106 / Create Date: 11/07/2017 17:36:06 / Last Update Date:"+"\n"+
+		                "11/07/2017 17:36:06 / Org_PID: 8523805 / Title: ARRESTED FOR"+"\n"+
+		                "BURGLARY - OCTOBER 30, 2017 / Gender: MALE / OtherInformation:"+"\n"+
+		                "According to the timesofindia.indiatimes.com; October 30, 2017: On"+"\n"+
+		                "October 30, 2017, Naved Iqbal was arrested for burglary. He and his"+"\n"+
+		                "co-conspirators were arrested while planning to commit a robbery in"+"\n"+
+		                "Khatauli region of the district. They were involved / Relationship:"+"\n"+
+		                "Co-Defendant / OriginalID: 8523809"+"\n"+
+		                "FML TYPE:"+"\n"+
+		                "1"+"\n"+
+		                "FML PRIORITY:"+"\n"+
+		                "0"+"\n"+
+		                "FML CONFIDENTIALITY:"+"\n"+
+		                "0"+"\n"+
+		                "FML INFO:"+"\n"+
+		                "none"+"\n"+
+		                "PEP-FEP:"+"\n"+
+		                "0 0"+"\n"+
+		                "KEYWORDS:"+"\n"+
+		                "OS:ADVERSE_MEDIA NS:NAMESOURCE_WEBSITE ENTITYLEVEL:LEVEL_NA SC:BURGLARY"+"\n"+
+		                "HYPERLINKS:"+"\n"+
+		                "https://accuity.worldcompliance.com/signin.aspx?ent=ca870ce6-eaa5-4112-ba57-7b6dbeadf8b4"+"\n"+
+		                "TYS: 1"+"\n"+
+		                "ISN: 0</Value>"+"\n"+
+		                "</Attribute>"+
+		                "</UID_details>"+
+		            "</CreateWorkitemReq>"+
+				"</EE_EAI_MESSAGE>";
+				
+		String dcc_create_wi=
+				"<EE_EAI_MESSAGE>"+
+					"<EE_EAI_HEADER>"+
+						"<MsgFormat>CREATE_WORKITEM</MsgFormat>"+
+						"<MsgVersion>0000</MsgVersion>"+
+						"<RequestorChannelId>EBC.WBA</RequestorChannelId>"+
+						"<RequestorUserId>RAKUSER</RequestorUserId>"+
+						"<RequestorLanguage>E</RequestorLanguage>"+
+						"<RequestorSecurityInfo>secure</RequestorSecurityInfo>"+
+						"<ReturnCode>0000</ReturnCode>"+
+						"<ReturnDesc>Success</ReturnDesc>"+
+						"<MessageId>CAS165536806634681</MessageId>"+
+						"<Extra1>REQ||DEH.123</Extra1>"+
+						"<Extra2>2017-04-17T11:05:30.000+04:00</Extra2>"+
+					"</EE_EAI_HEADER>"+
+					"<CreateWorkitemReq>"+
+						"<ProcessName>Digital_CC</ProcessName>"+
+						"<SubProcessName>Digital_CC</SubProcessName>"+
+						"<InitiateAlso>Y</InitiateAlso>"+
+						"<Documents>"+
+						"</Documents>"+
+						"<Attributes>"+
+							"<Attribute>"+
+								"<Name>MobileNo</Name>"+
+								"<Value>00971540580922</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Title</Name>"+
+								"<Value>1</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Title_Desc</Name>"+
+								"<Value>MR</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FirstName</Name>"+
+								"<Value>YASMIN</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>LastName</Name>"+
+								"<Value>YACOUB</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>dob</Name>"+
+								"<Value>1989-06-30</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Age</Name>"+
+								"<Value>32.11</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>MiddleName</Name>"+
+								"<Value>Kumar</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Gender</Name>"+
+								"<Value>1</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Gender_Desc</Name>"+
+								"<Value>Male</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Nationality</Name>"+
+								"<Value>14</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Nationality_Desc</Name>"+
+								"<Value>AE</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+		
+								"<Name>PassportNo</Name>"+
+								"<Value>ER02488632</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>email_id</Name>"+
+								"<Value>TEST11@RAKBANKTST.AE</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EmirateID</Name>"+
+								"<Value>784198912579458</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Designation</Name>"+
+								"<Value>156</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Designation_Desc</Name>"+
+								"<Value>Sales</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Cust_Decl_Salary</Name>"+
+								"<Value>50000</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>employercode</Name>"+
+								"<Value>002</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Employer_Name</Name>"+
+								"<Value>MINISTRY OF EDUCATION</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EmploymentType</Name>"+
+								"<Value>52</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EmploymentType_Desc</Name>"+
+								"<Value>Salaried</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Product</Name>"+
+								"<Value>12</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Product_Desc</Name>"+
+								"<Value>Credit Card</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>AECB_CONSENT_HELD</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>NameOnCard</Name>"+
+								"<Value>RAJ</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Skyward_Number</Name>"+
+								"<Value>SK1343434</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Loyalty_Number</Name>"+
+								"<Value>43</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>NTB</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FTS_Consent</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>IndusSeg</Name>"+
+								"<Value>56</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>IndusSeg_Desc</Name>"+
+								"<Value>INDUS De</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Prospect_id</Name>"+
+								"<Value>564</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>ApprovedLimit</Name>"+
+								"<Value>20000</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FinalDBR</Name>"+
+								"<Value>565</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FinalTAI</Name>"+
+								"<Value>4</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EligibleCardProduct</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EligibleCardProduct_Desc</Name>"+
+								"<Value>MCBWE-UAE</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>MaritalStatus</Name>"+
+								"<Value>5</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>MaritalStatus_Desc</Name>"+
+								"<Value>M</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EStatementFlag</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EmID_Expiry</Name>"+
+								"<Value>1999-07-08</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EmiD_Issue</Name>"+
+								"<Value>1985-07-08</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Passport_expiry</Name>"+
+								"<Value>1990-07-08</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Passport_issue</Name>"+
+								"<Value>1985-07-08</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Is_STP</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EFMS_FLAG</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>EFMS_Status</Name>"+
+								"<Value>U</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FIRCO_Flag</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FIRCO_Status</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FIRCO_ECN_No</Name>"+
+								"<Value>DCC-3000-2345223453436</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FTS_FLAG</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FTS_Ack_flg</Name>"+
+								"<Value>REJ</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Supp_Card_Required</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Self_Supp_Card_Required</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Self_Supp_Card_Limit</Name>"+
+								"<Value>500</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Self_Supp_Card_Embossing_Name</Name>"+
+								"<Value>RAJ</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>AECB_REF_NUM</Name>"+
+								"<Value>3453</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>FTS_Salary</Name>"+
+								"<Value>5000</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Industry</Name>"+
+								"<Value>IT</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Sub_Industry</Name>"+
+								"<Value>DSFG</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Requested_Limit</Name>"+
+								"<Value>2000</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>IPA_Limit</Name>"+
+								"<Value>1000</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Dependents</Name>"+
+								"<Value>NO</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Earning_members</Name>"+
+								"<Value>2</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Expense1</Name>"+
+								"<Value>DFG</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Expense2</Name>"+
+								"<Value>SGSD</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Expense3</Name>"+
+								"<Value>DFSG/Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Expense4</Name>"+
+								"<Value>XCVB</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Expense5</Name>"+
+								"<Value>555</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Expense6</Name>"+
+								"<Value>666</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Virtual_Card_Limit</Name>"+
+								"<Value>500</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Credit_Shield_Flag</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>RAK_Protect_Flag</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Acquistion_Flag</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>CIF</Name>"+
+								"<Value>5465545</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Name_On_Passport</Name>"+
+								"<Value>RAJ</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Name_On_EID</Name>"+
+								"<Value>RAH</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Visa_Expiry</Name>"+
+								"<Value>2030-01-01</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Visa_Sponsor_Name</Name>"+
+								"<Value>SELF</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Emirates_Visa</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>GCC_National</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Attached</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Prospect_Creation_Date</Name>"+
+								"<Value>Y</Value>"+
+							"</Attribute>"+	
+						"</Attributes>"+
+						"<Address_Details>"+
+							"<Attribute>"+
+								"<Name>House_No</Name>"+
+								"<Value>45464</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Building_Name</Name>"+
+								"<Value>TowerA</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Street_Name</Name>"+
+								"<Value>XYZRd</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Country_No</Name>"+
+								"<Value>235334</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>City</Name>"+
+								"<Value>1</Value>"+
+							"</Attribute>"+
+								"<Attribute>"+
+								"<Name>City_Desc</Name>"+
+								"<Value>Alwar</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>State</Name>"+
+								"<Value>2</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>State_Desc</Name>"+
+								"<Value>Rajasthan</Value>"+
+							"</Attribute>"+
+								"<Attribute>"+
+								"<Name>Country</Name>"+
+								"<Value>45</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Country_Desc</Name>"+
+								"<Value>India</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>PO_Box_Address</Name>"+
+								"<Value>India</Value>"+
+							"</Attribute>"+
+							"<Attribute>"+
+								"<Name>Address_Type</Name>"+
+								"<Value>Residence</Value>"+
+							"</Attribute>"+
+						"</Address_Details>"+
+						"<Supp_Card_Details>"+
+						"<Attribute>"+
+							"<Name>Self_Required</Name>"+
+							"<Value>NO</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>Name_On_Card</Name>"+
+							"<Value>RAJ</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>Card_For_Relative</Name>"+
+							"<Value>Y</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>Relationship_type</Name>"+
+							"<Value>Brother</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>UAE_Residency</Name>"+
+							"<Value>Y</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>First_Name</Name>"+
+							"<Value>RAJ</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>Middle_Name</Name>"+
+							"<Value></Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>Last_Name</Name>"+
+							"<Value>Kumar</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>DOB</Name>"+
+							"<Value>1989-06-30</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>Passport_Number</Name>"+
+							"<Value>IN12345678</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>Passport_Expiry</Name>"+
+							"<Value>2030-07-08</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>Nationality</Name>"+
+							"<Value>23</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>Nationality_Desc</Name>"+
+							"<Value>United arab emirate</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>MobileNo</Name>"+
+							"<Value>00972515466</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>Email</Name>"+
+							"<Value>raindra@rakbank.ae</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>Limit_Required</Name>"+
+							"<Value>2000</Value>"+
+						"</Attribute>"+
+						"<Attribute>"+
+							"<Name>Card_Embossing_Name</Name>"+
+							"<Value>DARHSEEL</Value>"+
+						"</Attribute>"+
+					"</Supp_Card_Details>"+
+					"<UIDDetials>"+
+		                "<Attribute>"+
+		                "<Name>Alertdetails</Name>"+
+		                "<Value>![CDATA[Suspect(s) detected by OFAC-Agent:9"+"\n"+
+		                "SystemId:"+"\n"+
+		                "Associate:"+"\n"+
+		                "============================="+"\n"+
+		                " Suspect detected #1"+"\n"+
+		                "OFAC ID:AS06990130"+"\n"+
+		                "MATCH: 775.00"+"\n"+
+		                "TAG: NAM"+"\n"+
+		                "MATCHINGTEXT: IQBAL, NAVEED,"+"\n"+
+		                "RESULT: (0)"+"\n"+
+		                "NAME: IQBAL, NAVED"+"\n"+
+		                "Synonyms: none"+"\n"+
+		                "ADDRESS:"+"\n"+
+		                "Synonyms: none"+"\n"+
+		                "CITY:"+"\n"+
+		                "Synonyms: none"+"\n"+
+		                "COUNTRY: INDIA"+"\n"+
+		                "Synonyms:"+"\n"+
+		                "- BHARAT"+"\n"+
+		                "- BHARATIYA GANARAJYA"+"\n"+
+		                "- INDE"+"\n"+
+		                "- INDIA"+"\n"+
+		                "- INDIEN"+"\n"+
+		                "- REPUBLIC OF INDIA"+"\n"+
+		                "STATE:"+"\n"+
+		                "Synonyms: none"+"\n"+
+		                "ORIGIN:"+"\n"+
+		                "EDD_ASIA_PACIFIC"+"\n"+
+		                "DESIGNATION:"+"\n"+
+		                "GWL"+"\n"+
+		                "TYPE:"+"\n"+
+		                "Individual"+"\n"+
+		                "SEARCH CODES:"+"\n"+
+		                "none"+"\n"+
+		                "USER DATA 1:"+"\n"+
+		                "none"+"\n"+
+		                "USER DATA 2:"+"\n"+
+		                "none"+"\n"+
+		                "OFFICIAL REF:"+"\n"+
+		                "2017-11-07 17:36:06 EDA"+"\n"+
+		                "PASSPORT:"+"\n"+
+		                "none"+"\n"+
+		                "BIC CODES:"+"\n"+
+		                "none"+"\n"+
+		                "NATID:"+"\n"+
+		                "none"+"\n"+
+		                "PLACE OF BIRTH:"+"\n"+
+		                "none"+"\n"+
+		                "DATE OF BIRTH:"+"\n"+
+		                "none"+"\n"+
+		                "NATIONALITY:"+"\n"+
+		                "none"+"\n"+
+		                "ADDITIONAL INFOS:"+"\n"+
+		                "List ID: 1106 / Create Date: 11/07/2017 17:36:06 / Last Update Date:"+"\n"+
+		                "11/07/2017 17:36:06 / Org_PID: 8523805 / Title: ARRESTED FOR"+"\n"+
+		                "BURGLARY - OCTOBER 30, 2017 / Gender: MALE / OtherInformation:"+"\n"+
+		                "According to the timesofindia.indiatimes.com; October 30, 2017: On"+"\n"+
+		                "October 30, 2017, Naved Iqbal was arrested for burglary. He and his"+"\n"+
+		                "co-conspirators were arrested while planning to commit a robbery in"+"\n"+
+		                "Khatauli region of the district. They were involved / Relationship:"+"\n"+
+		                "Co-Defendant / OriginalID: 8523809"+"\n"+
+		                "FML TYPE:"+"\n"+
+		                "1"+"\n"+
+		                "FML PRIORITY:"+"\n"+
+		                "0"+"\n"+
+		                "FML CONFIDENTIALITY:"+"\n"+
+		                "0"+"\n"+
+		                "FML INFO:"+"\n"+
+		                "none"+"\n"+
+		                "PEP-FEP:"+"\n"+
+		                "0 0"+"\n"+
+		                "KEYWORDS:"+"\n"+
+		                "OS:ADVERSE_MEDIA NS:NAMESOURCE_WEBSITE ENTITYLEVEL:LEVEL_NA SC:BURGLARY"+"\n"+
+		                "HYPERLINKS:"+"\n"+
+		                "https://accuity.worldcompliance.com/signin.aspx?ent=ca870ce6-eaa5-4112-ba57-7b6dbeadf8b4"+"\n"+
+		                "TYS: 1"+"\n"+
+		                "ISN: 0"+"\n"+
+		                "============================="+"\n"+
+		                " Suspect detected #2"+"\n"+
+		                "OFAC ID:AS06990130"+"\n"+
+		                "MATCH: 775.00"+"\n"+
+		                "TAG: NAM"+"\n"+
+		                "MATCHINGTEXT: IQBAL, NAVEED,"+"\n"+
+		                "RESULT: (0)"+"\n"+
+		                "NAME: IQBAL, NAVED"+"\n"+
+		                "Synonyms: none"+"\n"+
+		                "ADDRESS:"+"\n"+
+		                "Synonyms: none"+"\n"+
+		                "CITY:"+"\n"+
+		                "Synonyms: none"+"\n"+
+		                "COUNTRY: INDIA"+"\n"+
+		                "Synonyms:"+"\n"+
+		                "- BHARAT"+"\n"+
+		                "- BHARATIYA GANARAJYA"+"\n"+
+		                "- INDE"+"\n"+
+		                "- INDIA"+"\n"+
+		                "- INDIEN"+"\n"+
+		                "- REPUBLIC OF INDIA"+"\n"+
+		                "STATE:"+"\n"+
+		                "Synonyms: none"+"\n"+
+		                "ORIGIN:"+"\n"+
+		                "EDD_ASIA_PACIFIC"+"\n"+
+		                "DESIGNATION:"+"\n"+
+		                "GWL"+"\n"+
+		                "TYPE:"+"\n"+
+		                "Individual"+"\n"+
+		                "SEARCH CODES:"+"\n"+
+		                "none"+"\n"+
+		                "USER DATA 1:"+"\n"+
+		                "none"+"\n"+
+		                "USER DATA 2:"+"\n"+
+		                "none"+"\n"+
+		                "OFFICIAL REF:"+"\n"+
+		                "2017-11-07 17:36:06 EDA"+"\n"+
+		                "PASSPORT:"+"\n"+
+		                "none"+"\n"+
+		                "BIC CODES:"+"\n"+
+		                "none"+"\n"+
+		                "NATID:"+"\n"+
+		                "none"+"\n"+
+		                "PLACE OF BIRTH:"+"\n"+
+		                "none"+"\n"+
+		                "DATE OF BIRTH:"+"\n"+
+		                "none"+"\n"+
+		                "NATIONALITY:"+"\n"+
+		                "none"+"\n"+
+		                "ADDITIONAL INFOS:"+"\n"+
+		                "List ID: 1106 / Create Date: 11/07/2017 17:36:06 / Last Update Date:"+"\n"+
+		                "11/07/2017 17:36:06 / Org_PID: 8523805 / Title: ARRESTED FOR"+"\n"+
+		                "BURGLARY - OCTOBER 30, 2017 / Gender: MALE / OtherInformation:"+"\n"+
+		                "According to the timesofindia.indiatimes.com; October 30, 2017: On"+"\n"+
+		                "October 30, 2017, Naved Iqbal was arrested for burglary. He and his"+"\n"+
+		                "co-conspirators were arrested while planning to commit a robbery in"+"\n"+
+		                "Khatauli region of the district. They were involved / Relationship:"+"\n"+
+		                "Co-Defendant / OriginalID: 8523809"+"\n"+
+		                "FML TYPE:"+"\n"+
+		                "1"+"\n"+
+		                "FML PRIORITY:"+"\n"+
+		                "0"+"\n"+
+		                "FML CONFIDENTIALITY:"+"\n"+
+		                "0"+"\n"+
+		                "FML INFO:"+"\n"+
+		                "none"+"\n"+
+		                "PEP-FEP:"+"\n"+
+		                "0 0"+"\n"+
+		                "KEYWORDS:"+"\n"+
+		                "OS:ADVERSE_MEDIA NS:NAMESOURCE_WEBSITE ENTITYLEVEL:LEVEL_NA SC:BURGLARY"+"\n"+
+		                "HYPERLINKS:"+"\n"+
+		                "https://accuity.worldcompliance.com/signin.aspx?ent=ca870ce6-eaa5-4112-ba57-7b6dbeadf8b4"+"\n"+
+		                "TYS: 1"+"\n"+
+		                "ISN: 0"+"\n"+
+		                "============================="+"\n"+
+		                "*** INTERNAL OFAC DETAILS ***                              "+"\n"+
+		                "HasSndRcvIn                                                "+"\n"+
+		                "Limited: 0                                                 "+"\n"+
+		                "|AS02251007|550.00|NAM|29|40|-1|-1|-1|-1|-1|-1|-1|-1|      "+"\n"+
+		                "|BL00290657|720.00|NAM|50|51|-1|-1|-1|-1|-1|-1|-1|-1|      "+"\n"+
+		                "]]</Value>"+"\n"+
+		                "</Attribute>"+
+	                "</UIDDetials>"+
+		            "</CreateWorkitemReq>"+
+				"</EE_EAI_MESSAGE>";
+		
+		
+		String dcc_firco_udpate="<EE_EAI_MESSAGE>"+
+				"<EE_EAI_HEADER>" +
+				"<MsgFormat>UPDATE_SR</MsgFormat>" +
+				"<MsgVersion>0000</MsgVersion>" +
+				"<RequestorChannelId>EBC.WBA</RequestorChannelId>" +
+				"<RequestorUserId>RAKUSER</RequestorUserId>" +
+				"<RequestorLanguage>E</RequestorLanguage>" +
+				"<RequestorSecurityInfo>secure</RequestorSecurityInfo>" +
+				"<ReturnCode>0000</ReturnCode>" +
+				"<ReturnDesc>Success</ReturnDesc>" +
+				"<MessageId>CAS165536806634681</MessageId>" +
+				"<Extra1>REQ||DEH.123</Extra1>" +
+				"<Extra2>2015-05-30T22:30:14.544+05:30</Extra2>" +
+				"</EE_EAI_HEADER>" +
+				"<GetWorkitemStatusReq>" +
+					"<ProcessName>Digital_CC</ProcessName>" +
+					"<SubProcess>FIRCO_STATUS_UPDATE</SubProcess>" +
+					"<Attributes>" +
+						"<Attribute>" +
+							"<Name>WINUMBER</Name>" +
+							"<Value>DCC-0000000066-process</Value>" +
+						"</Attribute>" +
+						"<Attribute>" +
+							"<Name>FIRCO_Status</Name>" +
+							"<Value>False Positive</Value>" +
+						"</Attribute>" +
+						"<Attribute>" +
+							"<Name>Reject_reason</Name>" +
+							"<Value>Confirmed</Value>" +
+						"</Attribute>" +
+					"</Attributes>" +
+					"</GetWorkitemStatusReq>" +
+				"</EE_EAI_MESSAGE>";
+		System.out.println("message : "+dcc_create_wi);
+		String response =new CreateWorkitem().getResponseOffshore(dcc_create_wi);
+		System.out.println("Response "+response);
+	}
+}

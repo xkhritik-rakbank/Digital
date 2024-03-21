@@ -1,0 +1,225 @@
+1000=Error in adding document in SMS
+1001=Process Name is mandatory
+1002=SubProcess Name is mandatory
+1003=InitiateAlso can only be 'Y' or 'N'
+1004=Error in downloading file on server
+1005=Error in CBR Subprocess
+1006=Error in executing API
+1007=Error in fetching request parameters
+1008=base64 string is mandatory for Document Name
+1009=IOException 
+1010=Exception
+1011=RequestorChannelId is mandatory
+1012=Document Type mandatory for Document Name 
+1013= 
+1014=Error in file deletion
+1015=Name neither in External Table nor in Transaction Table
+1016=Value field mandatory for Name
+1017=No mapping in USR_0_WSR_ATTRDETAILS for Name
+1018=No mapping in USR_0_WSR_DOCTYPEDETAILS for Doc Name and Type
+1019=No mapping in USR_0_WSR_PROCESS for Process Name/Subprocess Name
+1020=Mandatory Attribute Name Value Tag missing
+1021=No Values in USR_0_WSR_ATTRDETAILS
+1022=No Values in USR_0_WSR_DOCTYPEDETAILS
+1023=Mandatory Document Name Tag missing
+1024=Transaction Table Not Maintained for Process Name/Subprocess Name/Repetitive Tag Name
+1025=No mapping in USR_0_WSR_PROCESS_REPETITIVE for Process Name/Subprocess Name/Repetitive Tag Name
+
+2000=Customer is not eligible for Cash Back Redemption
+2001=Customer is not eligible for Cash Back Redemption for Card Status: 
+2002=Available Redemption Amount is in negative balance - Customer is not eligible for Cash Back Redemption
+2003=Customer is not eligible for Cash Back Redemption for Card Type:
+2004=Not a Primary Card Customer - Customer is not eligible for Cash Back Redemption
+2005=Card Number should be of exactly 16 digits
+2006=Requested Cash Back Amount cannot be greater than Cash Back Eligible Amount
+2007=Your request is already in process. Please try again after some time.
+2008= number of requests already in process with total requested amount
+
+3000=Branch Name is required if delivery channel is Branch
+3001=Exception in Password Decryption
+
+## CAC error codes
+4000=IsJointExisiting cannot be Y when ApplicationType is Single
+4001=IsPrimaryExisiting cannot be Y when ApplicationType is Joint
+4002=CIFID Should not be less than 7 digit 
+4003=Some mandatory fields are blank for Single Customer Type
+4004=Application Type Must be Single or Joint
+4005=IsPrimaryExisiting must be Y or N
+4006=IsJointExisiting must be Y or N when ApplicationType is Joint
+4007=Some mandatory fields are blank for Joint Customer
+4008=Mailing address is null can not create workitem
+
+## OECD Error Codes
+4050=Either CIFID or FINANCIALDETAILID is mandatory for Related Party Details
+4051=RMCODE is mandatory if submission mode is Offline
+
+## RMT Error Codes
+5000=CIFNUMBER is mandatory
+5001=CIFNUMBER should be of 7 digits
+5002=EMPLOYMENTTYPE is mandatory
+5003=EMPLOYMENTTYPE should not be blank
+5004=INDUSTRY is mandatory
+5005=INDUSTRY should not be blank
+5006=POLITICALLYEXPOSEDPERSON is mandatory
+5007=POLITICALLYEXPOSEDPERSON should not be blank
+5008=DEMOGRAPHIC is mandatory
+5009=DEMOGRAPHIC should not be blank
+5010=ACCOUNTNUMBER is mandatory
+5011=ACCOUNTNUMBER should not be blank
+5012=PRODUCTTYPE is mandatory
+5013=PRODUCTTYPE should not be blank
+5014=PRODUCTCURRENCY is mandatory
+5015=PRODUCTCURRENCY should not be blank
+5016=CRSUNDOCUMENTEDFLAG is mandatory
+5017=CRSUNDOCUMENTEDFLAG should not be blank
+
+## ACP Error Codes
+5018=RAKBANKACCNUMBER is mandatory
+5019=OTHERBANKNAME is mandatory
+5020=OTHERBANKIBANNUMBER is mandatory
+
+## below codes are defined for UPDATE request
+5050=Update is not possible at this stage
+5051=Update is not possible at this stage - workitem is already approved by remittance checker
+5052=Workitem does not exist in flow
+
+## below codes are added for YAP Update Request
+5050A=Workitem cannot be updated as the WI is Rejected
+5050B=Workitem cannot be updated as the WI is Processed
+5050C=Workitem cannot be updated as the WI is Under Processing
+5050D=Workitem cannot be updated as additional information was not requested
+5050E=Workitem cannot be updated as additional information was requested
+5053A=VISAFILENUMBER is mandatory for Non GCC applicants
+5053B=VISAUIDNUMBER is mandatory for Non GCC applicants
+5053C=VISAISSUEDATE is mandatory for Non GCC applicants
+5053D=VISAEXPDATE is mandatory for Non GCC applicants
+5053E=Industry Sub Segment is mandatory, if employment type is self employed or salaried and self-employed
+
+## below codes are defined for DUPLICATE check on Message Id
+3333 = Workitem exist for same message Id
+## below codes are defined for DUPLICATE check on IBAN Number for YAP
+3334 = Workitem exist for same IBAN Number
+## Below code for duplicate WI in DAO
+3335 = Workitem exist for same Prospect Number
+##below code added for YAP IBPS process
+1111 = Size should be less than the limit for Attribute Name
+1112 = Should be numeric
+1113 = Should be alphanumeric
+1114 = Should be Alphabet only
+1115 = Should be alphanumeric with Space only
+1116 = Date format should be YYYY-MM-DD 
+1117 = Should be numeric with dot only
+1118 = Should be alphanumeric with special characters
+
+## FALCON WI Creation error codes
+6001=Employer code is mandatory if employer is listed
+6002=Industry Segment is mandatory if employer is listed
+6003=Home country house number,Building name,street name and Mobile number is mandatory for non UAE nationality
+6004=TIN is mandatory if it is available
+6005=No TIN reason is mandatory if TIN is not available
+6006=Operation name can either be DATA_UPDATE or BIOMETRIC_UPDATE
+6007=The Workitem is not at Customer_Hold workstep to update
+6008=The wokritem is not at Disbursal_hold so biometric status cannot be updated
+6009=REMARKS are mandatory if Biometric Status is FAILED
+6010=Mandatory parameters for Biometric Status update are not present
+6011=The Case with given First Name,Last Name,Mobile Number,Email Id already exits in the CAS BAU
+6012=Portal Reference number is mandatory for Data Update
+6013=Mandatory parameter is not present or is blank for dedupe check
+6014=Workitem not valid for update
+
+## DAO error codes
+7001=Monthly turnover in cash is mandatory for self employed
+7002=Monthly turnover in non-cash is mandatory for self employed
+7003=Employer code is mandatory for salaried employee
+7004=Company employer name is mandatory for salaried employee
+7005=Designation is mandatory for salaried employee
+7006=PO Box emp is mandatory for salaried employee
+7007=Gross monthly salary is mandatory for salaried employee
+7008=Previous designation is mandatory for PEP category - Self
+7009=Relation detail with PEP is mandatory for PEP category - Association
+7010=PEP category is mandatory for PEP - Yes
+7011=Name of PEP is mandatory for PEP category - Association
+7012=Country PEP hold status is mandatory for PEP category - Association
+7013=Emirates PEP hold status is mandatory for country PEP hold status - UAE
+7014=Year of incorporation is mandatory for for PEP
+7015=CIF is mandatory for STP
+7016=Account Number is mandatory for STP
+7017=W8Form is mandatory for US_citizen_residency
+7018=W9Form is mandatory for US_citizen_residency
+7019=Occupation is mandatory for salaried employee
+
+7020= investment_portfolio_including_virtual_asset is mandatory for High risk case
+7021= income_generated is mandatory for investment_portfolio_including_virtual_asset
+7022= real_Est_owned is mandatory for High risk case
+7023= rental_income is mandatory for real_Est_owned 
+7024= title_deed_attached is mandatory for High risk case
+7025= other_Source_of_income is mandatory for High risk case
+7026= virtual_Card_issued is mandatory for High risk case
+
+7027 = Background_info_employer is mandatory for high risk and salaried.
+7028 = W8Form/W9Form is mandatory for US_citizen_residency
+
+7029 = Name_on_ChequeBk is mandatory for ChequeBk_Req
+7030 = Net_monthly_income is mandatory for other_Source_of_income
+
+7031= CIF is mandatory for ETB
+7032= Check high risk flag
+
+
+7033 = Inheritance_income is mandatory for Inheritance.
+7034 = Country_Of_Birth is mandatory for NTB cases.
+7035 = Mothers_Maiden_Name is mandatory for NTB cases.
+7036 = PO_Box_address is mandatory for NTB cases.
+
+## DAI Update WI 
+8001 = WI Number is mandatory.
+8002= Prospect_id is mandatory.
+8003 = Event is mandatory.
+8004 = CIF is mandatory.
+8005 = Account No. is mandatory.
+8006 = Additional_document_received is mandatory.
+8007 = income_generated is mandatory for investment_portfolio_including_virtual_asset.
+8008 = rental_income is mandatory for real_Est_owned.
+8009 = Net_monthly_income is mandatory for other_Source_of_income.
+8010 = not_in_employment is mandatory for background information.
+
+8011 = Delivery_Status is mandatory.
+8012 = Status_Code is mandatory.
+8013 = emirates_id is mandatory for Emirates_ID_PING_data.
+8014 = name is mandatory for Emirates_ID_PING_data.
+
+
+8015 = PEP is mandatory.
+8016 = PEP category is mandatory for PEP - Yes
+8017= Previous designation is mandatory for PEP category - Self
+8018= Relation detail with PEP is mandatory for PEP category - Association
+8019= Name of PEP is mandatory for PEP category - Association
+8020= Country PEP hold status is mandatory for PEP category - Association
+8021= Emirates PEP hold status is mandatory for country PEP hold status - UAE
+8022= Inheritance_income is mandatory for Inheritance.
+8023= ECRN is mandatory for is_prime_req
+8024= ChequeBk_ref is mandatory for is_cbs_req
+8025= IBAN is mandatory for event Account Created.
+
+##BSR Update Intellect to BPM
+9001 = WI Number not lying in BSR Intellect Hold Queue.
+
+
+## DIGITAL CC ERROR CODES
+10001=Employer code is mandatory if employer is listed
+10002=Industry Segment is mandatory if employer is listed
+10003=FIRCO Status is mandatory
+10004=Industry Sub Segment is mandatory, if employment type is self employed or salaried and self-employed
+10005=For the supplementary card its mandatory to mention whether its for yourself or not.
+10006=For the self supplementary card its mandatory to enter card embossing name.
+10007=For the self supplementary card its mandatory to enter supplementary card limit.
+10008=For the supplementary card its mandatory to mention whether it is for relative or non-relative.
+10009=For the supplementary card for relative its mandatory to mention Relationship.
+10010=For UAE Resident, EID is mandatory.
+10011=For UAE Resident, EID Expiry date is mandatory.
+10012=For UAE Resident, Visa Number is mandatory.
+10013=For UAE Resident, Visa Expiry date is mandatory.
+
+##WI Update Cooling Period
+11001=Cooling period expiry date is mandatory, if Cooling period expiry flag is Y
+
