@@ -74,6 +74,8 @@ import com.newgen.DBO.DBO_WIUpdateService;
 import com.newgen.NBTL.NBTL_WICreateService;
 import com.newgen.NBTL.NBTL_WIStatusService;
 import com.newgen.NBTL.NBTL_WIUpdateService;
+import com.newgen.PL.PL_WICreationService;
+import com.newgen.PL.Pl_WIUpdateService;
 import com.newgen.DBO.DBO_WIStatusService;
 import com.newgen.CPMS.CPMS_WICreateService;
 import com.newgen.CPMS.CPMS_WIUpdateService;
@@ -129,6 +131,8 @@ public class CreateWorkitem implements MessageListener
 	NBTL_WICreateService mainCreateObjNBTL;
 	NBTL_WIUpdateService mainUpdateObjNBTL;
 	NBTL_WIStatusService mainStatusObjNBTL;
+	PL_WICreationService mainCreateObjPL;
+	Pl_WIUpdateService mainUpdateObjDPL;
 	/**
      * Default constructor. 
      */
@@ -260,7 +264,8 @@ public class CreateWorkitem implements MessageListener
     				|| "Digital_CC".equalsIgnoreCase(request.getProcessName())
 					|| "DBO".equalsIgnoreCase(request.getProcessName())
 					|| "CPMS".equalsIgnoreCase(request.getProcessName())
-					|| "NBTL".equalsIgnoreCase(request.getProcessName()))
+					|| "NBTL".equalsIgnoreCase(request.getProcessName())
+					|| "Digital_PL".equalsIgnoreCase(request.getProcessName()))
     			
     			insertReqRespINDatabase(requestedDateTime);
     		//**********************************************************
@@ -415,6 +420,11 @@ public class CreateWorkitem implements MessageListener
     		mainCreateObjNBTL=new NBTL_WICreateService();
     		WriteLog("attributeList--"+attributeList);
     		response=mainCreateObjNBTL.wiCreate(request,attributeList);
+    	}
+    	else if("Digital_PL".equalsIgnoreCase(request.getProcessName().trim())){
+    		mainCreateObjPL=new PL_WICreationService();
+    		WriteLog("attributeList--"+attributeList);
+    		response=mainCreateObjPL.wiCreate(request,attributeList);
     	}
     	else
     		response=mainObj.wiCreate(request,attributeList);
@@ -600,6 +610,11 @@ public class CreateWorkitem implements MessageListener
     	{
     		mainUpdateObjCPMS=new CPMS_WIUpdateService();
     		response=mainUpdateObjCPMS.wiUpdate(request,attributeList);
+    	}
+    	else if("Digital_PL".equalsIgnoreCase(request.getProcessName().trim()))
+    	{
+    		mainUpdateObjDPL=new Pl_WIUpdateService();
+    		response=mainUpdateObjDPL.wiUpdate(request,attributeList);
     	}
     	else
     		response=mainObjUpdate.wiUpdate(request,attributeList);
@@ -1205,6 +1220,9 @@ private String[] validateNameValue(String attrName, String attrValue) {
 			}
 			else if("Digital_CC".equalsIgnoreCase(request.getProcessName())){
 				XMLHISTORY_TABLENAME = "NG_DCC_XMLLOG_HISTORY";
+			}
+			else if("Digital_PL".equalsIgnoreCase(request.getProcessName())){
+				XMLHISTORY_TABLENAME = "NG_DPL_XMLLOG_HISTORY";
 			}
 			else{
 				XMLHISTORY_TABLENAME = "NG_"+request.getProcessName()+"_XMLLOG_HISTORY";

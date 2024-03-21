@@ -188,6 +188,7 @@ public class DBO_WIUpdateService extends CreateWorkitem {
         		}
         		else
         		{
+        			//WriteLog("attributeTag- "+attributeTag);
         			doneworkitem();
                 	insertIntoHistoryDBO(); // inserting in history table
         		}
@@ -1122,6 +1123,39 @@ public class DBO_WIUpdateService extends CreateWorkitem {
 		return NotifyDEHAction;
 	
 	}
+	
+	private String getExistingRiskScoreAndRevisedFlag() throws WICreateException,Exception
+	{
+		String getTableNameQry="select isnull(RiskScore,'0') as RiskScore,isnull(IsRiskScoreRevised,'-') as IsRiskScoreRevised from RB_DBO_EXTTABLE with(nolock) where WINAME='"+WINumber+"'";
+		sInputXML=getAPSelectWithColumnNamesXML(getTableNameQry);
+		WriteLog("Input XML to Get DBO getExistingRiskScoreRevisedFlag: "+sInputXML);
+		sOutputXML=executeAPI(sInputXML);
+		WriteLog("Output XML to Get DBO getExistingRiskScoreRevisedFlag: "+sOutputXML);
+		xmlobj=new XMLParser(sOutputXML);
+		checkCallsMainCode(xmlobj);
+		String RiskScore =getTagValues(sOutputXML, "RiskScore");
+		String IsRiskScoreRevised =getTagValues(sOutputXML, "IsRiskScoreRevised");
+		WriteLog("DBO getExistingRiskScoreRevisedFlag RiskScore: "+RiskScore);
+		WriteLog("DBO getExistingRiskScoreRevisedFlag: "+IsRiskScoreRevised);
+		return RiskScore+"~"+IsRiskScoreRevised;
+	
+	}
+	
+	private String getExistingEIDNumberBasedOnAWBNumber(String AWBNumber) throws WICreateException,Exception
+	{
+		String getTableNameQry="select top 1 isnull(r.EmirateID,'-') as EmirateID from USR_0_DBO_AWB_Status a with(nolock), USR_0_DBO_RelatedPartyGrid r with(nolock) where a.wi_name = '"+WINumber+"' and a.AWB_Number = '"+AWBNumber+"' and a.wi_name = r.winame and a.RelatedPartyId = r.RelatedPartyId";
+		sInputXML=getAPSelectWithColumnNamesXML(getTableNameQry);
+		WriteLog("Input XML to Get DBO getExistingEIDNumberBasedOnAWBNumber: "+sInputXML);
+		sOutputXML=executeAPI(sInputXML);
+		WriteLog("Output XML to Get DBO getExistingEIDNumberBasedOnAWBNumber: "+sOutputXML);
+		xmlobj=new XMLParser(sOutputXML);
+		checkCallsMainCode(xmlobj);
+		String EmiratesID =getTagValues(sOutputXML, "EmirateID");
+		WriteLog("DBO getExistingEIDNumberBasedOnAWBNumber: "+EmiratesID);
+		return EmiratesID;
+	
+	}
+	
 	private String validateAWBNumberOfRequest() throws WICreateException,Exception
 	{
 		String getAWBCountQry="select count(*) as Count from USR_0_DBO_AWB_Status with(nolock) where AWB_Number='"+hm.get("AWB_Number").trim()+"' and wi_name='"+WINumber+"'";
@@ -1177,7 +1211,8 @@ public class DBO_WIUpdateService extends CreateWorkitem {
 					if("INFO_CORECTION".equalsIgnoreCase(notifyDEHAction) ||
 							"SOLELLC_TO_SOLE_WITH_INFO_CORECTION".equalsIgnoreCase(notifyDEHAction) || 
 							"SOLE_TO_SOLELLC".equalsIgnoreCase(notifyDEHAction) || 
-							"SOLE_TO_SOLELLC_INFO_CORECTION".equalsIgnoreCase(notifyDEHAction))
+							"SOLE_TO_SOLELLC_INFO_CORECTION".equalsIgnoreCase(notifyDEHAction) ||
+							"INIT_ACC_OPENING".equalsIgnoreCase(notifyDEHAction))
 					{
 						// Nothing to do - if this value is blank means workitem is waiting for 2nd call from YAP
 					} 
@@ -1421,7 +1456,8 @@ public class DBO_WIUpdateService extends CreateWorkitem {
 					if (!ExtColsName[i].trim().equalsIgnoreCase("") && !ExtColsName[i].trim().equalsIgnoreCase("#"))
 					{
 						WriteLog("this is a extn table attribute:-"+AttrTagsName[i]);
-						attributeTag=attributeTag+"\n<"+ExtColsName[i]+">"+attributeValue+"</"+ExtColsName[i]+">";
+						if(!"IsRiskScoreRevised".equalsIgnoreCase(AttrTagsName[i]))
+							attributeTag=attributeTag+"\n<"+ExtColsName[i]+">"+attributeValue+"</"+ExtColsName[i]+">";
 						//WriteLog("attributeTag:-"+attributeTag);
 						if("RiskScore".equalsIgnoreCase(AttrTagsName[i]) && !"".equalsIgnoreCase(attributeValue))
 						{
@@ -1430,6 +1466,30 @@ public class DBO_WIUpdateService extends CreateWorkitem {
 							if(riskScore >= 4.05)
 								isHighRisk = "Y";
 							attributeTag=attributeTag+"\n<IsHighRisk>"+isHighRisk+"</IsHighRisk>";
+						}
+						if("IsChqBkReq".equalsIgnoreCase(AttrTagsName[i]) && !"".equalsIgnoreCase(attributeValue))
+						{
+							if("N".equalsIgnoreCase(attributeValue) || "No".equalsIgnoreCase(attributeValue))
+								attributeTag=attributeTag+"\n<NameOnChqBk></NameOnChqBk>";
+						}
+						if("IsRiskScoreRevised".equalsIgnoreCase(AttrTagsName[i]) && !"".equalsIgnoreCase(attributeValue))
+						{
+							String ExistingRiskScoreAndRevisedFlag=getExistingRiskScoreAndRevisedFlag();
+							if(!"null".equalsIgnoreCase(ExistingRiskScoreAndRevisedFlag) && !"".equalsIgnoreCase(ExistingRiskScoreAndRevisedFlag) && ExistingRiskScoreAndRevisedFlag != null)
+							{
+								String arrExistingRiskScoreAndRevisedFlag[]=ExistingRiskScoreAndRevisedFlag.split("~");
+								String ExistingRiskScore = arrExistingRiskScoreAndRevisedFlag[0].trim();
+								String ExistingRiskScoreRevisedFlag = arrExistingRiskScoreAndRevisedFlag[1].trim();
+								if(!"Y".equalsIgnoreCase(ExistingRiskScoreRevisedFlag))
+								{
+									if(ExistingRiskScore.equalsIgnoreCase(hm.get("RiskScore").trim()))
+									{
+										attributeTag=attributeTag+"\n<"+ExtColsName[i]+">"+"N"+"</"+ExtColsName[i]+">";
+									} else
+										attributeTag=attributeTag+"\n<"+ExtColsName[i]+">"+"Y"+"</"+ExtColsName[i]+">";
+								} else
+									attributeTag=attributeTag+"\n<"+ExtColsName[i]+">"+"Y"+"</"+ExtColsName[i]+">";
+							}
 						}
 					}
 					else if(!txnColsName[i].trim().equalsIgnoreCase("") && !txnColsName[i].trim().equalsIgnoreCase("#"))
@@ -1471,7 +1531,7 @@ public class DBO_WIUpdateService extends CreateWorkitem {
 					{
 						awbDeliveryStatusDesc = attributeValue.trim();
 					}
-					
+				
 				}
 					 
 			}
@@ -2005,7 +2065,7 @@ public class DBO_WIUpdateService extends CreateWorkitem {
 					
 					if(attType.equalsIgnoreCase("APLPHANUMERICWITHSPECIALCHAR"))
 					{
-						patternMatch="^[a-zA-Z0-9-#_!.@()+/%&\\s|~\\[\\]$^*={};:\",<>?\\n\\r\\t\\\\ ]*$";
+						patternMatch="^[a-zA-Z0-9-#_!.'@()+/%&\\s|~\\[\\]$^*={};:\",<>?\\n\\r\\t\\\\ ]*$";
 						if(!Pattern.matches(patternMatch, attributeValue))
 						{
 							throw new WICreateException("1118",pCodes.getString("1118")+" :"+attributeName);
@@ -2120,6 +2180,10 @@ public class DBO_WIUpdateService extends CreateWorkitem {
 					RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<Q_"+RepetitiveTagTableName+">";
 				}
 				
+				String isMiddleNameExistsInFECorr = "N";
+				String isRCIFIDExistsInFECorr = "N";
+				String isLinkedInURLExistsInFECorr = "N";
+				String isBackgroundInfoExistsInFECorr = "N";
 
 				//WriteLog("RepetitiveProcessID:"+RepetitiveProcessID);
 				//WriteLog("RepetitiveTagTableName:"+RepetitiveTagTableName);
@@ -2164,6 +2228,16 @@ public class DBO_WIUpdateService extends CreateWorkitem {
 							}
 							if(!value.trim().equalsIgnoreCase("")) 
 							{
+								// changing debitcardrequired value as R if received as Y -- commented it as part of PDB-3432
+								/*if("DebitCardRequired".equalsIgnoreCase(TransColListArr[j]))
+								{
+									if("Y".equalsIgnoreCase(value.trim()) || "Yes".equalsIgnoreCase(value.trim()))
+									{
+										value = "R";
+									}
+								}*/
+								//*************************************
+								
 								if(!"DBOCOURIERUPDATE_EmiratesIDPingData".equalsIgnoreCase(RepetitiveProcessID))
 									RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<"+TransColListArr[j]+">"+value+"</"+TransColListArr[j]+">";
 								else if("DBOCOURIERUPDATE_EmiratesIDPingData".equalsIgnoreCase(RepetitiveProcessID))
@@ -2177,6 +2251,21 @@ public class DBO_WIUpdateService extends CreateWorkitem {
 										pingDataColValues="'"+value.trim()+"'";
 									else
 										pingDataColValues=pingDataColValues+","+"'"+value.trim()+"'";
+									
+									// Setting EIDAMatched flag in Ping Data
+									if("emirates_id".equalsIgnoreCase(TransColListArr[j].trim()))
+									{
+										String pingedEmiratesid = value.trim();
+									
+										String ExistingEIDNumber = getExistingEIDNumberBasedOnAWBNumber(awbNumber).trim();
+										pingDataColNames=pingDataColNames+","+"isEIDMatched";
+										if(pingedEmiratesid.equalsIgnoreCase(ExistingEIDNumber))
+											pingDataColValues=pingDataColValues+","+"'Yes'";
+										else
+											pingDataColValues=pingDataColValues+","+"'No'";
+									}
+									/////////////////////////
+									
 								}
 								/*if("".equalsIgnoreCase(insertColumns))
 									insertColumns = TransColListArr[j];
@@ -2212,6 +2301,11 @@ public class DBO_WIUpdateService extends CreateWorkitem {
 												throw new WICreateException("12003",pCodes.getString("12003")+" - "+value);
 											}else
 												RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<insertionOrderId>"+insertionOrderId+"</insertionOrderId>";
+										}
+										else if("DebitCardRequired".equalsIgnoreCase(TransColListArr[j]))
+										{
+											if("N".equalsIgnoreCase(value) || "No".equalsIgnoreCase(value))
+												RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<NameOnDebitCard></NameOnDebitCard>";
 										}
 										/*else if("FullName".equalsIgnoreCase(TransColListArr[j]))
 											RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<copyof_FullName>"+value+"</copyof_FullName>";
@@ -2291,6 +2385,11 @@ public class DBO_WIUpdateService extends CreateWorkitem {
 											}else
 												RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<insertionOrderId>"+insertionOrderId+"</insertionOrderId>";
 										}
+										else if("DebitCardRequired".equalsIgnoreCase(TransColListArr[j]))
+										{
+											if("N".equalsIgnoreCase(value) || "No".equalsIgnoreCase(value))
+												RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<NameOnDebitCard></NameOnDebitCard>";
+										}
 										/*else if("FullName".equalsIgnoreCase(TransColListArr[j]))
 											RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<copyof_FullName>"+value+"</copyof_FullName>";
 										else if("FirstName".equalsIgnoreCase(TransColListArr[j]))
@@ -2301,6 +2400,14 @@ public class DBO_WIUpdateService extends CreateWorkitem {
 											RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<copyof_LastName>"+value+"</copyof_LastName>";
 										else if("NameOnDebitCard".equalsIgnoreCase(TransColListArr[j]))
 											RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<copyof_NameOnDebitCard>"+value+"</copyof_NameOnDebitCard>";*/
+										else if("MiddleName".equalsIgnoreCase(TransColListArr[j]))
+											isMiddleNameExistsInFECorr = "Y";
+										else if("DedupeCIFs".equalsIgnoreCase(TransColListArr[j]))
+											isRCIFIDExistsInFECorr = "Y";
+										else if("LinkedIn_URL".equalsIgnoreCase(TransColListArr[j]))
+											isLinkedInURLExistsInFECorr = "Y";
+										else if("Background_Information".equalsIgnoreCase(TransColListArr[j]))
+											isBackgroundInfoExistsInFECorr = "Y";
 									}
 									
 									// marking isForzen as Y for firco rows which are already available is firco grid for respective related party id
@@ -2320,6 +2427,25 @@ public class DBO_WIUpdateService extends CreateWorkitem {
 											fircoRelatedPartiesCount++;
 										}
 									}
+									else if("DBOFULFILLMENT_AdditionalCurrencies".equalsIgnoreCase(RepetitiveProcessID))
+									{
+										if("Currency".equalsIgnoreCase(TransColListArr[j]))
+										{
+											sInputXML=getAPSelectWithColumnNamesXML("select top 1 InsertionOrderId from "+RepetitiveTagTableName+" with(nolock) where WI_NAME='"+WINumber+"' and  Currency='"+value+"' ");
+											WriteLog("Input XML: "+sInputXML);
+											sOutputXML=executeAPI(sInputXML);
+											WriteLog("Output XML: "+sOutputXML);
+											xmlobj=new XMLParser(sOutputXML);
+											checkCallsMainCode(xmlobj);
+											String insertionOrderId=getTagValues(sOutputXML,"InsertionOrderId");
+											if("".equalsIgnoreCase(insertionOrderId))
+											{
+												WriteLog("Currency doesnot exists: "+value);
+												throw new WICreateException("12009",pCodes.getString("12009")+" - "+value);
+											}else
+												RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<insertionOrderId>"+insertionOrderId+"</insertionOrderId>";
+										}
+									}	
 								}
 								
 								
@@ -2329,6 +2455,30 @@ public class DBO_WIUpdateService extends CreateWorkitem {
 					//insertIntoRepetitiveGridTable(RepetitiveTagTableName, insertColumns, insertValues);
 					
 				}
+				
+				// making below field values as blank if data not received in respective tags in FE Correction PDB-3512
+				if("DBOFECORR_RelatedPartyDetails".equalsIgnoreCase(RepetitiveProcessID))
+				{
+					if("N".equalsIgnoreCase(isMiddleNameExistsInFECorr))
+					{
+						RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<MiddleName></MiddleName>";
+						RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<copyof_MiddleName></copyof_MiddleName>";
+					}
+					if("N".equalsIgnoreCase(isRCIFIDExistsInFECorr))
+					{
+						RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<DedupeCIFs></DedupeCIFs>";
+						RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<CIFID></CIFID>";
+					}
+					if("N".equalsIgnoreCase(isLinkedInURLExistsInFECorr))
+					{
+						RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<LinkedIn_URL></LinkedIn_URL>";
+					}
+					if("N".equalsIgnoreCase(isBackgroundInfoExistsInFECorr))
+					{
+						RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<Background_Information></Background_Information>";
+					}
+				}
+				
 				RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n</Q_"+RepetitiveTagTableName+">";
 				
 				if("DBOCOURIERUPDATE_EmiratesIDPingData".equalsIgnoreCase(RepetitiveProcessID))
@@ -2394,7 +2544,9 @@ public class DBO_WIUpdateService extends CreateWorkitem {
                   if(value.contains("&lt;"))
                         value = value.replace("&lt;", "LLSSTNSPX");
                   if(value.contains("&gt;"))
-                        value = value.replace("&gt;", "GGRTTNSPX");
+                	  	value = value.replace("&gt;", "GGRTTNSPX");
+                  /*if(value.contains("&quote;"))
+                	  	value = value.replace("&quote;", "DOBBULEQOTTS");*/
                   if(value.contains("&"))
                         value = value.replace("&", "&amp;");
                   
@@ -2404,11 +2556,15 @@ public class DBO_WIUpdateService extends CreateWorkitem {
                         value = value.replace("LLSSTNSPX", "&lt;");
                   if(value.contains("GGRTTNSPX"))
                         value = value.replace("GGRTTNSPX", "&gt;");
+                  /*if(value.contains("DOBBULEQOTTS"))
+                    	value = value.replace("DOBBULEQOTTS", "&quote;");*/
                   
                   if(value.contains("<"))
                         value = value.replace("<", "&lt;");
                   if(value.contains(">"))
                         value = value.replace(">", "&gt;");
+                  /*if(value.contains("\""))
+                    	value = value.replace("\"", "&quote;");*/
            }
            return value;
     }

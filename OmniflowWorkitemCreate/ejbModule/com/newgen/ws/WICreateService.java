@@ -550,49 +550,49 @@ public class WICreateService extends CreateWorkitem
 				} //Hritik 5.4.22 Digital AO Process
 				
 				/** Ravindra Kumar -- Validate parameters  for dcc **/
-				if("Digital_CC".equalsIgnoreCase(sProcessName))
-				{
+				if("Digital_CC".equalsIgnoreCase(sProcessName)){
+					
 					//changes to validate duplicate workitem based on Prospect_id
 					WriteLog("DigitalCC: Prospect_id: "+hm.get("Prospect_id"));
 					getworkitemfromduplicatetable_DAO(hm.get("Prospect_id"));
-
-					if(WINAME.trim().equalsIgnoreCase("") || WINAME.trim().equalsIgnoreCase("null")){
-						
+					
+					if(WINAME.trim().equalsIgnoreCase("") || WINAME.trim().equalsIgnoreCase("null"))
+					{
 						validateRepetitiveRequestParametersDCC();
 						validateConditionalRequestParametersForDCC();
 						
 						// HRITIK 04.01.24 PDSC - 1292 - Start
-						String AECB_Sal_Flag = hm.get("AECB_Sal_Flag");	
+						/*String AECB_Sal_Flag = hm.get("AECB_Sal_Flag");	
 						WriteLog("AECB_Sal_Flag: "+AECB_Sal_Flag);
 						if (hm.containsKey("AECB_Sal_Flag") && hm.get("AECB_Sal_Flag") != null && "Y".equalsIgnoreCase(AECB_Sal_Flag)) {
 							WriteLog("Inside AECB_Sal_Flag: "+AECB_Sal_Flag);
-							if (hm.containsKey("AECB_Sal_Month_1") && hm.get("AECB_Sal_Month_1") != null ){
+							if (hm.containsKey("AECB_Sal_Month_1") && hm.get("AECB_Sal_Month_1") != null ) {
 								String AECB_Sal_Month_1=hm.get("AECB_Sal_Month_1");
 								attributeTag=attributeTag+"AECB_Sal_Month_1"+(char)21+AECB_Sal_Month_1+(char)25;
 							}
-							if (hm.containsKey("AECB_Sal_Month_2") && hm.get("AECB_Sal_Month_2") != null){
+							if (hm.containsKey("AECB_Sal_Month_2") && hm.get("AECB_Sal_Month_2") != null) {
 								String AECB_Sal_Month_2=hm.get("AECB_Sal_Month_2");
 								attributeTag=attributeTag+"AECB_Sal_Month_2"+(char)21+AECB_Sal_Month_2+(char)25;
 							}
-							if (hm.containsKey("AECB_Sal_Month_3") && hm.get("AECB_Sal_Month_3") != null){
+							if (hm.containsKey("AECB_Sal_Month_3") && hm.get("AECB_Sal_Month_3") != null) {
 								String AECB_Sal_Month_3=hm.get("AECB_Sal_Month_3");
 								attributeTag=attributeTag+"AECB_Sal_Month_3"+(char)21+AECB_Sal_Month_3+(char)25;
 							}
 							WriteLog("AECB_Sal_Flag attributeTag: "+attributeTag);
-						} // PDSC - 1292 - End
-						
-						if(hm.containsKey("Statement_Analyser_Flag") && hm.get("Statement_Analyser_Flag") != null && "F".equalsIgnoreCase(hm.get("Statement_Analyser_Flag"))) // Cheque book ref Number
-							{
-								attributeTag=attributeTag+"FTS_Ack_flg"+(char)21+"Y"+(char)25;
-							}
+						}
+						else {
+							WriteLog("No AECB_Sal_Flag attributeTag: "+AECB_Sal_Flag); // PDSC - 1292 - End
+						}
+						*/
+						if(hm.containsKey("Statement_Analyser_Flag") && hm.get("Statement_Analyser_Flag") != null && "F".equalsIgnoreCase(hm.get("Statement_Analyser_Flag"))){
+							attributeTag=attributeTag+"FTS_Ack_flg"+(char)21+"Y"+(char)25;
+						}
 						else{
-								attributeTag=attributeTag+"FTS_Ack_flg"+(char)21+"N"+(char)25;
-							}
-						
+							attributeTag=attributeTag+"FTS_Ack_flg"+(char)21+"N"+(char)25;
+						}
 						WriteLog(" Set FTS_Ack_flg according to FTS_FLAG :- " +attributeTag);
 					}
-					else
-					{
+					else{
 						WriteLog("returnCode: "+3335+" returnDesc: "+pCodes.getString("3335"));
 						setFailureParamResponse();
 						response.setWorkitemNumber(WINAME);
@@ -600,7 +600,6 @@ public class WICreateService extends CreateWorkitem
 						response.setErrorDescription(pCodes.getString("3335"));
 						return response;
 					}
-
 				}
 				//Reddy 07.06.22 BSR Process
 				if("BSR".equalsIgnoreCase(sProcessName))
@@ -5929,8 +5928,16 @@ public class WICreateService extends CreateWorkitem
 		}*/
 		
 		// PDSC - 1292 - Hritik 18.12.23
+		
 		String AECB_Sal_Flag = hm.get("AECB_Sal_Flag");	
+		
+		String NTB = hm.get("NTB"); 
+		String ETB_New=hm.get("ETB_New"); //PDSC-1500
+		
 		WriteLog("AECB_Sal_Flag: "+AECB_Sal_Flag);
+		WriteLog("NTB: "+NTB);
+		WriteLog("ETB_New: "+ETB_New);
+		
 		if (hm.containsKey("AECB_Sal_Flag") && hm.get("AECB_Sal_Flag") != null && "Y".equalsIgnoreCase(AECB_Sal_Flag)) {
 			WriteLog("Inside AECB_Sal_Flag: "+AECB_Sal_Flag);
 			if (!hm.containsKey("AECB_Sal_Month_1") || "".equals(hm.get("AECB_Sal_Month_1"))){
@@ -5947,13 +5954,24 @@ public class WICreateService extends CreateWorkitem
 			}
 		}
 		
+		// hritik 26.02.2024
+		
+		if(hm.containsKey("NTB") && hm.get("NTB") != null && "false".equalsIgnoreCase(NTB) && (!hm.containsKey("ETB_New") || "".equals(hm.get("ETB_New")))) {
+			WriteLog("Inside NTB false - ETB New Flag for new journey.."); 	
+		//	throw new WICreateException("10023", pCodes.getString("10023") + " for process id: " + processID); //PDSC-1500
+		}
+		
+		if((hm.containsKey("NTB") && hm.get("NTB") != null && "false".equalsIgnoreCase(NTB)) && (hm.containsKey("ETB_New") && hm.get("ETB_New") != null && "Y".equalsIgnoreCase(ETB_New)) && (!hm.containsKey("EFR_done") || "".equals(hm.get("EFR_done")))) {
+			WriteLog("Inside NTB false - EFR_done Flag for new journey.."); 
+			throw new WICreateException("10024", pCodes.getString("10024") + " for process id: " + processID); // PDSC-1500
+		}
+		
 		if (!hm.containsKey("IndusSeg") || "".equals(hm.get("IndusSeg"))) {
 			String strIndusMicro = checkIndustrySegment(hm.get("employercode"));
 			if (!"".equals(strIndusMicro)) {
 				throw new WICreateException("10002", pCodes.getString("10002") + " for process id: " + processID);
 			}
 		}
-		
 		if (hm.get("Supp_Card_Required") != null && hm.get("Supp_Card_Required").startsWith("Y")) {
 			if (!hm.containsKey("Self_Supp_Card_Required") || "".equals(hm.get("Self_Supp_Card_Required"))) {
 				throw new WICreateException("10005", pCodes.getString("10005") + " for process id: " + processID);
@@ -6984,11 +7002,9 @@ private String validateInputValues(String attrName,String attrValues)
 		 {
 			// String rlos_firco_update ="update NG_RLOS_FIRCO set call_valid = 'N' where Workitem_no='"+processInstanceID+"' and Call_type='FIRCO'";
 			 try {
-				
-				
+				 
 				 Map<String,String> Columnvalues = new HashMap<String,String>(); 
-				 for(int j=1;j<arrOfStr1.length;j++)
-				 {
+				 for(int j=1;j<arrOfStr1.length;j++) {
 					 String sRecords=arrOfStr1[j].replace(": \n", ":"); 
 					 sRecords=sRecords.replace(":\n", ":");
 					 sRecords=sRecords.replace("'", "''"); // added to handle the PCUG 99 - firco impacted cases.
@@ -6996,13 +7012,10 @@ private String validateInputValues(String attrName,String attrValues)
 					 if (sRecords.contains("Suspect detected")) {
 						 BufferedReader bufReader = new BufferedReader(new StringReader(sRecords));
 						 String line=null;
-						 while((line=bufReader.readLine()) != null )
-						 {
+						 while((line=bufReader.readLine()) != null ) {
 							 String[] PDFColumns = {"OFAC ID", "NAME", "MATCHINGTEXT", "ORIGIN", "DESIGNATION", "DATE OF BIRTH", "USER DATA 1", "NATIONALITY", "PASSPORT", "ADDITIONAL INFOS"};
-							 for(int k=0;k<PDFColumns.length;k++)
-							 {
-								 if(line.contains(PDFColumns[k]+":"))
-								 {
+							 for(int k=0;k<PDFColumns.length;k++) {
+								 if(line.contains(PDFColumns[k]+":")) {
 									 String colData = "";
 									 String [] tmp = line.split(":");
 									 //iRBLSysCheckIntegrationLog.iRBLSysCheckIntegrationLogger.debug("tmp.length : "+tmp.length+", line : "+line);
@@ -7012,24 +7025,21 @@ private String validateInputValues(String attrName,String attrValues)
 										 colData="";
 									 else if(tmp[1].trim().equalsIgnoreCase("Synonyms") || tmp[1].trim().equalsIgnoreCase("none") || tmp[1].trim().equalsIgnoreCase(""))
 										 colData="";
-									 else
-									 {
+									 else {
 										 //colData=tmp[1].trim();
-										 for(int m=1; m<tmp.length; m++)
-										 {
+										 for(int m=1; m<tmp.length; m++) {
 											 colData=colData+" "+tmp[m].trim();
 										 }
 									 }
 	
-									 if("DATE OF BIRTH".equalsIgnoreCase(PDFColumns[k].trim()))
-									 {
+									 if("DATE OF BIRTH".equalsIgnoreCase(PDFColumns[k].trim())) {
 										 colData=colData.trim();
 										 if(colData.length()==4)
 											 colData="01-01-"+colData;
 										 else if(colData.length()>10)
 											 colData = colData.substring(0,10);
 									 }	
-	
+									 
 									 Columnvalues.put(PDFColumns[k],colData);
 									 WriteLog("Columnvalues " + Columnvalues);
 									 WriteLog("colData " + colData);
@@ -7037,30 +7047,30 @@ private String validateInputValues(String attrName,String attrValues)
 								 }
 							 }
 						 }
-						String addinfo = Columnvalues.get("ADDITIONAL INFOS");
-						addinfo=addinfo.replaceAll("'", "''");
-						WriteLog("addinfo " + addinfo);
+						 String addinfo = Columnvalues.get("ADDITIONAL INFOS");
+						 addinfo=addinfo.replaceAll("'", "''");
+						 WriteLog("addinfo " + addinfo);
 						
-						String Name = Columnvalues.get("NAME");
-						Name=Name.replaceAll("'", "''");
-						WriteLog("Name " + Name);
+						 String Name = Columnvalues.get("NAME");
+						 Name=Name.replaceAll("'", "''");
+						 WriteLog("Name " + Name);
 						
-						trTableColumn = "WI_name,U_ID,Additiona_info,Name,Date_of_birth,Designation,Matchingtext,Origin,Nationality,Passport,user_data_1";
-						WriteLog("trTableColumn" + trTableColumn);
+						 trTableColumn = "WI_name,U_ID,Additiona_info,Name,Date_of_birth,Designation,Matchingtext,Origin,Nationality,Passport,user_data_1";
+						 WriteLog("trTableColumn" + trTableColumn);
 	
-						trTableValue = "'" + wiName + "','" + Columnvalues.get("OFAC ID").toString().trim() + "'," + "'"
-								+ addinfo + "','" + Name + "','" + Columnvalues.get("DATE OF BIRTH") + "'," + "'" + Columnvalues.get("DESIGNATION")
-								+ "','" + Columnvalues.get("MATCHINGTEXT") + "','" + Columnvalues.get("ORIGIN") + "'," + "'" + Columnvalues.get("NATIONALITY") + "','" + Columnvalues.get("PASSPORT") + "','"
-								+ Columnvalues.get("USER DATA 1")+"'" ;
+						 trTableValue = "'" + wiName + "','" + Columnvalues.get("OFAC ID").toString().trim() + "'," + "'"
+							+ addinfo + "','" + Name + "','" + Columnvalues.get("DATE OF BIRTH") + "'," + "'" + Columnvalues.get("DESIGNATION")
+							+ "','" + Columnvalues.get("MATCHINGTEXT") + "','" + Columnvalues.get("ORIGIN") + "'," + "'" + Columnvalues.get("NATIONALITY") + "','" + Columnvalues.get("PASSPORT") + "','"
+							+ Columnvalues.get("USER DATA 1")+"'" ;
 				
-						WriteLog("trTableValue " + trTableValue);
-						String inputXML = getInputXMLInsert(GRID_DTLS);
-						WriteLog("APInsert Input History: " + inputXML);
-						sOutputXML = executeAPI(inputXML);
-						WriteLog("APInsert Output History: " + sOutputXML);
-						xmlobj = new XMLParser(sOutputXML);
+						 WriteLog("trTableValue " + trTableValue);
+						 String inputXML = getInputXMLInsert(GRID_DTLS);
+						 WriteLog("APInsert Input History: " + inputXML);
+						 sOutputXML = executeAPI(inputXML);
+						 WriteLog("APInsert Output History: " + sOutputXML);
+						 xmlobj = new XMLParser(sOutputXML);
 						
-						checkCallsMainCode(xmlobj);
+						 checkCallsMainCode(xmlobj);
 						
 					//	 String rlos_firco_query="INSERT INTO NG_RLOS_FIRCO(Process_name,Workitem_no,Firco_ID,Request_datatime,Workstep_name,Newgen_status,StatusBehavior,StatusName,AlertDetails,Updated_Datetime,Call_type,call_valid,passport) VALUES('"+formObject.getWFProcessName()+"','"+ formObject.getWFWorkitemName()+"','"+ReferenceNo+"','"+requestDate+"','"+formObject.getWFActivityName()+"','Pending','"+StatusBehavior+"','"+StatusName+"','"+AlertDetails+"','"+UpdatedDateAndTime+"',"+"'FIRCO','Y','"+Columnvalues.get("PASSPORT")+"')";
 							

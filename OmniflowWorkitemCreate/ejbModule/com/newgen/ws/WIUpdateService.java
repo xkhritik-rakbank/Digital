@@ -310,10 +310,18 @@ public class WIUpdateService extends CreateWorkitem
         	/**Ravindra Kumar -- 15-07-2022**/
         	if("Digital_CC".equalsIgnoreCase(sProcessName))
         	{
+    			String FTS_FLAG="";
+    			
+    			FTS_FLAG=FTS_FLAG(); // added HRITIK 30.01.24 PDSC - 1436
+    			WriteLog("FTS_FLAG - "+FTS_FLAG);
+    			
+    			
         		// Put all the sub process here with conditions.
+    			
         		WriteLog("DigitalCC - process");
         		String decisionInHistory = "";
         		String remark = "";
+        		
 				if ("FIRCO_DOC_RECEIVED".equalsIgnoreCase(sSubProcess)){
         			upadteRepetitiveAttributeDCC();
         			trTableColumn=extColNames+"FircoUpdateAction, IsFTSDocProvided";
@@ -334,9 +342,32 @@ public class WIUpdateService extends CreateWorkitem
         			WriteLog("WI update for STATEMENT_ANALYZED- extColNames: "+extColNames);
         			WriteLog("WI update for STATEMENT_ANALYZED- extColValues: "+extColValues);
         			
-        			trTableColumn=extColNames+"IsFTSDocProvided, FTS_Ack_flg, Decision";
-        			trTableValue=extColValues+"'Y','A','Approve'";
-        			
+        			if("N".equalsIgnoreCase(FTS_FLAG)) {
+        				trTableColumn=extColNames+"IsFTSDocProvided, FTS_Ack_flg, Decision_FTS"; // Staus condition added HRITIK 30.01.24 PDSC - 1436
+            			trTableValue=extColValues+"'Y','A','Approve'";
+
+            			// Add entry to NG_DCC_FTS_DOC bcoz FTS queue will not be created. 30.01.24 PDSC - 1436
+            			Date d= new Date();
+    					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    					sDate = dateFormat.format(d);
+    					
+            			String Col_FTS_Doc="wi_name,insertion_date,Status";
+    					String Val_FTS_Doc="'"+hm.get("WINUMBER")+"','"+sDate+"','R'";
+    					
+    					sInputXML=getInsert_NG_DCC_FTS_DOC(Col_FTS_Doc,Val_FTS_Doc);
+    					WriteLog("The input XML getInsert_NG_DCC_FTS_DOC "+sInputXML);
+    					sOutputXML = executeAPI(sInputXML);
+    					WriteLog("APInsert Output for transaction update table getInsert_NG_DCC_FTS_DOC: " + sOutputXML);
+    					xmlobj = new XMLParser(sOutputXML);
+    					checkCallsMainCode(xmlobj);
+    					WriteLog("Insert in the table - NG_DCC_FTS_DOC  END.");			
+    					
+        			}
+        			else {
+        				trTableColumn=extColNames+"IsFTSDocProvided, FTS_Ack_flg, Decision_FTS, Decision"; // Decision_FTS added HRITIK 12/11/23
+            			trTableValue=extColValues+"'Y','A','Approve','Approve'";
+        			}
+        		        			
         			WriteLog("WI update for STATEMENT_ANALYZED- trTableColumn: "+trTableColumn);
         			WriteLog("WI update for STATEMENT_ANALYZED- trTableValue: "+trTableValue);
         			
@@ -352,21 +383,55 @@ public class WIUpdateService extends CreateWorkitem
     					IsFTSDocProvided="Y";
     					FTS_Ack_flg="NA";
     					hm.put("UW_reqd","NACK");//changed as per discussion with simi and deepak sir by om 20/10/22
-    				} else if ("N".equalsIgnoreCase(hm.get("UW_reqd"))){
+    				} else if ("N".equalsIgnoreCase(hm.get("UW_reqd"))) {
     					IsFTSDocProvided="N";
     					FTS_Ack_flg="NA";
     					//FTS_Ack_flg="D";changed as per discussion with simi and deepak sir by om 20/10/22
     				}
-    				trTableColumn=extColNames+"FTS_Ack_flg, Decision,IsFTSDocProvided";
-        			trTableValue=extColValues+"'"+FTS_Ack_flg+"','Approve','" +IsFTSDocProvided+"'";
+    				
+    				if("N".equalsIgnoreCase(FTS_FLAG)) {
+    					trTableColumn=extColNames+"FTS_Ack_flg, Decision_FTS,IsFTSDocProvided";
+            			trTableValue=extColValues+"'"+FTS_Ack_flg+"','Approve','" +IsFTSDocProvided+"'";  // Staus condition added HRITIK 30.01.24 PDSC - 1436
+
+    				}else {
+    					trTableColumn=extColNames+"FTS_Ack_flg, Decision_FTS,IsFTSDocProvided,Decision";
+            			trTableValue=extColValues+"'"+FTS_Ack_flg+"','Approve','" +IsFTSDocProvided+"','Approve'"; // Decision_FTS added HRITIK 12/11/23
+            			
+    				}
+    				
+    				if("Y".equalsIgnoreCase(IsFTSDocProvided)) {
+    					// Add entry to NG_DCC_FTS_DOC bcoz FTS queue will not be created. 30.01.24 PDSC - 1436
+            			Date d= new Date();
+    					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    					sDate = dateFormat.format(d);
+    					
+            			String Col_FTS_Doc="wi_name,insertion_date,Status";
+    					String Val_FTS_Doc="'"+hm.get("WINUMBER")+"','"+sDate+"','R'";
+    					
+    					sInputXML=getInsert_NG_DCC_FTS_DOC(Col_FTS_Doc,Val_FTS_Doc);
+    					WriteLog("The input XML getInsert_NG_DCC_FTS_DOC "+sInputXML);
+    					sOutputXML = executeAPI(sInputXML);
+    					WriteLog("APInsert Output for transaction update table getInsert_NG_DCC_FTS_DOC: " + sOutputXML);
+    					xmlobj = new XMLParser(sOutputXML);
+    					checkCallsMainCode(xmlobj);
+    					WriteLog("Insert in the table - NG_DCC_FTS_DOC  END.");			
+    				}
+    				
         			decisionInHistory = "No bank statement analysis statement Received";
         			remark="FTS Details Updated";
         		}
 
         		if ("BS_NO_ACTION".equalsIgnoreCase(sSubProcess))
         		{
-    				trTableColumn=extColNames+"FTS_Ack_flg,Decision,IsFTSDocProvided";
-        			trTableValue=extColValues+"'D','Approve','N'";
+        			
+        			if("N".equalsIgnoreCase(FTS_FLAG)) {
+        				trTableColumn=extColNames+"FTS_Ack_flg,Decision_FTS,IsFTSDocProvided"; // Staus condition added HRITIK 30.01.24 PDSC - 1436
+            			trTableValue=extColValues+"'D','Approve','N'";
+        			}else {
+        				trTableColumn=extColNames+"FTS_Ack_flg,Decision_FTS,IsFTSDocProvided,Decision";  // Decision_FTS added HRITIK 12/11/23
+            			trTableValue=extColValues+"'D','Approve','N','Approve'";
+        			}
+        			
         			decisionInHistory = "Bank statement no action statement Received";
         			remark="FTS Details Updated";
         		}
@@ -374,10 +439,8 @@ public class WIUpdateService extends CreateWorkitem
         		//vinayak prime 4 changes starts
         		if ("Update_Card_Serno".equalsIgnoreCase(sSubProcess))
         		{        			
-        			
-        				String Card_Serno_flag=hm.get("Card_Serno");
-       			
-    				
+        		    String Card_Serno_flag=hm.get("Card_Serno");
+        		    
         			trTableColumn=extColNames;
         			trTableValue=extColValues;
         			decisionInHistory = "Card_Serno Received";
@@ -398,7 +461,7 @@ public class WIUpdateService extends CreateWorkitem
         			decisionInHistory = "Cooling period " + Decision;
         			remark="END_COOLING";
         		}
-/*        		//Hritik - 26/06/2023 
+/*        		//Hritik - 26/06/2023 repeated code
         		if("UPDATE_CIF_CARD_DETAILS".equalsIgnoreCase(sSubProcess))
         		{
         			String Decision="Success";
@@ -474,7 +537,7 @@ public class WIUpdateService extends CreateWorkitem
         		if("UPDATE_CIF_CARD_DETAILS".equalsIgnoreCase(sSubProcess)){
         			
         			String Decision="Success";
-        			sInputXML=getAPSelectWithColumnNamesXML("SELECT Wi_name,OutputAlternateCard from NG_DCC_EXTTABLE WHERE wi_name='"+hm.get("WINUMBER")+"'");
+        			sInputXML=getAPSelectWithColumnNamesXML("SELECT Wi_name,OutputAlternateCard from NG_DCC_EXTTABLE with(nolock) WHERE wi_name='"+hm.get("WINUMBER")+"'");
         			WriteLog("APSelectWithColumnNames Input: "+sInputXML);
         			sOutputXML=executeAPI(sInputXML);
         			WriteLog("APSelectWithColumnNames Output: "+sOutputXML);
@@ -485,7 +548,6 @@ public class WIUpdateService extends CreateWorkitem
         			String OutputAlternateCard=getTagValues(sOutputXML, "OutputAlternateCard");
         			WriteLog("Wi_name "+Wi_name);
         			WriteLog("card_change "+OutputAlternateCard);
-        			
         			if("Y".equalsIgnoreCase(OutputAlternateCard)){
         				checkConditionMandatoryForDCC_UPDATE_CIF_CARD_DETAILS(); // hritik 08112023 -  CM of tags for Alternate card.
         			}
@@ -494,26 +556,36 @@ public class WIUpdateService extends CreateWorkitem
     				trTableValue=extColValues+"'"+Decision+"'";
     				decisionInHistory = "CIF CARD DETAILS " + Decision;
     				remark="UPDATE CIF CARD DETAILS";
+
         		}
         		
-        		// CARD_DETAILS_NO_ACTN - 28.9.23
-        		
-        		if("CARD_DETAILS_NO_ACTN".equalsIgnoreCase(sSubProcess)){
+        		// CARD_DETAILS_NO_ACTN - 28.9.23 HRITIK
+           		if("CARD_DETAILS_NO_ACTN".equalsIgnoreCase(sSubProcess)){
         			
         			String Decision="Reject";
         			trTableColumn=extColNames+"Decision";
         			trTableValue=extColValues+"'"+Decision+"'";
-        			decisionInHistory = "No response from Customer " + Decision;
-        			remark="No response from Customer";
+        			decisionInHistory = "Response "+ hm.get("Card_Change_No_Action") + " Workitem "+Decision;
+        			remark="Response "+ hm.get("Card_Change_No_Action");
         		}
         		
+           		// Hritik 30.01.24 -  PDSC 1436
+           		if("N".equalsIgnoreCase(FTS_FLAG) && ("STATEMENT_ANALYZED".equalsIgnoreCase(sSubProcess) || "NO_BANK_STATEMENT_ANALYSIS".equalsIgnoreCase(sSubProcess) || "BS_NO_ACTION".equalsIgnoreCase(sSubProcess) )) {	
+           			insertIntoExtTableDCC();
+					insertIntoHistoryDCC(remark, decisionInHistory);
+					
+           		}else if(!"N".equalsIgnoreCase(FTS_FLAG) && ("STATEMENT_ANALYZED".equalsIgnoreCase(sSubProcess) || "NO_BANK_STATEMENT_ANALYSIS".equalsIgnoreCase(sSubProcess) || "BS_NO_ACTION".equalsIgnoreCase(sSubProcess) )){
+           			insertIntoExtTableDCC();
+           			insertIntoHistoryDCC(remark, decisionInHistory);
+           			getWorkItemID();
+					doneworkitemDCC();
+           		}
+           		
         		//2803 End
         		//2803 --Kamran Updated Salary Bank for EXT Tabel update	
-				if ("FIRCO_DOC_RECEIVED".equalsIgnoreCase(sSubProcess) || "FIRCO_NO_ACTION".equalsIgnoreCase(sSubProcess) || "STATEMENT_ANALYZED".equalsIgnoreCase(sSubProcess)
-				|| "NO_BANK_STATEMENT_ANALYSIS".equalsIgnoreCase(sSubProcess) || "BS_NO_ACTION".equalsIgnoreCase(sSubProcess) || "END_COOLING".equalsIgnoreCase(sSubProcess)
+				if ("FIRCO_DOC_RECEIVED".equalsIgnoreCase(sSubProcess) || "FIRCO_NO_ACTION".equalsIgnoreCase(sSubProcess) || "END_COOLING".equalsIgnoreCase(sSubProcess)
 				|| "SALARY_DOC_RECEIVED".equalsIgnoreCase(sSubProcess) || "SALARY_DOC_NO_ACTION".equalsIgnoreCase(sSubProcess) || "UPDATE_CIF_CARD_DETAILS".equalsIgnoreCase(sSubProcess)
-				|| "CARD_DETAILS_NO_ACTN".equalsIgnoreCase(sSubProcess)) 
-				{
+				|| "CARD_DETAILS_NO_ACTN".equalsIgnoreCase(sSubProcess)) {
 					insertIntoExtTableDCC();
 					insertIntoHistoryDCC(remark, decisionInHistory);
 					getWorkItemID();
@@ -550,7 +622,7 @@ public class WIUpdateService extends CreateWorkitem
 					WriteLog("Insert Net Salary in the table - NG_DCC_GR_NetSalaryDetails  END.");
 				}
         		WriteLog("Digital CC : doneworkitem");
-        	}
+				}
         	
         	
         	// returning success response
@@ -1428,8 +1500,8 @@ public class WIUpdateService extends CreateWorkitem
 		WriteLog("is_cbs_req "+is_cbs_req);
 		String is_ntb=is_ntb();
 		WriteLog("is_ntb "+is_ntb);
-		
-		if((is_prime_req.equalsIgnoreCase("Y")|| is_prime_req.equalsIgnoreCase("Yes")) && is_ntb.equalsIgnoreCase("Y"))
+		//Vinayak changes done to remove NTB from condition 
+		if((is_prime_req.equalsIgnoreCase("Y")|| is_prime_req.equalsIgnoreCase("Yes")))
 		{
 			if(!hm.containsKey("ECRN") ||  "".equals(hm.get("ECRN")))
 			{
@@ -1537,8 +1609,8 @@ public class WIUpdateService extends CreateWorkitem
 			WriteLog("is_cbs_req "+is_cbs_req);
 			String is_ntb=is_ntb();
 			WriteLog("is_ntb "+is_ntb);
-			
-			if((is_prime_req.equalsIgnoreCase("Y")|| is_prime_req.equalsIgnoreCase("Yes"))&& is_ntb.equalsIgnoreCase("Y"))
+					//Vinayak changes done to remove NTB from condition 
+			if((is_prime_req.equalsIgnoreCase("Y")|| is_prime_req.equalsIgnoreCase("Yes")))
 			{
 				if(!hm.containsKey("ECRN") ||  "".equals(hm.get("ECRN")))
 				{
@@ -1877,6 +1949,34 @@ public class WIUpdateService extends CreateWorkitem
 			WriteLog("updateInDataInExtTableDAO: Additional_document_received: "+hm.get("IBAN"));
 			WriteLog("updateInDataInExtTableDAO: Additional_document_received : trTableValue: "+trTableValue);
 		}
+		//vinayak added jira 4087
+		
+		if(hm.containsKey("Payroll_account"))
+		{
+			trTableColumn=trTableColumn+",Payroll_account";
+			trTableValue=trTableValue+",'"+hm.get("Payroll_account")+"'";
+			WriteLog("updateInDataInExtTableDAO: Additional_document_received: "+hm.get("Payroll_account"));
+			WriteLog("updateInDataInExtTableDAO: Additional_document_received : trTableValue: "+trTableValue);
+		}
+		
+		if(hm.containsKey("Scheme_Code"))
+		{
+			trTableColumn=trTableColumn+",Scheme_Code";
+			trTableValue=trTableValue+",'"+hm.get("Scheme_Code")+"'";
+			WriteLog("updateInDataInExtTableDAO: Additional_document_received: "+hm.get("Scheme_Code"));
+			WriteLog("updateInDataInExtTableDAO: Additional_document_received : trTableValue: "+trTableValue);
+		}
+		
+		if(hm.containsKey("customer_subsegment"))
+		{
+			trTableColumn=trTableColumn+",Customer_Subsegment";
+			trTableValue=trTableValue+",'"+hm.get("customer_subsegment")+"'";
+			WriteLog("updateInDataInExtTableDAO: Additional_document_received: "+hm.get("customer_subsegment"));
+			WriteLog("updateInDataInExtTableDAO: Additional_document_received : trTableValue: "+trTableValue);
+		}
+		//vinayak chnages end
+		
+		
 		/*
 		if(hm.containsKey("ECRN"))
 		{
@@ -2593,6 +2693,21 @@ public class WIUpdateService extends CreateWorkitem
 		WriteLog(" is_ntb: "+is_ntb);
 		return is_ntb;
 	}
+		
+	public String FTS_FLAG()throws WICreateException,Exception {
+		WriteLog("FTS_FLAG:");
+		String sQuery="Select FTS_FLAG from NG_DCC_EXTTABLE  with (nolock)  where Wi_Name='"+hm.get("WINUMBER")+"'";
+		sInputXML=getAPSelectWithColumnNamesXML(sQuery);
+		WriteLog("FTS_FLAG Input: "+sInputXML);
+		sOutputXML=executeAPI(sInputXML);
+		WriteLog("FTS_Ack_flg Output: "+sOutputXML);
+		xmlobj=new XMLParser(sOutputXML);
+		WriteLog("FTS_FLAG Status::"+xmlobj);
+		checkCallsMainCode(xmlobj);
+		String Status = getTagValues(sOutputXML, "FTS_FLAG");
+		WriteLog(" FTS_FLAG Status: "+Status);
+		return Status;
+	}
 	
 	
 	private String getDBInsertExternal() {
@@ -2675,6 +2790,16 @@ public class WIUpdateService extends CreateWorkitem
 	{
 		return "<?xml version=\"1.0\"?>" + "<APInsert_Input>"
 				+ "<Option>APInsert</Option>" + "<TableName>NG_DCC_GR_NetSalaryDetails"
+				+ "</TableName>" + "<ColName>" + NetSal_Col + "</ColName>"
+				+ "<Values>" + NetSal_val + "</Values>" + "<EngineName>"
+				+ sCabinetName + "</EngineName>" + "<SessionId>" + sSessionID
+				+ "</SessionId>" + "</APInsert_Input>";
+	}
+	
+	private String getInsert_NG_DCC_FTS_DOC(String NetSal_Col, String NetSal_val)
+	{
+		return "<?xml version=\"1.0\"?>" + "<APInsert_Input>"
+				+ "<Option>APInsert</Option>" + "<TableName>NG_DCC_FTS_DOC"
 				+ "</TableName>" + "<ColName>" + NetSal_Col + "</ColName>"
 				+ "<Values>" + NetSal_val + "</Values>" + "<EngineName>"
 				+ sCabinetName + "</EngineName>" + "<SessionId>" + sSessionID
@@ -3289,7 +3414,8 @@ public class WIUpdateService extends CreateWorkitem
 	}
 	
 	private void checkAttributeTable_DCC(String attributeName, String attributeValue) throws WICreateException, Exception
-	{		WriteLog("inside checkAttributeTable_DCC");
+	{
+		WriteLog("inside checkAttributeTable_DCC");
 		String getExtTransQry="";
 		String IsIncludedInUpdate = "Y";
 		if(sProcessName.equalsIgnoreCase("Digital_CC")) // for iBPS Processes
@@ -3456,7 +3582,18 @@ public class WIUpdateService extends CreateWorkitem
 	
 	private void getWorkItemID() throws WICreateException, Exception {
 		try {
-			String getWorkitemIDQry = "select workitemid  from QUEUEVIEW with (nolock) where PROCESSINSTANCEID='" + WINumber + "' and ActivityName='" + PossibleQueues + "'";
+			String getWorkitemIDQry = "";
+			
+			// Added HRITIK 30.01.24 PDSC - 1436
+			String FTS_FLAG="";
+			FTS_FLAG=FTS_FLAG(); 
+			WriteLog("FTS_FLAG - "+FTS_FLAG);
+			if(!"N".equalsIgnoreCase(FTS_FLAG) && ("STATEMENT_ANALYZED".equalsIgnoreCase(sSubProcess) || "NO_BANK_STATEMENT_ANALYSIS".equalsIgnoreCase(sSubProcess) || "BS_NO_ACTION".equalsIgnoreCase(sSubProcess) )) {	
+				getWorkitemIDQry = "select workitemid  from QUEUEVIEW with (nolock) where PROCESSINSTANCEID='" + WINumber + "' and ActivityName='Sys_FTS_WI_Update'";
+			}
+			else {
+				getWorkitemIDQry = "select workitemid  from QUEUEVIEW with (nolock) where PROCESSINSTANCEID='" + WINumber + "' and ActivityName='" + PossibleQueues + "'";
+			}
 			sInputXML = getAPSelectWithColumnNamesXML(getWorkitemIDQry);
 			WriteLog("Input XML: " + sInputXML);
 			sOutputXML = executeAPI(sInputXML);

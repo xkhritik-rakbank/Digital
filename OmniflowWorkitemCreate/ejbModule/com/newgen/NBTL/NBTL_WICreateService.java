@@ -61,8 +61,8 @@ public class NBTL_WICreateService extends CreateWorkitem {
 	final private String WSR_DOCTYPEDETAILS="USR_0_WSR_DOCTYPEDETAILS";
 	
 	
-	// for DBO
-	final private String DBO_WIHISTORY = "USR_0_NBTL_WIHISTORY";
+	// for NBTL
+	final private String NBTL_WIHISTORY = "USR_0_NBTL_WIHISTORY";
 	final private String txnTableName="RB_NBTL_TXNTABLE";
 	final private String q_queueID = "";
 
@@ -136,13 +136,13 @@ public class NBTL_WICreateService extends CreateWorkitem {
     LinkedHashMap<String, HashMap<String, String>> hmMain = new LinkedHashMap();	
     HashMap<String, String> hm1 = new HashMap<String, String>(); 
     
-    static HashMap<String, String> hmExtMandDBO = new HashMap();
-    static HashMap<String, String> hmRptProcessIdDBO = new HashMap();
-    static HashMap<String, String> hmRptTransTableDBO = new HashMap();
-    static LinkedHashMap<String, HashMap<String, String>> hmRptAttrAndColDBO = new LinkedHashMap();
-    static LinkedHashMap<String, HashMap<String, String>> hmRptAttrAndMandDBO = new LinkedHashMap();
-    static LinkedHashMap<String, HashMap<String, String>> hmRptAttrAndFormatDBO = new LinkedHashMap();
-    static LinkedHashMap<String, HashMap<String, String>> hmRptAttrAndTypeDBO = new LinkedHashMap();
+    static HashMap<String, String> hmExtMandNBTL = new HashMap();
+    static HashMap<String, String> hmRptProcessIdNBTL = new HashMap();
+    static HashMap<String, String> hmRptTransTableNBTL = new HashMap();
+    static LinkedHashMap<String, HashMap<String, String>> hmRptAttrAndColNBTL = new LinkedHashMap();
+    static LinkedHashMap<String, HashMap<String, String>> hmRptAttrAndMandNBTL = new LinkedHashMap();
+    static LinkedHashMap<String, HashMap<String, String>> hmRptAttrAndFormatNBTL = new LinkedHashMap();
+    static LinkedHashMap<String, HashMap<String, String>> hmRptAttrAndTypeNBTL = new LinkedHashMap();
     
     String InputMessage1 = "";
     //private static NGEjbClient ngEjbClient;
@@ -185,7 +185,7 @@ public class NBTL_WICreateService extends CreateWorkitem {
 				//Checking existing session
 				checkExistingSession();
             	runWICall();//WFUploadWorkItemCall executed in this method
-            	insertIntoHistoryDBO();
+            	insertIntoHistory();
 			}
 			catch(WICreateException e)
 			{
@@ -229,11 +229,11 @@ public class NBTL_WICreateService extends CreateWorkitem {
 				}
 				hm.clear();
 				hmMain.clear();
-				//hmRptAttrAndColDBO.clear();
-				//hmRptAttrAndMandDBO.clear();
-				//hmExtMandDBO.clear();
-				hmRptProcessIdDBO.clear();
-				hmRptTransTableDBO.clear();
+				//hmRptAttrAndColNBTL.clear();
+				//hmRptAttrAndMandNBTL.clear();
+				//hmExtMandNBTL.clear();
+				hmRptProcessIdNBTL.clear();
+				hmRptTransTableNBTL.clear();
 			}
 			return response;
 		
@@ -339,7 +339,7 @@ public class NBTL_WICreateService extends CreateWorkitem {
 		response.setEE_EAI_HEADER(headerObjResponse);
 	}
 	
-	private void insertIntoHistoryDBO() throws WICreateException, Exception {
+	private void insertIntoHistory() throws WICreateException, Exception {
 
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
@@ -350,7 +350,7 @@ public class NBTL_WICreateService extends CreateWorkitem {
 		WriteLog("trTableColumn dor NBTL" + trTableColumn);
 		trTableValue = "'"+ wiName + "','Initiation','Submit','" + sDate + "','Workitem created through webservice','" + sUsername + "','" + sDate + "'";
 		WriteLog("trTableValue for NBTL" + trTableValue);
-		sInputXML = getAPInsertInputXML(DBO_WIHISTORY,trTableColumn,trTableValue);
+		sInputXML = getAPInsertInputXML(NBTL_WIHISTORY,trTableColumn,trTableValue);
 		WriteLog("APInsert Input History: " + sInputXML);
 		sOutputXML = executeAPI(sInputXML);
 		WriteLog("APInsert Output History: " + sOutputXML);
@@ -1064,18 +1064,18 @@ public class NBTL_WICreateService extends CreateWorkitem {
 		getQueueDefID();
 		
 		//Check if all Mandatory attributes present in USR_0_WSR_ATTRDETAILS have come
-		checkMandatoryAttributeDBO();
+		checkMandatoryAttributeNBTL();
 		Date d= new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		sDate = dateFormat.format(d);
 		checkExtTableAttrIBPS(hm);
 		getTableName();
 	}
-	private void checkMandatoryAttributeDBO() throws WICreateException, Exception
+	private void checkMandatoryAttributeNBTL() throws WICreateException, Exception
 	{
-		WriteLog("inside checkMandatoryAttributeDBO");
+		WriteLog("inside checkMandatoryAttributeNBTL");
 		String attributeList [];
-		if(hmExtMandDBO.size() == 0)
+		if(hmExtMandNBTL.size() == 0)
 		{
 			sInputXML=getAPSelectWithColumnNamesXML("select ATTRIBUTENAME from "+WSR_ATTRDETAILS+" with(nolock) where PROCESSID='"+processID+"' and ISMANDATORY='Y' and ISACTIVE='Y'");
 			WriteLog("Input XML: "+sInputXML);
@@ -1088,14 +1088,14 @@ public class NBTL_WICreateService extends CreateWorkitem {
 			{
 				for(int i=0;i<attributeList.length;i++)
 				{
-					hmExtMandDBO.put(attributeList[i], "");
+					hmExtMandNBTL.put(attributeList[i], "");
 				}
 			}	
 		}
 		else 
 		{
 			String AttrTagName = "";
-			for (String name: hmExtMandDBO.keySet()){
+			for (String name: hmExtMandNBTL.keySet()){
 				if(AttrTagName.equalsIgnoreCase(""))
 					AttrTagName = name.toString();
 				else 
@@ -1129,6 +1129,159 @@ public class NBTL_WICreateService extends CreateWorkitem {
 			    if(flag.equalsIgnoreCase("N"))
 					throw new WICreateException("1020",pCodes.getString("1020")+": "+attributeList[i]);
 			}
+			
+			//check for conditional mandatory tags if invalid value is being passed
+			
+			if (hm.containsKey("CorporateCIF")) {
+				if(hm.get("CorporateCIF").trim().length()!=7)
+					throw new WICreateException("12001",pCodes.getString("12001")+" : CorporateCIF");
+			}
+			
+			if (hm.containsKey("RequestType")) {
+				if(!"STP".equalsIgnoreCase(hm.get("RequestType").trim()) && !"Non STP".equalsIgnoreCase(hm.get("RequestType").trim()))
+	            {
+	                  throw new WICreateException("13003",pCodes.getString("13003")+" : RequestType");
+	            }
+			}
+			if (hm.containsKey("LicenseType")) {
+	            if(!"Active".equalsIgnoreCase(hm.get("LicenseType").trim()))
+	            {
+	                  throw new WICreateException("13004",pCodes.getString("13004")+" : LicenseType");
+	            }
+			}
+		
+			if (hm.containsKey("IsCompanyNameChanged")) {
+	            if(!"Y".equalsIgnoreCase(hm.get("IsCompanyNameChanged").trim()) && !"Yes".equalsIgnoreCase(hm.get("IsCompanyNameChanged").trim()) 
+	            		&& !"N".equalsIgnoreCase(hm.get("IsCompanyNameChanged").trim()) && !"No".equalsIgnoreCase(hm.get("IsCompanyNameChanged").trim()))
+	            {
+	                  throw new WICreateException("13001",pCodes.getString("13001")+" : IsCompanyNameChanged");
+	            }
+	            
+	            if("Y".equalsIgnoreCase(hm.get("IsCompanyNameChanged").trim()) || "Yes".equalsIgnoreCase(hm.get("IsCompanyNameChanged").trim())) 
+				{
+					if (hm.containsKey("ToBeCompanyName"))
+					{
+						if("".equalsIgnoreCase(hm.get("ToBeCompanyName").trim()))
+							throw new WICreateException("1026",pCodes.getString("1026")+" : ToBeCompanyName");	
+					}
+					else
+						throw new WICreateException("1026",pCodes.getString("1026")+" : ToBeCompanyName");
+					
+					if (hm.containsKey("ExistingCompanyName"))
+					{
+						if("".equalsIgnoreCase(hm.get("ExistingCompanyName").trim()))
+							throw new WICreateException("1026",pCodes.getString("1026")+" : ExistingCompanyName");	
+					}
+					else
+						throw new WICreateException("1026",pCodes.getString("1026")+" : ExistingCompanyName");
+					
+					if (hm.containsKey("CompanyTimeStamp"))
+					{
+						if("".equalsIgnoreCase(hm.get("CompanyTimeStamp").trim()))
+							throw new WICreateException("1026",pCodes.getString("1026")+" : CompanyTimeStamp");	
+					}
+					else
+						throw new WICreateException("1026",pCodes.getString("1026")+" : CompanyTimeStamp");
+	            }
+			}
+			
+			if (hm.containsKey("IsTLNoChanged")) {
+	           if(!"Y".equalsIgnoreCase(hm.get("IsTLNoChanged").trim()) && !"Yes".equalsIgnoreCase(hm.get("IsTLNoChanged").trim()) 
+		           		&& !"N".equalsIgnoreCase(hm.get("IsTLNoChanged").trim()) && !"No".equalsIgnoreCase(hm.get("IsTLNoChanged").trim()))
+	           {
+	                 throw new WICreateException("13001",pCodes.getString("13001")+" : IsTLNoChanged");
+	           }
+	           
+	           if("Y".equalsIgnoreCase(hm.get("IsTLNoChanged").trim()) || "Yes".equalsIgnoreCase(hm.get("IsTLNoChanged").trim())) 
+	           {
+					if (hm.containsKey("ToBeTLNo"))
+					{
+						if("".equalsIgnoreCase(hm.get("ToBeTLNo").trim()))
+							throw new WICreateException("1026",pCodes.getString("1026")+" : ToBeTLNo");	
+					}
+					else
+						throw new WICreateException("1026",pCodes.getString("1026")+" : ToBeTLNo");
+					
+					if (hm.containsKey("TLNoTimeStamp"))
+					{
+						if("".equalsIgnoreCase(hm.get("TLNoTimeStamp").trim()))
+							throw new WICreateException("1026",pCodes.getString("1026")+" : TLNoTimeStamp");	
+					}
+					else
+						throw new WICreateException("1026",pCodes.getString("1026")+" : TLNoTimeStamp");
+				}
+	        }
+			
+			if (hm.containsKey("IsExpiryDateChanged")) {
+				if(!"Y".equalsIgnoreCase(hm.get("IsExpiryDateChanged").trim()) && !"Yes".equalsIgnoreCase(hm.get("IsExpiryDateChanged").trim()) 
+	            		&& !"N".equalsIgnoreCase(hm.get("IsExpiryDateChanged").trim()) && !"No".equalsIgnoreCase(hm.get("IsExpiryDateChanged").trim()))
+				{
+	                  throw new WICreateException("13001",pCodes.getString("13001")+" : IsExpiryDateChanged");
+	            }
+				
+				if("Y".equalsIgnoreCase(hm.get("IsExpiryDateChanged").trim()) || "Yes".equalsIgnoreCase(hm.get("IsExpiryDateChanged").trim())) 
+	            {
+					if (hm.containsKey("ToBeExpiryDate"))
+					{
+						if("".equalsIgnoreCase(hm.get("ToBeExpiryDate").trim()))
+							throw new WICreateException("1026",pCodes.getString("1026")+" : ToBeExpiryDate");	
+					}
+					else
+						throw new WICreateException("1026",pCodes.getString("1026")+" : ToBeExpiryDate");
+					
+					if (hm.containsKey("TLExpiryDateTimeStamp"))
+					{
+						if("".equalsIgnoreCase(hm.get("TLExpiryDateTimeStamp").trim()))
+							throw new WICreateException("1026",pCodes.getString("1026")+" : TLExpiryDateTimeStamp");	
+					}
+					else
+						throw new WICreateException("1026",pCodes.getString("1026")+" : TLExpiryDateTimeStamp");
+				}
+			}
+			
+			if (hm.containsKey("IsLegalStatusChanged")) {
+	            if(!"Y".equalsIgnoreCase(hm.get("IsLegalStatusChanged").trim()) && !"Yes".equalsIgnoreCase(hm.get("IsLegalStatusChanged").trim()) 
+		            		&& !"N".equalsIgnoreCase(hm.get("IsLegalStatusChanged").trim()) && !"No".equalsIgnoreCase(hm.get("IsLegalStatusChanged").trim()))
+				{
+	                  throw new WICreateException("13001",pCodes.getString("13001")+" : IsLegalStatusChanged");
+	            }
+	            
+	            //&& (!hm.containsKey("ExisitingCompanyLegalStatus") || !hm.containsKey("ToBeCompanyLegalStatus") || !hm.containsKey("CompanyLegalStatusTimeStamp")))
+	            if("Y".equalsIgnoreCase(hm.get("IsLegalStatusChanged").trim()) || "Yes".equalsIgnoreCase(hm.get("IsLegalStatusChanged").trim())) 
+	            {
+					if (hm.containsKey("ToBeCompanyLegalStatus"))
+					{
+						if("".equalsIgnoreCase(hm.get("ToBeCompanyLegalStatus").trim()))
+							throw new WICreateException("1026",pCodes.getString("1026")+" : ToBeCompanyLegalStatus");	
+					}
+					else
+						throw new WICreateException("1026",pCodes.getString("1026")+" : ToBeCompanyLegalStatus");
+					
+					if (hm.containsKey("ExisitingCompanyLegalStatus"))
+					{
+						if("".equalsIgnoreCase(hm.get("ExisitingCompanyLegalStatus").trim()))
+							throw new WICreateException("1026",pCodes.getString("1026")+" : ExisitingCompanyLegalStatus");	
+					}
+					else
+						throw new WICreateException("1026",pCodes.getString("1026")+" : ExisitingCompanyLegalStatus");
+					
+					if (hm.containsKey("CompanyLegalStatusTimeStamp"))
+					{
+						if("".equalsIgnoreCase(hm.get("CompanyLegalStatusTimeStamp").trim()))
+							throw new WICreateException("1026",pCodes.getString("1026")+" : CompanyLegalStatusTimeStamp");	
+					}
+					else
+						throw new WICreateException("1026",pCodes.getString("1026")+" : CompanyLegalStatusTimeStamp");
+				}
+			}
+			if (hm.containsKey("IsActivityChanged")) {
+	            if(!"Y".equalsIgnoreCase(hm.get("IsActivityChanged").trim()) && !"Yes".equalsIgnoreCase(hm.get("IsActivityChanged").trim()) 
+		            		&& !"N".equalsIgnoreCase(hm.get("IsActivityChanged").trim()) && !"No".equalsIgnoreCase(hm.get("IsActivityChanged").trim()))
+	            {
+	                  throw new WICreateException("13001",pCodes.getString("13001")+" : IsActivityChanged");
+	            }
+			}
+			
 		}
 		else
 		{
@@ -1166,7 +1319,7 @@ public class NBTL_WICreateService extends CreateWorkitem {
 			        		}
 			        		if(hm1.size() != 0)
 			        		{
-			        			String RepetitiveProcessID = hmRptProcessIdDBO.get(attributeList[i]);
+			        			String RepetitiveProcessID = hmRptProcessIdNBTL.get(attributeList[i]);
 			        			checkMandatoryRepetitiveAttribute(RepetitiveProcessID,"Y",hm1);
 				        		hmMain.put(attributeList[i]+"-"+Integer.toString(j), hm1);
 				        	}
@@ -1212,8 +1365,8 @@ public class NBTL_WICreateService extends CreateWorkitem {
 			    if(flag.equalsIgnoreCase("N"))
 					throw new WICreateException("1020",pCodes.getString("1020")+": "+RepetitiveList[i]);
 			
-			    hmRptProcessIdDBO.put(RepetitiveList[i], RepProcessId[i]);
-			    hmRptTransTableDBO.put(RepProcessId[i], RepTransTable[i]);
+			    hmRptProcessIdNBTL.put(RepetitiveList[i], RepProcessId[i]);
+			    hmRptTransTableNBTL.put(RepProcessId[i], RepTransTable[i]);
 			}
 		}
 		return RepetitiveMainTags;
@@ -1229,7 +1382,7 @@ public class NBTL_WICreateService extends CreateWorkitem {
 		String AttrFormat = "";
 		String AttrType = "";
 		String isMandatory = "";
-		if(!hmRptAttrAndColDBO.containsKey(RepetitiveProcessId))
+		if(!hmRptAttrAndColNBTL.containsKey(RepetitiveProcessId))
 		{
 			String sInputXML=getAPSelectWithColumnNamesXML("select ATTRIBUTENAME,TRANSACTIONTABLECOLNAME,isnull(nullif(ATTRIBUTE_FORMAT,''),'#') as ATTRIBUTE_FORMAT, isnull(nullif(ATTRIBUTE_TYPE,''),'#') as ATTRIBUTE_TYPE,ISMANDATORY from USR_0_WSR_ATTRDETAILS_REPETITIVE with(nolock) where PROCESSID='"+RepetitiveProcessId+"' and ISACTIVE='Y' order by AttributeName");
 			WriteLog("Input XML: "+sInputXML);
@@ -1246,7 +1399,7 @@ public class NBTL_WICreateService extends CreateWorkitem {
 		else
 		{
 			HashMap<String, String> hmAttr = new HashMap();
-			hmAttr = hmRptAttrAndColDBO.get(RepetitiveProcessId);
+			hmAttr = hmRptAttrAndColNBTL.get(RepetitiveProcessId);
 			for (String name: hmAttr.keySet()){
 				if(AttrTagName.equalsIgnoreCase(""))
 					AttrTagName = name.toString();
@@ -1260,7 +1413,7 @@ public class NBTL_WICreateService extends CreateWorkitem {
 			}
 			
 			HashMap<String, String> hmMand = new HashMap();
-			hmMand = hmRptAttrAndMandDBO.get(RepetitiveProcessId);
+			hmMand = hmRptAttrAndMandNBTL.get(RepetitiveProcessId);
 			for (String name1: hmMand.keySet()){
 				if(isMandatory.equalsIgnoreCase(""))
 					isMandatory = hmMand.get(name1).toString(); 
@@ -1269,7 +1422,7 @@ public class NBTL_WICreateService extends CreateWorkitem {
 			}
 			
 			HashMap<String, String> hmFormat = new HashMap();
-			hmFormat = hmRptAttrAndFormatDBO.get(RepetitiveProcessId);
+			hmFormat = hmRptAttrAndFormatNBTL.get(RepetitiveProcessId);
 			for (String name1: hmFormat.keySet()){
 				if(AttrFormat.equalsIgnoreCase(""))
 					AttrFormat = hmFormat.get(name1).toString(); 
@@ -1278,7 +1431,7 @@ public class NBTL_WICreateService extends CreateWorkitem {
 			}
 			
 			HashMap<String, String> hmType = new HashMap();
-			hmType = hmRptAttrAndTypeDBO.get(RepetitiveProcessId);
+			hmType = hmRptAttrAndTypeNBTL.get(RepetitiveProcessId);
 			for (String name1: hmType.keySet()){
 				if(AttrType.equalsIgnoreCase(""))
 					AttrType = hmType.get(name1).toString(); 
@@ -1337,13 +1490,93 @@ public class NBTL_WICreateService extends CreateWorkitem {
 				    //**************************************************
 						WriteLog("Check333 - "+AttrTagsName[i]);	
 				}
+				// Added to check if invalid value is being passed 21112023
+				if (RepetitiveReqAttr.containsKey("IsShareholderNameChanged")) {
+		            if(!"Y".equalsIgnoreCase(RepetitiveReqAttr.get("IsShareholderNameChanged").trim()) && !"Yes".equalsIgnoreCase(RepetitiveReqAttr.get("IsShareholderNameChanged").trim()) 
+		            		&& !"N".equalsIgnoreCase(RepetitiveReqAttr.get("IsShareholderNameChanged").trim()) && !"No".equalsIgnoreCase(RepetitiveReqAttr.get("IsShareholderNameChanged").trim()))
+		            {
+		                  throw new WICreateException("13001",pCodes.getString("13001")+" : IsShareholderNameChanged");
+		            }
+		           
+		            if("Y".equalsIgnoreCase(RepetitiveReqAttr.get("IsShareholderNameChanged").trim()) || "Yes".equalsIgnoreCase(RepetitiveReqAttr.get("IsShareholderNameChanged").trim())) 
+					{
+						if (RepetitiveReqAttr.containsKey("ShareholderNo"))
+						{
+							if("".equalsIgnoreCase(RepetitiveReqAttr.get("ShareholderNo").trim()))
+								throw new WICreateException("1026",pCodes.getString("1026")+": ShareholderNo");	
+						}
+						else
+							throw new WICreateException("1026",pCodes.getString("1026")+": ShareholderNo");
+						
+						if (RepetitiveReqAttr.containsKey("ShareholderOption"))
+						{
+							if("".equalsIgnoreCase(RepetitiveReqAttr.get("ShareholderOption").trim()))
+								throw new WICreateException("1026",pCodes.getString("1026")+": ShareholderOption");	
+							
+							if(!"Added".equalsIgnoreCase(RepetitiveReqAttr.get("ShareholderOption").trim()) 
+									&& !"Existing".equalsIgnoreCase(RepetitiveReqAttr.get("ShareholderOption").trim()) 
+									&& !"Removed".equalsIgnoreCase(RepetitiveReqAttr.get("ShareholderOption").trim())) {
+				                  throw new WICreateException("13002",pCodes.getString("13002")+" : ShareholderOption");
+							 }
+						}
+						else
+							throw new WICreateException("1026",pCodes.getString("1026")+": ShareholderOption");
+						
+						if (RepetitiveReqAttr.containsKey("ToBeShareholderName"))
+						{
+							if("".equalsIgnoreCase(RepetitiveReqAttr.get("ToBeShareholderName").trim()))
+								throw new WICreateException("1026",pCodes.getString("1026")+": ToBeShareholderName");	
+						}
+						else
+							throw new WICreateException("1026",pCodes.getString("1026")+": ToBeShareholderName");
+						
+						if (RepetitiveReqAttr.containsKey("ShareholderNameTimeStamp"))
+						{
+							if("".equalsIgnoreCase(RepetitiveReqAttr.get("ShareholderNameTimeStamp").trim()))
+								throw new WICreateException("1026",pCodes.getString("1026")+": ShareholderNameTimeStamp");	
+						}
+						else
+							throw new WICreateException("1026",pCodes.getString("1026")+": ShareholderNameTimeStamp");
+		            }
+				}
+				
+				if (RepetitiveReqAttr.containsKey("IsNationalityChanged")) {
+					 if(!"Y".equalsIgnoreCase(RepetitiveReqAttr.get("IsNationalityChanged").trim()) && !"Yes".equalsIgnoreCase(RepetitiveReqAttr.get("IsNationalityChanged").trim()) 
+		            		&& !"N".equalsIgnoreCase(RepetitiveReqAttr.get("IsNationalityChanged").trim()) && !"No".equalsIgnoreCase(RepetitiveReqAttr.get("IsNationalityChanged").trim()))
+					 {
+		                  throw new WICreateException("13001",pCodes.getString("13001")+" : IsNationalityChanged");
+					 }
+				}
+				
+				if (RepetitiveReqAttr.containsKey("IsRoleChanged")) {
+					 if(!"Y".equalsIgnoreCase(RepetitiveReqAttr.get("IsRoleChanged").trim()) && !"Yes".equalsIgnoreCase(RepetitiveReqAttr.get("IsRoleChanged").trim()) 
+		            		&& !"N".equalsIgnoreCase(RepetitiveReqAttr.get("IsRoleChanged").trim()) && !"No".equalsIgnoreCase(RepetitiveReqAttr.get("IsRoleChanged").trim()))
+					 {
+		                  throw new WICreateException("13001",pCodes.getString("13001")+" : IsRoleChanged");
+					 }
+				}
+				
+				if (RepetitiveReqAttr.containsKey("IsShareChanged")) {
+					 if(!"Y".equalsIgnoreCase(RepetitiveReqAttr.get("IsShareChanged").trim()) && !"Yes".equalsIgnoreCase(RepetitiveReqAttr.get("IsShareChanged").trim()) 
+		            		&& !"N".equalsIgnoreCase(RepetitiveReqAttr.get("IsShareChanged").trim()) && !"No".equalsIgnoreCase(RepetitiveReqAttr.get("IsShareChanged").trim()))
+					 {
+		                  throw new WICreateException("13001",pCodes.getString("13001")+" : IsShareChanged");
+					 }
+				}
+								
+				if (RepetitiveReqAttr.containsKey("ShareholderType")) {
+					if(!"Individual".equalsIgnoreCase(RepetitiveReqAttr.get("ShareholderType").trim()) 
+							&& !"Non Individual".equalsIgnoreCase(RepetitiveReqAttr.get("ShareholderType").trim())) {
+		                  throw new WICreateException("13005",pCodes.getString("13005")+" : ShareholderType");
+					 }
+				}
 			}
 			else
 			{
 				throw new WICreateException("1021",pCodes.getString("1021")+" for process id: "+processID);
 			}
 			
-			if(!hmRptAttrAndColDBO.containsKey(RepetitiveProcessId))
+			if(!hmRptAttrAndColNBTL.containsKey(RepetitiveProcessId))
 			{
 				if(AttrTagsName.length>0)
 				{
@@ -1352,28 +1585,28 @@ public class NBTL_WICreateService extends CreateWorkitem {
 					{
 						hmtmp.put(AttrTagsName[i], TransColsName[i]);
 					}
-					hmRptAttrAndColDBO.put(RepetitiveProcessId, hmtmp);
+					hmRptAttrAndColNBTL.put(RepetitiveProcessId, hmtmp);
 					
 					HashMap<String, String> hmtmp1 = new HashMap();
 					for(int i=0;i<AttrTagsName.length;i++)
 					{
 						hmtmp1.put(AttrTagsName[i], MandateList[i]);
 					}
-					hmRptAttrAndMandDBO.put(RepetitiveProcessId, hmtmp1);
+					hmRptAttrAndMandNBTL.put(RepetitiveProcessId, hmtmp1);
 					
 					HashMap<String, String> hmtmp2 = new HashMap();
 					for(int i=0;i<AttrTagsName.length;i++)
 					{
 						hmtmp2.put(AttrTagsName[i], AttrFormatList[i]);
 					}
-					hmRptAttrAndFormatDBO.put(RepetitiveProcessId, hmtmp2);
+					hmRptAttrAndFormatNBTL.put(RepetitiveProcessId, hmtmp2);
 					
 					HashMap<String, String> hmtmp3 = new HashMap();
 					for(int i=0;i<AttrTagsName.length;i++)
 					{
 						hmtmp3.put(AttrTagsName[i], AttrTypeList[i]);
 					}
-					hmRptAttrAndTypeDBO.put(RepetitiveProcessId, hmtmp3);
+					hmRptAttrAndTypeNBTL.put(RepetitiveProcessId, hmtmp3);
 				}	
 			}
 		}
@@ -1389,8 +1622,8 @@ public class NBTL_WICreateService extends CreateWorkitem {
 	            String keyvalue = hmMain.get(name).toString();  
 	            //WriteLog("hmMain: "+key + " " + keyvalue);  
 	            String RepetitiveTags [] = key.split("-");
-	            String RepetitiveProcessID = hmRptProcessIdDBO.get(RepetitiveTags[0]);
-				String RepetitiveTagTableName=hmRptTransTableDBO.get(RepetitiveProcessID);
+	            String RepetitiveProcessID = hmRptProcessIdNBTL.get(RepetitiveTags[0]);
+				String RepetitiveTagTableName=hmRptTransTableNBTL.get(RepetitiveProcessID);
 				//WriteLog("RepetitiveProcessID:"+RepetitiveProcessID);
 				//WriteLog("RepetitiveTagTableName:"+RepetitiveTagTableName);
 				HashMap<String, String> hm1 = new HashMap(); 
@@ -1398,7 +1631,7 @@ public class NBTL_WICreateService extends CreateWorkitem {
 				//WriteLog(key+" hm1 size: "+hm1.size());
 				
 				HashMap<String, String> hmtmp = new HashMap();
-				hmtmp = hmRptAttrAndColDBO.get(RepetitiveProcessID);
+				hmtmp = hmRptAttrAndColNBTL.get(RepetitiveProcessID);
 				String AttrList = "";
 				String TransColList = "";
 				//WriteLog("hmRptAttrAndCol size:"+hmRptAttrAndCol.size());
@@ -1492,8 +1725,8 @@ public class NBTL_WICreateService extends CreateWorkitem {
 	            String keyvalue = hmMain.get(name).toString();  
 	            //WriteLog("hmMain: "+key + " " + keyvalue);  
 	            String RepetitiveTags [] = key.split("-");
-	            String RepetitiveProcessID = hmRptProcessIdDBO.get(RepetitiveTags[0]);
-				String RepetitiveTagTableName=hmRptTransTableDBO.get(RepetitiveProcessID);
+	            String RepetitiveProcessID = hmRptProcessIdNBTL.get(RepetitiveTags[0]);
+				String RepetitiveTagTableName=hmRptTransTableNBTL.get(RepetitiveProcessID);
 				if("".equalsIgnoreCase(RepetitiveTagsAttribute))
 				{
 					RepetitiveTagsAttribute="\n<Q_"+RepetitiveTagTableName+">";
@@ -1511,7 +1744,7 @@ public class NBTL_WICreateService extends CreateWorkitem {
 				//WriteLog(key+" hm1 size: "+hm1.size());
 				
 				HashMap<String, String> hmtmp = new HashMap();
-				hmtmp = hmRptAttrAndColDBO.get(RepetitiveProcessID);
+				hmtmp = hmRptAttrAndColNBTL.get(RepetitiveProcessID);
 				String AttrList = "";
 				String TransColList = "";
 				//WriteLog("hmRptAttrAndCol size:"+hmRptAttrAndCol.size());

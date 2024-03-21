@@ -197,6 +197,7 @@ public class DBO_WICreateService extends CreateWorkitem {
 	            	//Download Input Documents at Server and add them to SMS
 	            	downloadDocument();
             	}
+				//WriteLog("all attributeTag- "+attributeTag);
             	runWICall();//WFUploadWorkItemCall executed in this method
 				
 				if ("DBO".equalsIgnoreCase(sProcessName))
@@ -634,6 +635,8 @@ public class DBO_WICreateService extends CreateWorkitem {
                         value = value.replace("&lt;", "LLSSTNSPX");
                   if(value.contains("&gt;"))
                         value = value.replace("&gt;", "GGRTTNSPX");
+                  /*if(value.contains("&quote;"))
+                      	value = value.replace("&quote;", "DOBBULEQOTTS");*/
                   if(value.contains("&"))
                         value = value.replace("&", "&amp;");
                   
@@ -643,11 +646,15 @@ public class DBO_WICreateService extends CreateWorkitem {
                         value = value.replace("LLSSTNSPX", "&lt;");
                   if(value.contains("GGRTTNSPX"))
                         value = value.replace("GGRTTNSPX", "&gt;");
+                  /*if(value.contains("DOBBULEQOTTS"))
+                      	value = value.replace("DOBBULEQOTTS", "&quote;");*/
                   
                   if(value.contains("<"))
                         value = value.replace("<", "&lt;");
                   if(value.contains(">"))
                         value = value.replace(">", "&gt;");
+                  /*if(value.contains("\""))
+                      	value = value.replace("\"", "&quote;");*/
            }
            return value;
     }
@@ -908,7 +915,7 @@ public class DBO_WICreateService extends CreateWorkitem {
 					{
 						WriteLog("inside APLPHANUMERICWITHSPECIALCHAR-"+attributeValue);
 						//patternMatch="^[a-zA-Z0-9-#_!.@()+/%&\\s|~ ]*$";
-						patternMatch="^[a-zA-Z0-9-#_!.@()+/%&\\s|~\\[\\]$^*={};:\",<>?\\n\\r\\t\\\\ ]*$";
+						patternMatch="^[a-zA-Z0-9-#_!.'@()+/%&\\s|~\\[\\]$^*={};:\",<>?\\n\\r\\t\\\\ ]*$";
 						if(!Pattern.matches(patternMatch, attributeValue))
 						{
 							throw new WICreateException("1118",pCodes.getString("1118")+" :"+attributeName);
@@ -1759,6 +1766,16 @@ public class DBO_WICreateService extends CreateWorkitem {
 							}
 							if(!value.trim().equalsIgnoreCase("")) 
 							{
+								// changing debitcardrequired value as R if received as Y -- commented it as part of PDB-3432
+								/*if("DebitCardRequired".equalsIgnoreCase(TransColListArr[j]))
+								{
+									if("Y".equalsIgnoreCase(value.trim()) || "Yes".equalsIgnoreCase(value.trim()))
+									{
+										value = "R";
+									}
+								}*/	
+								//******************************
+								
 								RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<"+TransColListArr[j]+">"+value+"</"+TransColListArr[j]+">";
 								/*if("".equalsIgnoreCase(insertColumns))
 									insertColumns = TransColListArr[j];
@@ -1805,11 +1822,11 @@ public class DBO_WICreateService extends CreateWorkitem {
 				
 				if("DBO".equalsIgnoreCase(sProcessName))
 				{
-					if("STP".equalsIgnoreCase(hm.get("TypeOfRequest")) && "DBOWBA_RelatedPartyDetails".equalsIgnoreCase(RepetitiveProcessID))
+					/*if("STP".equalsIgnoreCase(hm.get("TypeOfRequest")) && "DBOWBA_RelatedPartyDetails".equalsIgnoreCase(RepetitiveProcessID))
 					{
 						//RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<ChequeBookRecipient>Y</ChequeBookRecipient>";
 						RepetitiveTagsAttribute=RepetitiveTagsAttribute+"\n<PEP>NPEP</PEP>";
-					}
+					}*/
 					if( ("SP".equalsIgnoreCase(hm.get("Persona")) || "SPLL".equalsIgnoreCase(hm.get("Persona"))) 
 							&& "DBOWBA_RelatedPartyDetails".equalsIgnoreCase(RepetitiveProcessID))
 					{
