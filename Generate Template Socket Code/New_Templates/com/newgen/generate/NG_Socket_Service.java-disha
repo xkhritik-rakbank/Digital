@@ -1,0 +1,465 @@
+
+package com.newgen.generate;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
+import java.util.Properties;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.newgen.SMSHelper.SMSHelperMain;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.Set;
+
+public class NG_Socket_Service
+{
+ private static int port, maxConnections=10;
+ public static String RunMode, s, err;
+ private static Logger logger = Logger.getLogger("consoleLogger");
+
+ static
+    {
+		 PropertyConfigurator.configure(System.getProperty("user.dir")+File.separator+"Config"+File.separator+"log4j_WebServiceWrapper.properties");
+		 
+		// **********Read the attributes from NG_SERVICE.xml****************
+      
+	}
+	
+ public static void main(String[] args) 
+ {
+	port=4444;
+    int k=0;
+	ServerSocket listener=null;
+	Socket server=null;
+	//******* Establish connection *************
+    try
+	{
+      listener = new ServerSocket(port);      
+
+		while(true)
+		{
+			k=k+1;
+	        //doComms connection;
+			logger.info("Waiting for Request Count--" + k);
+			System.out.println("Waiting for Request Count--" + k);
+	        server = listener.accept();
+	        doComms conn_c= new doComms(server);
+	        Thread t = new Thread(conn_c);
+	        t.start();
+		}
+    } 
+	catch (IOException ioe) 
+	{
+	  logger.info("IOException on socket listen:11111111 " + ioe);
+      System.out.println("Catch  3 IOException on socket listen:11111111 " + ioe);
+      ioe.printStackTrace();	 
+    }
+	finally
+	{
+		try
+		{
+			if (listener!=null)
+			{
+				listener.close();
+				listener=null;
+				System.out.println("Closing Listener");
+				logger.info("Closing Listener");
+			}
+			if (server!=null)
+			{
+				server.close();
+				server=null;
+				System.out.println("Closing Server Socket");
+				logger.info("Closing Server Socket");
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			logger.info("Exception " + e.toString());
+			System.out.println("Exception " + e.toString());
+		}
+	}
+  }
+
+}
+
+//--------------------------------------------------------------------------------------------------
+//********** Communicating Class I/O *****************
+class doComms implements Runnable
+{
+    private Socket server;
+    private String input;
+	private static Logger loggern = Logger.getLogger("consoleLoggerdocomms");
+	Properties property = new Properties();
+	static String XMLFileName 	 = null;
+	static String XSDFileName 	 = null;
+	static String XSDFileNameArray[]	= null;
+	static int flag=0;
+	NG_Socket_Service N= new NG_Socket_Service();
+
+	static String docIndex= null;
+	 static String strPropertyPath;
+	 static Properties propConfig;
+	 static String cabinetName;
+	 static String jtsPort;
+	 static String jtsIP;
+	 static String volId;
+	 static String sessionID;
+	 static String userName;
+	 static String password;
+ 
+ static Map <String,String> configPropertyMap = new HashMap<String, String>();
+ 
+
+	//DESedeEncryption D= new DESedeEncryption();
+
+    doComms(Socket server) 
+	{
+      this.server=server;
+    }
+	
+	static
+    {	 		 
+		// **********Read the attributes from NG_SERVICE.xml****************
+		FileInputStream proConfigFileStream;
+       try 
+		{
+			strPropertyPath = "configFiles"+File.separator+"Config.properties";
+			proConfigFileStream = new FileInputStream(strPropertyPath);
+			propConfig = new Properties();
+			propConfig.load(proConfigFileStream);
+			
+			configPropertyMap.clear();
+			Set<Object> keys = propConfig.keySet();
+			
+			for(Object k:keys)
+			{
+				configPropertyMap.put((String)k,propConfig.getProperty((String)k));
+			}
+			
+			strPropertyPath=null;proConfigFileStream=null;propConfig=null;keys=null;
+			
+			jtsIP = configPropertyMap.get("JTSIP");
+			jtsPort = configPropertyMap.get("JTSPORT");
+			cabinetName = configPropertyMap.get("CabinetName");
+			userName = configPropertyMap.get("UserName");
+			password = configPropertyMap.get("Password");
+			
+//			userPwd=new User("main");
+//			sUserName=userPwd.getUsername();
+//			sPassword=userPwd.getPassword();
+			
+		} 
+		catch (FileNotFoundException e) 
+		{
+			System.out.println("Config.properties not found. "+e);
+		}
+		catch (IOException e) 
+		{
+			System.out.println("Config.properties Load/Read Failed with IOException. "+e);
+		}
+	}
+	public void writeData(DataOutputStream xmlDataOutputStream,String input) throws IOException
+    {
+       
+		 {
+             try {
+             	
+             	DataOutputStream dout=new DataOutputStream(server.getOutputStream());  
+         		
+             	String return_message = input;
+                 if (return_message != null && return_message.length() > 0) {
+                    // synchronized (socket) 
+                     {
+                     	dout.write(return_message.getBytes("UTF-16LE"));
+                     	dout.flush();
+                     }	
+                 };
+                 
+             } catch (IOException i) {
+                 i.printStackTrace();	
+             } catch (Exception ie) {
+                 ie.printStackTrace();
+             }	
+         }
+    }
+
+	public String readData(DataInputStream xmlDataInputStream) throws IOException
+    {
+       
+		String recvedMessage="";
+		try {
+            byte[] readBuffer = new byte[20000];
+            int num = xmlDataInputStream.read(readBuffer);
+            if (num > 0) {
+                byte[] arrayBytes = new byte[num];
+                System.arraycopy(readBuffer, 0, arrayBytes, 0, num);
+                recvedMessage = new String(arrayBytes, "UTF-16LE");
+
+                System.out.println("Received message :" + recvedMessage);
+            } 
+			else {
+
+                notify();
+            }
+            ;
+            
+        } catch (SocketException se) {
+            System.exit(0);
+
+        } catch (IOException i) {	
+            i.printStackTrace();
+        }
+		 return recvedMessage;
+    }
+ 
+	//******* Get a particaular tag value from input xml *****************
+	public String getvaluebytag(String xml,String TagName)
+	{
+		//System.out.println("xml= "+xml);
+		//System.out.println("TagName"+TagName);
+		String retval="";
+        try 
+		{
+			retval=(xml.substring(
+				xml.indexOf("<"+toUpperCase(TagName, 0, 0) +">") +TagName.length() + 2,
+				xml.indexOf("</"+toUpperCase(TagName, 0, 0) +">")));
+        } 
+		catch (StringIndexOutOfBoundsException ex) 
+		{
+			ex.printStackTrace();
+			System.out.println("Exception " + ex.toString());
+			N.err=ex.toString();
+            return "";
+        }
+		return retval;
+	}
+	
+	//********** Convert string to upper case ****************
+	public String toUpperCase(String str, int begin, int end) throws StringIndexOutOfBoundsException 
+	{
+        String returnStr = "";
+        try 
+		{
+            int count = str.length();
+            char strChar[] = new char[count];
+            str.getChars(0, count, strChar, 0);
+            while (count-- > 0) 
+			{
+                strChar[count] = Character.toUpperCase(strChar[count]);
+            }
+            returnStr = new String(strChar);
+        } 
+		catch (ArrayIndexOutOfBoundsException e) 
+		{
+			e.printStackTrace();
+			System.out.println("Exception " + e.toString());
+			N.err=e.toString();
+			loggern.info("Exception " + e.toString());
+		}
+        return returnStr;
+    }
+	
+	//*********** Read a file (batch mode) ***************	
+	public String readConfig(String fileName) 
+      	{
+                  String str = "";
+                  try 
+                  {
+					loggern.info("XML FileName and Path Read = "+fileName);
+                	System.out.println("XML FileName and Path Read = "+fileName);
+                    FileReader fr = new FileReader(fileName);
+                    BufferedReader br = new BufferedReader(fr);
+                    String Record = "";
+                    while ( (Record = br.readLine()) != null) 
+                    {
+                      str = str + Record;
+                    }
+                    System.out.println("String Converted from XML = "+str);
+					loggern.info("String Converted from XML = "+str);
+                    fr.close();
+                  }
+
+                  catch (FileNotFoundException e) 
+                  {
+                	  e.printStackTrace();
+                  	System.out.println("File not found exception in Read Function");
+					loggern.info("File not found exception in Read Function");
+					N.err=e.toString();
+                  }
+
+                  catch (Exception e) 
+                  {
+                	  e.printStackTrace();
+					loggern.info("Exception in Read Function = "+e);
+                    System.out.println("Exception in Read Function = "+e);
+					N.err=e.toString();
+                  }
+
+                 return str;
+
+      	}
+		
+	//*************** Validate XML **************	
+	public void XmlValidator()
+	{
+		
+							
+			//XML file name that needs to be validated.
+			XMLFileName = getvaluebytag(input,"xmlFilename");
+			
+			//Split the filename separated by comma in case multiple XSD filenames occured.
+			XSDFileNameArray = XSDFileName.split(",");
+			
+			System.out.println("XMLFileName  = "+ XMLFileName);
+			loggern.info("XMLFileName  = "+ XMLFileName);
+
+			for(int i= 0; i< XSDFileNameArray.length; i++)
+			{
+				System.out.println("XSDFileName"+i+" = "+XSDFileNameArray[i]);
+				loggern.info("XSDFileName"+i+" = "+XSDFileNameArray[i]);
+			}
+			
+	}
+				
+    //************** Process according to input options *************
+	public void run () 
+		{
+	
+	    input="";
+		System.out.println("==========Start Listening for local Port==========:"+server.getRemoteSocketAddress());
+		loggern.info("==========Start Listening for local Port==========:"+server.getRemoteSocketAddress());
+		
+		try 
+		{
+				// Get input from the client
+				DataInputStream in = new DataInputStream (new BufferedInputStream(server.getInputStream()));
+				DataOutputStream out = new DataOutputStream(new DataOutputStream (server.getOutputStream()));
+				input=readData(in);
+				
+				System.out.println(input);
+				
+				String[] tempArr=input.split("~");
+				String attList="";
+				String wi_name="";
+				String DocName="";
+				File dir= null;
+				String statusAttach="";
+				String sFilePath="";
+				
+				 for(int i=0;i<tempArr.length;i++)
+				 {
+					 if(i==0)
+					   attList=tempArr[i];
+					   if(i==1)
+					   wi_name=tempArr[i];
+				    if(i==2)
+					   DocName=tempArr[i];
+				 }
+				
+				String target_file_loc="C:\\GRTemplate"+File.separatorChar+wi_name;					
+				
+				File file = new File(target_file_loc);
+				if (!file.exists()) 
+				{
+					file.mkdir();
+				}
+				
+				String generateStatus=GeneratePdf.replaceGRTemplateArgs(file,attList);
+				System.out.println("generateStatus --- " + generateStatus);
+				
+				if (generateStatus.equalsIgnoreCase("PDF Generated"))
+				{
+					System.out.println("inside statusPdf --- " );
+					input = "Success";	
+					sFilePath	= "C:\\GRTemplate\\LE-0000000060152-RLOS\\Generate_Letter_1535380759964.pdf";				
+					SMSHelperMain sSMSHelperMain= new SMSHelperMain();
+					docIndex = sSMSHelperMain.UploadDocToSMS( sFilePath, "13.76.134.161", "3333", "rakcas_uat", "3");
+					System.out.println("docIndex---- "+ docIndex);
+					
+					
+					statusAttach = GeneratePdf.attachDocument(docIndex,wi_name,"rakcas_uat","13.76.134.161","2809","3","arun","test1234",DocName);				
+				}
+				else
+					input = "Failure";
+			// ************ Now write to the client ********************
+	
+					writeData(out,input);
+	
+					// server.close();
+			}
+		  
+		catch (IOException ioe) 
+		{
+			ioe.printStackTrace();
+			DataOutputStream out=null;
+			try
+			{
+				out = new DataOutputStream(new DataOutputStream (server.getOutputStream()));
+			}
+			catch(Exception e)
+			{
+				System.out.println("Data Output Stream initialization error");
+				N.err="Data Output Stream initialization error"+e.toString();
+				e.printStackTrace();
+			}
+	        System.out.println("Catch 19 IOException on socket listen: " + ioe);
+			N.err="IOException on socket listen: "+ioe;
+			//input="<Status>FAILURE</Status>"+ N.err;
+			input=N.err;
+			//System.out.println("		Returning " + input);
+			//loggern.info("		Returning " + input);
+			try
+			{
+				writeData(out,input);
+			}
+			catch(Exception e)
+			{
+				N.err="Write Data Exception "+e.toString();
+			}
+			loggern.info("IOException on socket listen: " + ioe);
+	        ioe.printStackTrace();		
+	    }
+		  
+		finally
+			{
+				try
+				{
+					if (server!=null)
+					{	
+						System.out.println("====Closing local Cient Socket======="+server.getRemoteSocketAddress());
+						loggern.info("====Closing local Cient Socket======="+server.getRemoteSocketAddress());
+						server.close();
+						server=null;
+						System.out.println("====Successfuly Closed=======");
+						loggern.info("====Successfuly Closed=======");
+					
+					}
+				 }
+				catch(Exception e)
+				{
+					System.out.println("Exception " + e.toString());
+					loggern.info("Exception " + e.toString());
+					N.err=e.toString();
+					//input="<Status>FAILURE</Status>"+ N.err;
+					input=N.err;
+				}
+			}
+	 }
+}
+
+//----------------------------------------------------------------------------------------------------------------
+

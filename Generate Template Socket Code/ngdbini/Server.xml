@@ -1,0 +1,29 @@
+<?xml version="1.0"?> 
+<ServerInfo>
+	<DataSourceUrl>jdbc/</DataSourceUrl>
+	<SocketTimeout>30</SocketTimeout>
+	<IniPath>ngdbini</IniPath>
+	<ServerPort>3333</ServerPort>
+	<AdminPort>9999</AdminPort>
+	<BatchSize>100</BatchSize>
+	<ThresholdTime>5000</ThresholdTime>
+	<Debug>
+		<ConnectionLog>False</ConnectionLog>
+		<TransactionLog>False</TransactionLog>
+		<ThresholdLog>True</ThresholdLog>
+		<XMLLog>False</XMLLog>
+		<LogSize>5242880</LogSize>
+		<LogCount>100</LogCount>
+		<ErrorLogSize>10</ErrorLogSize>
+	</Debug>
+	<CharacterSet>UTF-8</CharacterSet>
+	<BinaryClassName>com.newgen.omni.jts.txn.OracleWebSphereLargeObject</BinaryClassName>
+	<CabinetSpecificLogging>True</CabinetSpecificLogging>
+	<FlushConnection>False</FlushConnection>
+</ServerInfo>
+<CabinetList>
+	<ExpiryTime></ExpiryTime>
+<CabinetInfo>
+<CabinetName>cas</CabinetName><UserName>newgen</UserName><UserPassword>:Kh8:l-C;Yc-D;64/-C;g</UserPassword><MaxDBConnections>100</MaxDBConnections><MinDBConnections>10</MinDBConnections><Querytimeout>60</Querytimeout><CabinetType>7</CabinetType><DatabaseType>mssql</DatabaseType><IP>10.15.12.144</IP><Port></Port><Service></Service><Comment>mssql</Comment><DriverName>com.microsoft.sqlserver.jdbc.SQLServerDriver</DriverName><DriverURL>jdbc:sqlserver://10.15.12.144:5301</DriverURL><TNSNAME></TNSNAME>
+</CabinetInfo>
+</CabinetList>

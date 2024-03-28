@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<!-- ===================================================================== -->
+<!--  OmniDocs Server Configuration                                        -->
+<!-- ===================================================================== -->
+
+<!-- ===================================================================== -->
+<!-- ATTENTION:  DO NOT FORGET TO SET Each Hook's Name under a separate	   -->
+<!-- "HookName" tag														   -->
+<!-- ===================================================================== -->
+
+<HookInfo>
+        <!-- Hook Names that are intended to exist in the system. 
+        <HookName>Some Hook Name</HookName>
+        -->
+</HookInfo>

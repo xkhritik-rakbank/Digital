@@ -1,0 +1,689 @@
+<table style="border-color: #ff0000; width: 700px;" border="1" cellspacing="0" cellpadding="1">
+   <tbody>
+      <tr>
+         <td style="width: 1027px;" bgcolor="#ffffff" height="18">
+            <p><strong><img src="C:\RAK_Binaries\Generate Template Socket Code\Config\CAM_REPORT_SELF_EMPLOYED_html_83b2d76b.png" width="154" height="51" name="graphics1" border="0" hspace="12" /></strong></p>
+         </td>
+		 <td colspan="2"><strong>&amp;&lt;header&gt;&amp;</strong></td>
+		          <td style="width: 181px;" >
+            <p>Current date time:&amp;&lt;Current_date_time&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+         <td colspan = "4" style="width: 1027px;"  height="21">
+            <p><strong>SOURCING DETAILS</strong></p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 260px;"  height="18" id="appNo">
+            <p>Application no:</p>
+         </td>
+         <td style="width: 50px;" >
+            <p>&amp;&lt;CC_Wi_name&gt;&amp;</p>
+         </td>
+         <td style="width: 70px;" >
+            <p>Elite CRN:</p>
+         </td>
+         <td style="width: 647px;" >
+            <p>&amp;&lt;ECRN&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 260px;"  height="18">
+            <p>CRN:</p>
+         </td>
+         <td style="width: 50px;" >
+            <p>&amp;&lt;CRN&gt;&amp;</p>
+         </td>
+         <td style="width: 70px;" >
+            <p>CIF No:</p>
+         </td>
+         <td style="width: 647px;" >
+            <p>&amp;&lt;q_Customer.CIFNo&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 260px;"  height="18">
+            <p>Product:</p>
+         </td>
+         <td style="width: 50px;" >
+            <p>&amp;&lt;requested_product&gt;&amp;</p>
+         </td>
+         <td style="width: 70px;" >
+            <p>Sub Product</p>
+         </td>
+         <td style="width: 647px;" >
+            <p>&amp;&lt;subproduct&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 260px;"  height="18">
+            <p>Scheme Group:</p>
+         </td>
+         <td style="width: 50px;" >
+            <p>&amp;&lt;applicant_type&gt;&amp;</p>
+         </td>
+         <td style="width: 70px;" >
+            <p>Scheme</p>
+         </td>
+         <td style="width: 647px;" >
+            <p>&amp;&lt;Scheme&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 260px;"  height="18">
+            <p>Product Type</p>
+         </td>
+         <td style="width: 50px;" >
+            <p>&amp;&lt;Product_type&gt;&amp;</p>
+         </td>
+         <td style="width: 70px;" >
+            <p>Card Type</p>
+         </td>
+         <td style="width: 647px;" >
+            <p>&amp;&lt;Card_Product&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 260px;"  height="18">
+            <p>Sourcing Unit</p>
+         </td>
+         <td style="width: 50px;" >
+            <p>&amp;&lt;source_code&gt;&amp;</p>
+         </td>
+         <td style="width: 70px;" >
+            <p>RM</p>
+         </td>
+         <td style="width: 647px;" >
+            <p>&amp;&lt;RM_Name&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 260px;"  height="18">
+            <p>&amp;&lt;loan&gt;&amp; Amount / CC limit</p>
+         </td>
+         <td style="width: 50px;" >
+            <p>&amp;&lt;requested_limit&gt;&amp;</p>
+         </td>
+         <td style="width: 70px;" >
+            <p>Target segment code</p>
+         </td>
+         <td style="width: 647px;" >
+            <p>&amp;&lt;targetSegCode&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 260px;"  height="18">
+            <p>Date Encoded</p>
+         </td>
+         <td style="width: 50px;" >
+            <p>&amp;&lt;Entry_Date&gt;&amp;</p>
+         </td>
+         <td style="width: 70px;" >
+            <p>Marketing code</p>
+         </td>
+         <td style="width: 647px;" >
+            <p>&amp;&lt;marketcode&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 260px;"  height="18">
+            <p>Rakbank A/c no:</p>
+         </td>
+         <td style="width: 50px;" >
+            <p>&amp;&lt;Account_Number&gt;&amp;</p>
+         </td>
+         <td style="width: 70px;" >
+            <p>Application Type</p>
+         </td>
+         <td style="width: 647px;" >
+            <p>&amp;&lt;applicant_type&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 260px;"  height="2">&nbsp;</td>
+         <td style="width: 50px;" >&nbsp;</td>
+         <td style="width: 70px;" >&nbsp;</td>
+         <td style="width: 647px;" >&nbsp;</td>
+      </tr>
+      <tr>
+         <td colspan = "4" style="width: 1433px;"  height="18">
+            <p><strong>APPLICANT DETAILS</strong></p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 290px;"  height="18">
+            <p>Company Name</p>
+         </td>
+         <td style="width: 30px;" >
+            <p>&amp;&lt;company_name&gt;&amp;</p>
+         </td>
+         <td style="width: 707px;" >
+            <p>Account No</p>
+         </td>
+         <td style="width: 406px;" >
+            <p>&amp;&lt;Acc_No&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 290px;"  height="18">
+            <p>Trade License Valid</p>
+         </td>
+         <td style="width: 30px;" >
+            <p>&amp;&lt;TL_Expiry&gt;&amp;</p>
+         </td>
+         <td style="width: 707px;" >
+            <p>Nature of Business</p>
+         </td>
+         <td style="width: 406px;" >
+            <p>&amp;&lt;Indus_sector&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 290px;"  height="18">
+            <p>Bank Name</p>
+         </td>
+         <td style="width: 30px;" >
+            <p>&amp;&lt;Bank_Name&gt;&amp;</p>
+         </td>
+         <td style="width: 707px;" >
+            <p>Category</p>
+         </td>
+         <td style="width: 406px;" >
+            <p>&amp;&lt;Employer_Category&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 290px;"  height="18">
+            <p>CIF No</p>
+         </td>
+         <td style="width: 30px;" >
+            <p>&amp;&lt;comp_CIF&gt;&amp;</p>
+         </td>
+         <td style="width: 707px;" >
+            <p>LOB</p>
+         </td>
+         <td style="width: 406px;" >
+            <p>&amp;&lt;LOB&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 290px;"  height="18">
+            <p>Average CR Turn Over (3 months)</p>
+         </td>
+         <td style="width: 30px;" >
+            <p>&amp;&lt;AvgCR33&gt;&amp;</p>
+         </td>
+         <td style="width: 707px;" >
+            <p>Average CR Turn Over(6 months)</p>
+         </td>
+         <td style="width: 406px;" >
+            <p>&amp;&lt;AvgCR6&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 290px;"  height="18">
+            <p>Avg. Balance (3 months</p>
+         </td>
+         <td style="width: 30px;" >
+            <p>&amp;&lt;avgbal3&gt;&amp;</p>
+         </td>
+         <td style="width: 707px;" >
+            <p>Avg. Balance (6 months)</p>
+         </td>
+         <td style="width: 406px;" >
+            <p>&amp;&lt;avgbal6&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 290px;"  height="18">
+            <p>Bank Statement From</p>
+         </td>
+         <td style="width: 30px;" >
+            <p>&amp;&lt;Bank_From&gt;&amp;</p>
+         </td>
+         <td style="width: 707px;" >
+            <p>Bank Statement To</p>
+         </td>
+         <td style="width: 406px;" >
+            <p>&amp;&lt;Bank_To&gt;&amp;</p>
+         </td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+         <td colspan="4" rowspan="5">
+            <p><strong>AUTHORISED SIGNATORY DETAILS</strong></p>
+            <table id="auth_sig" dbTablename="authorize_details"  border="1" width="50%" cellspacing="0" cellpadding="1">
+               <tbody id="auth_sig_body">
+                  <tr id="auth_sig_headerRow">
+                     <td width="109" columnName="AuthSignName">
+                        <p>Authorized signatory Name</p>
+                     </td>
+                     <td width="110" columnName="AuthSignDOB">
+                        <p>Authorized signatory Age</p>
+                     </td>
+                     <td width="147" columnName="AuthSignPassportExpiry">
+                        <p>Authorized signatory Passport Valid</p>
+                     </td>
+                     <td width="82" columnName="AuthSignName">
+                        <p>Authorized signatory Effective LOB</p>
+                     </td>
+                     <td width="102" columnName="AuthSignCIFNo">
+                        <p>Authorized signatory CIF No</p>
+                     </td>
+                     <td width="110" columnName="AuthSignNationality">
+                        <p>Authorized signatory nationality</p>
+                     </td>
+                     <td width="111" columnName="AuthSignVisaExpiry">
+                        <p>Authorized signatory visa expiry date</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </td>
+      </tr>
+      <tr></tr>
+	  <tr></tr>
+	  <tr></tr>
+      <tr></tr>
+      <tr>
+         <td style="width: 270px;"  height="18">&nbsp;</td>
+         <td style="width: 70px;" >&nbsp;</td>
+         <td style="width: 60px;" >&nbsp;</td>
+         <td style="width: 1033px;" >&nbsp;</td>
+      </tr>
+      <tr>
+         <td style="width: 270px;"  height="2">&nbsp;</td>
+         <td style="width: 70px;" >&nbsp;</td>
+         <td style="width: 60px;" >&nbsp;</td>
+         <td style="width: 828px;" >&nbsp;</td>
+      </tr>
+      <tr>
+         <td colspan="4">
+            <p><strong>AECB SUMMARY</strong></p>
+            <table id="aecb_summary" dbTablename="aecb_details" border="1" width="100%" cellspacing="0" cellpadding="1">
+               <tbody id="aecb_summary_body">
+                  <tr id="aecb_summary_headerRow">
+                     <td width="194" columnName="AECBHistMonthCnt">
+                        <p>Number of Months AECB History</p>
+                     </td>
+                     <td width="195" columnName="WORSTL24">
+                        <p>Worst Status L24M</p>
+                     </td>
+                     <td width="195" columnName="WORSTD24">
+                        <p>Worst Payment Delay Last 24 Months</p>
+                     </td>
+                     <td width="195" columnName="TOTAL">
+                        <p>Total Outstanding</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </td>
+      </tr>
+      <tr></tr>
+      <tr></tr>
+      <tr>
+         <td colspan="4" style="width: 1433px;"  height="18">
+            <p><strong>OTHER CHECKS</strong></p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 300px;"  height="30">
+            <p>Field Visit Done (by External Agency) : </p>
+            <p>(Waived) / Not Required / Awaited</p>
+         </td>
+         <td style="width: 40px;" >&amp;&lt;FieldVisitedDone&gt;&amp;</td>
+         <td style="width: 697px;">
+            <p>FCU Feedback Obtained : </p>
+         </td>
+         <td style="width: 396px;" >&amp;&lt;check3&gt;&amp;</td>
+        </tr>
+      <tr>
+         <td style="width: 300px;"  height="30">
+            <p>Field Visit Done (In-House by FCU) : </p>
+         </td>
+         <td style="width: 40px;" >&amp;&lt;check&gt;&amp;</td>
+         <td style="width: 697px;" >
+            <p>Smart CPV Done : </p>
+         </td>
+         <td style="width: 396px;" >&amp;&lt;check1&gt;&amp;</td>
+      </tr>
+      <tr>
+         <td style="width: 300px;"  height="49">
+            <p>Compliance Feedback Obtained : </p>
+         </td>
+         <td style="width: 40px;" >&amp;&lt;Remarks_Compliance&gt;&amp;</td>
+         <td style="width: 697px;" >&nbsp;</td>
+         <td style="width: 396px;" >&nbsp;</td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+         <td colspan ="4" style="width: 1433px;"  height="18">
+            <p><strong>PRODUCT DETAILS</strong></p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 280px;" height="18">
+            <p>Card Product </p>
+         </td>
+         <td style="width: 70px;" >&amp;&lt;Card_prod&gt;&amp;</td>
+         <td style="width: 677px;" >
+            <p>Source Code </p>
+         </td>
+         <td style="width: 231px;" >&amp;&lt;source_code&gt;&amp;</td>
+      </tr>
+      <tr>
+         <td style="width: 280px;"height="18">
+            <p>Total Exposure </p>
+         </td>
+         <td style="width: 70px;" >&amp;&lt;Total_Exposure&gt;&amp;</td>
+         <td style="width: 677px;" >&nbsp;</td>
+         <td style="width: 231px;" >&nbsp;</td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+         <td colspan="4" rowspan="2">
+            <p><strong>EXPOSURE DETAILS</strong></p>
+            <table id="exposure_det" dbTablename="exposure_details" width="788" cellspacing="0" cellpadding="1">
+               <tbody id="exposure_det_body">
+                  <tr id="exposure_det_headerRow">
+                     <td width="117" height="7" columnName="ExposureScheme">
+                        <p>Scheme</p>
+                     </td>
+                     <td width="126" columnName="LiabilityType">
+                        <p>Liability Type</p>
+                     </td>
+                     <td width="161" columnName="ApplicationNo">
+                        <p>Application No./CRN</p>
+                     </td>
+                     <td width="105" columnName="TotalOutstanding">
+                        <p>Total Outstanding</p>
+                     </td>
+                     <td width="91" columnName="EMI">
+                        <p>EMI</p>
+                     </td>
+                     <td width="174" columnName="ConsiderForObligation">
+                        <p>Consider for Obligation</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </td>
+      </tr>
+      <tr></tr>
+      <tr></tr>      
+      <tr>
+         <td colspan="4" rowspan="2">
+            <p><strong>DEVIATION DETAILS</strong></p>
+            <table id="deviation_det" dbTablename="deviation_details" border="1" width="100%" cellspacing="0" cellpadding="1">
+               <tbody id="deviation_det_body">
+                  <tr id="deviation_det_headerRow">
+                     <td width="352" columnName="DeviationDescription">
+                        <p>Deviation Description</p>
+                     </td>
+                     <td width="427" columnName="DeviationCode">
+                        <p>Deviation Code</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+         <td colspan="4" style="width: 1433px;"  height="18">
+            <p><strong>STRENGTHS / OBSERVATIONS</strong></p>
+         </td>
+      </tr>
+      <tr>
+         <td colspan="4" style="width: 300px;"  height="30">
+            <p>Auto-populated from STRENGTHS section in Credit analyst + CAD</p>
+         </td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+         <td colspan="4" style="width: 1433px;"  height="18">
+            <p><strong>WEAKNESSES / DEVIATIONS</strong></p>
+         </td>
+      </tr>
+      <tr>
+         <td colspan="4" style="width: 300px;"  height="30">
+            <p>Auto-populated from STRENGTHS section in Credit analyst + CAD</p>
+         </td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+         <td colspan="4" style="width: 1433px;"  height="18">
+            <p><strong>DOC WAIVER / DEFERRAL SUMMARY</strong></p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 300px;"  height="18">
+            <p>Document Name&nbsp;</p>
+         </td>
+         <td style="width: 60px;" >&nbsp;&amp;&lt;Doc_name&gt;&amp;</td>
+         <td style="width: 677px;" >
+            <p>Status&nbsp;</p>
+         </td>
+         <td style="width: 396px;" >&nbsp;&amp;&lt;Doc_Sta&gt;&amp;</td>
+      </tr>
+      <tr>
+         <td style="width: 300px;"  height="18">
+            <p>Deferred until&nbsp;</p>
+         </td>
+         <td style="width: 60px;" >&nbsp;&amp;&lt;Deferred&gt;&amp;</td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+         <td colspan="4" style="width: 1433px;"  height="18">
+            <p><strong>REMARKS</strong></p>
+         </td>
+      </tr>
+      <tr>
+         <td style="width: 300px;"  height="18">
+            <p>Initiation Staff :&nbsp;</p>
+         </td>
+         <td style="width: 20px;" >&nbsp;&amp;&lt;Remarks_Init&gt;&amp;</td>
+         <td style="width: 717px;">
+            <p>Sales Co-Ordinator :&nbsp;</p>
+         </td>
+         <td style="width: 396px;" >&nbsp;&amp;&lt;Remarks_Sales&gt;&amp;</td>
+         
+      </tr>
+      <tr>
+         <td style="width: 300px;"  height="18">
+            <p>Operations:&nbsp;</p>
+         </td>
+         <td style="width: 20px;" >&nbsp;&amp;&lt;Remarks_Ops&gt;&amp;</td>
+         <td style="width: 717px;">
+            <p>Credit approver (CAD) :&nbsp;</p>
+            <p>Credit Analyst</p>
+         </td>
+         <td style="width: 396px;" >&nbsp;&amp;&lt;Remarks_CAD&gt;&amp;</td>
+         
+      </tr>
+      <tr>
+         <td style="width: 300px;"  height="18">
+            <p>CPV :&nbsp;</p>
+         </td>
+         <td style="width: 20px;" >&nbsp;&amp;&lt;Remarks_CPV&gt;&amp;</td>
+         <td style="width: 717px;">
+            <p>Smart CPV Feedback :&nbsp;</p>
+         </td>
+         <td style="width: 396px;" >&nbsp;&amp;&lt;Remarks_CPV_Feed&gt;&amp;</td>
+         
+      </tr>
+      <tr>
+         <td style="width: 300px;"  height="18">
+            <p>FCU Feedback :</p>
+         </td>
+         <td style="width: 20px;" >&amp;&lt;Remarks_Feedback&gt;&amp;</td>
+         <td style="width: 717px;" >
+            <p>Compliance Feedback :&nbsp;</p>
+         </td>
+         <td style="width: 396px;" >&nbsp;&amp;&lt;Remarks_Compliance&gt;&amp;</td>
+         
+      </tr>
+     <tr></tr>
+      <tr>
+         <td colspan="4" style="width: 1433px;"  height="18">
+            <p><strong>INSTRUCTIONS BY CREDIT UNDERWRITING</strong></p>
+         </td>
+         
+      </tr>
+      <tr>
+         <td style="width: 126px;" height="18">
+            <p>To CPV Unit</p>
+         </td>
+         <td style="width: 204px;" >
+            <p>&amp;&lt;desc&gt;&amp;</p>
+         </td>
+         <td style="width: 80px;" >
+            <p>To Credit Card Operations</p>
+         </td>
+         <td style="width: 1023px;" >
+            <p>&amp;&lt;desc1&gt;&amp;</p>
+         </td>
+         
+      </tr>
+      <tr>
+         <td style="width: 126px;" height="18">
+            <p>To CROPS / IOPS</p>
+         </td>
+         <td style="width: 204px;" >
+            <p>&amp;&lt;CROPS&gt;&amp;</p>
+         </td>
+         <td style="width: 30px;" ></td>
+         <td style="width: 30px;" ></td>
+      </tr>
+     <tr></tr>
+      <tr>
+         <td colspan="4" style="width: 1433px;"  height="18">
+            <p><strong>CREDIT ANALYST DECISION</strong></p>
+         </td>
+         
+      </tr>
+      <tr>
+         <td style="width: 260px;"  height="18">
+            <p>Decision :</p>
+         </td>
+         <td style="width: 80px;" >
+            <p>&amp;&lt;Decision&gt;&amp;</p>
+         </td>
+         <td style="width: 80px;" >
+            <p>Refer To :</p>
+         </td>
+         <td style="width: 1013px;" >
+            <p>&amp;&lt;ReferTo&gt;&amp;</p>
+         </td>
+         
+      </tr>
+      <tr>
+         <td style="width: 260px;"  height="18">
+            <p>Decision Reason Code :</p>
+         </td>
+         <td style="width: 80px;" >
+            <p>&amp;&lt;ReferReason&gt;&amp;</p>
+         </td>
+         <td style="width: 80px;" >
+            <p>Decision Remarks :</p>
+         </td>
+         <td style="width: 1013px;" >
+            <p>&amp;&lt;Dec_Remarks&gt;&amp;</p>
+         </td>
+         
+      </tr>
+     <tr></tr>
+      <tr>
+         <td colspan="4" style="width: 1433px;"  height="18">
+            <p><strong>APPROVAL AUTHORITY:</strong></p>
+         </td>
+         
+      </tr>
+      <tr>
+         <td style="width: 300px;"  height="46">
+            <p>Reviewed By &ndash;[Credit analyst name]&nbsp;</p>
+         </td>
+         <td style="width: 50px;" >&nbsp;&amp;&lt;Remarks_1&gt;&amp;</td>
+         <td style="width: 687px;" >
+            <p>Supported / Approved / Declined -</p>
+            <p>Sr. Credit Analyst</p>
+         </td>
+         <td style="width: 191px;" >&nbsp;&amp;&lt;Remarks_6&gt;&amp;&nbsp;</td>
+         
+      </tr>
+      <tr>
+         <td style="width: 300px;"  height="30">
+            <p>Supported / Approved / Declined -&nbsp;</p>
+            <p>Sr. Credit Analyst</p>
+         </td>
+         <td style="width: 50px;" >&nbsp;&amp;&lt;Remarks_2&gt;&amp;</td>
+         <td style="width: 687px;" >
+            <p>Supported / Approved / Declined -&nbsp;</p>
+            <p>Asst Manager</p>
+         </td>
+         <td style="width: 191px;" >&nbsp;&amp;&lt;Remarks_7&gt;&amp;</td>
+         
+      </tr>
+      <tr>
+         <td style="width: 300px;"  height="30">
+            <p>Supported / Approved / Declined -&nbsp;</p>
+            <p>Credit Manager</p>
+         </td>
+         <td style="width: 50px;" >&nbsp;&amp;&lt;Remarks_3&gt;&amp;</td>
+         <td style="width: 687px;" >
+            <p>Supported / Approved / Declined -</p>
+            <p>Sr. Manager</p>
+         </td>
+         <td style="width: 191px;" >&amp;&lt;Remarks_8&gt;&amp;</td>
+         
+      </tr>
+      <tr>
+         <td style="width: 300px;"  height="30">
+            <p>Supported / Approved / Declined -&nbsp;</p>
+            <p>HOU , PB Credit</p>
+         </td>
+         <td style="width: 50px;" >&nbsp;&amp;&lt;Remarks_4&gt;&amp;</td>
+         <td style="width: 687px;" >
+            <p>Supported / Approved / Declined -</p>
+            <p>Director, PB Credit</p>
+         </td>
+         <td style="width: 191px;" >&amp;&lt;Remarks_9&gt;&amp;</td>
+         
+      </tr>
+      <tr>
+         <td style="width: 300px;"  height="30">
+            <p>Supported / Approved / Declined -&nbsp;</p>
+            <p>CEO</p>
+         </td>
+         <td style="width: 50px;" >&nbsp;&amp;&lt;Remarks_5&gt;&amp;</td>
+         <td style="width: 687px;" >
+            <p>Supported / Approved / Declined -&nbsp;</p>
+            <p>CEO</p>
+         </td>
+         <td style="width: 191px;" >&nbsp;&amp;&lt;Remarks_10&gt;&amp;</td>
+         
+      </tr>
+      <tr>
+         <td style="width: 270px;" >
+            <p><br /><br /></p>
+         </td>
+      </tr>
+   </tbody>
+</table>

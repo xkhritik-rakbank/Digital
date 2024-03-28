@@ -1,0 +1,46 @@
+﻿<Components>
+    <Component>
+        <ComponentName>MasterDesktop</ComponentName>
+        <LaunchURL>/omnidocs/ExtendSession.jsp</LaunchURL>
+        <Display>true</Display> 
+    </Component>
+    <Component>
+        <ComponentName>PaperlessOffice</ComponentName>
+        <LaunchURL>/paperlessoffice/extendsession.jsp</LaunchURL>
+        <Display>false</Display> 
+    </Component>
+    <Component>
+        <ComponentName>KMS</ComponentName>
+        <LaunchURL>/KMS/login.jsp</LaunchURL>
+        <Display>false</Display> 
+    </Component>
+	 <Component>
+        <ComponentName>RMS</ComponentName>
+        <LaunchURL>/omnidocs/rms/login/main_frameset.jsp</LaunchURL>
+        <Display>false</Display> 
+   </Component>
+   
+     <Component Name="Federated">
+		<ComponentName>FederatedSearch</ComponentName>
+		<Display>false</Display> 
+		
+		<Module Type="Toolbar" Display="false">
+		<IconURL>/omnidocs/estyle/images/doccab/search11.JPG</IconURL>
+		<DisplayName>Federated search</DisplayName> 
+		<LaunchURL>/omnidocs/webaccess/configurations/LaunchFS.jsp</LaunchURL> 
+		</Module>
+		
+	</Component>
+	
+	<Component Name="eDiscovery">
+		<ComponentName>eDiscovery</ComponentName>
+		<Display>false</Display> 
+		
+		<Module Type="Toolbar" Display="false">
+		<IconURL>/omnidocs/estyle/images/doccab/search11.JPG</IconURL>
+		<DisplayName>eDiscovery</DisplayName> 
+		<LaunchURL>/omnidocs/webaccess/configurations/mastersearch.jsp</LaunchURL> 
+		</Module>
+		
+	</Component>
+</Components>

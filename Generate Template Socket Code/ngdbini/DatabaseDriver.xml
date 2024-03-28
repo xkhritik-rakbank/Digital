@@ -1,0 +1,21 @@
+<? xml version="1.0"?>
+<DefaultDriver>
+	<DriverInfo>
+		<ServerType>mssql</ServerType>
+		<DriverType>4</DriverType>				--Only type 3/4 supported
+		<DriverName>com.microsoft.sqlserver.jdbc.SQLServerDriver</DriverName>
+		<DriverURL>jdbc:sqlserver://servername:5301</DriverURL>
+	</DriverInfo>
+	<DriverInfo>
+		<ServerType>oracle</ServerType>
+		<DriverType>4</DriverType>				--Only type 3/4 supported
+		<DriverName>oracle.jdbc.OracleDriver</DriverName>		
+		<DriverURL>jdbc:oracle:thin:</DriverURL>			--Generic url	 
+	</DriverInfo>
+	<DriverInfo>
+		<ServerType>postgres</ServerType>
+		<DriverType>4</DriverType>				--Only type 3/4 supported
+		<DriverName>org.postgresql.Driver</DriverName>		
+		<DriverURL>jdbc:postgresql:</DriverURL>			--Generic url	 
+	</DriverInfo>
+</DefaultDriver>

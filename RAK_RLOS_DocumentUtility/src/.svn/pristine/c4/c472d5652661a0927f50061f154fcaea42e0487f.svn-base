@@ -1,0 +1,235 @@
+/*
+---------------------------------------------------------------------------------------------------------
+                  NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+
+Group                   : Application - Projects
+Project/Product			: CAS
+Application				: FALCON Document Attach Utility
+Module					: FALCON Document
+File Name				: FalconDocumentLog.java
+Author 					: Sajan
+Date (DD/MM/YYYY)		: 05/12/2019
+
+---------------------------------------------------------------------------------------------------------
+                 	CHANGE HISTORY
+---------------------------------------------------------------------------------------------------------
+
+Problem No/CR No        Change Date           Changed By             Change Description
+---------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
+*/
+
+
+package com.newgen.main;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+
+import org.apache.log4j.PropertyConfigurator;
+
+import com.newgen.DigitalAO.Document.DAODocument;
+import com.newgen.DigitalCC.ApplicationForm.DCCGenerateAppForm;
+import com.newgen.DigitalCC.Dispatch.DCCGenerateFile;
+import com.newgen.DigitalCC.Document.DCCDocument;
+import com.newgen.Falcon.ApplicationForm.GenerateAppForm;
+import com.newgen.Falcon.Dispatch.GenerateFile;
+import com.newgen.Falcon.Document.FalconDocument;
+import com.newgen.Falcon.ReadCourierFile.CourierFile;
+import com.newgen.common.CommonConnection;
+import com.newgen.encryption.DataEncryption;
+
+public class RAKBankUtility
+{
+	private static Map<String, String> mainPropMap= new HashMap<String, String>();
+	private static String loggerName = "MainLogger";
+	private static org.apache.log4j.Logger MainLogger = org.apache.log4j.Logger.getLogger(loggerName);
+
+	 static
+	 {
+			setLogger();
+	 }
+
+	public static void main(String[] args)
+	{
+		System.out.println("Starting utility...");
+		MainLogger.info("Starting Utility");
+		int mainPropFileReadCode = readMainPropFile();
+
+		if(mainPropFileReadCode!=0)
+		{
+			System.out.println("Error in Readin Main Property FIle");
+			MainLogger.error("Error in Readin Main Property FIle "+mainPropFileReadCode);
+			return;
+		}
+
+		try
+		{
+			int socketPort =  Integer.parseInt(mainPropMap.get("Utility_Port"));
+			if(socketPort==0)
+			{
+				System.out.println("Not able to Get Utility Port");
+				MainLogger.error("Not able to Get Utility Port "+socketPort);
+				return;
+			}
+			//ServerSocket serverSocket = new ServerSocket(socketPort);
+
+
+
+			CommonConnection.setUsername(mainPropMap.get("UserName"));
+			CommonConnection.setPassword(DataEncryption.decrypt(mainPropMap.get("Password")));
+			CommonConnection.setJTSIP(mainPropMap.get("JTSIP"));
+			CommonConnection.setJTSPort(mainPropMap.get("JTSPort"));
+			CommonConnection.setsSMSPort(mainPropMap.get("SMSPort"));
+			CommonConnection.setCabinetName(mainPropMap.get("CabinetName"));
+			
+			String sessionID = CommonConnection.getSessionID(MainLogger,true);
+
+			if(sessionID==null || sessionID.equalsIgnoreCase("") || sessionID.equalsIgnoreCase("null"))
+			{
+				MainLogger.info("Could Not Get Session ID "+sessionID);
+				return;
+			}
+			MainLogger.info("bandana testing config values "+mainPropMap.get("Application_Form"));
+			if(mainPropMap.get("Falcon_Document")!=null && mainPropMap.get("Falcon_Document").equalsIgnoreCase("Y"))
+			{
+				Thread FalconDocumentThread = new Thread(new FalconDocument());
+				FalconDocumentThread.start();
+				System.out.println("Falcon Document Utility Started");
+				MainLogger.info("Falcon Document Utility Started");
+			}
+			if(mainPropMap.get("Digital_AO_Document")!=null && mainPropMap.get("Digital_AO_Document").equalsIgnoreCase("Y"))
+			{
+				Thread DAODocumentThread = new Thread(new DAODocument());
+				DAODocumentThread.start();
+				System.out.println("Digital_AO Document Utility Started");
+				MainLogger.info("Digital_AO Document Utility Started");
+			}
+			if(mainPropMap.get("Digital_CC_Document")!=null && mainPropMap.get("Digital_CC_Document").equalsIgnoreCase("Y"))
+			{
+				Thread DCCDocumentThread = new Thread(new DCCDocument());
+				DCCDocumentThread.start();
+				System.out.println("Digital_CC Document Utility Started");
+				MainLogger.info("Digital_CC Document Utility Started");
+			}
+			if(mainPropMap.get("GenerateFile")!=null && mainPropMap.get("GenerateFile").equalsIgnoreCase("Y"))
+			{
+				Thread FalconGenerateFileThread = new Thread(new GenerateFile());
+				FalconGenerateFileThread.start();
+				System.out.println("Falcon Generate File Utility Started");
+				MainLogger.info("Falcon Generate File Utility Started");
+			}
+			if(mainPropMap.get("Digital_CC_GenerateFile")!=null && mainPropMap.get("Digital_CC_GenerateFile").equalsIgnoreCase("Y"))
+			{
+				Thread DCCGenerateFileThread = new Thread(new DCCGenerateFile());
+				DCCGenerateFileThread.start();
+				System.out.println("Falcon Generate File Utility Started");
+				MainLogger.info("Falcon Generate File Utility Started");
+			}
+			if(mainPropMap.get("Application_Form")!=null && mainPropMap.get("Application_Form").equalsIgnoreCase("Y"))
+			{
+				Thread FalconapplicationFileThread = new Thread(new GenerateAppForm());
+				FalconapplicationFileThread.start();
+				System.out.println("Falcon Application Form Started");
+				MainLogger.info("Falcon Application Form Started");
+			}
+			if(mainPropMap.get("Digital_CC_Application_Form")!=null && mainPropMap.get("Digital_CC_Application_Form").equalsIgnoreCase("Y"))
+			{
+				Thread DCCapplicationFileThread = new Thread(new DCCGenerateAppForm());
+				DCCapplicationFileThread.start();
+				System.out.println("Falcon Application Form Started");
+				MainLogger.info("Falcon Application Form Started");
+			}
+		}
+		catch (Exception e)
+		{
+			if(e.getMessage().toUpperCase().startsWith("Address already in use".toUpperCase()))
+			{
+				System.out.println("Utility Instance Already Running");
+				MainLogger.error("Utility Instance Already Running");
+			}
+			else
+			{
+				e.printStackTrace();
+				MainLogger.error("Exception Occurred in Main Thread: "+e);
+				final Writer result = new StringWriter();
+				final PrintWriter printWriter = new PrintWriter(result);
+				e.printStackTrace(printWriter);
+				MainLogger.error("Exception Occurred in Main Thread : "+result);
+			}
+			return;
+		}
+		finally
+		{
+			System.gc();
+		}
+	}
+
+	private static void setLogger()
+	{
+		try
+		{
+			Date date = new Date();
+			DateFormat logDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+			Properties p = new Properties();
+			p.load(new FileInputStream(System.getProperty("user.dir")+ File.separator + "log4jFiles"+ File.separator+ "Main_log4j.properties"));
+			String dynamicLog = null;
+			String orgFileName = null;
+			File d = null;
+			File fl = null;
+
+			dynamicLog = "Logs/Main_Logs/"+logDateFormat.format(date)+"/Main_Log.xml";
+			orgFileName = p.getProperty("log4j.appender."+loggerName+".File");
+			if(!(orgFileName==null || orgFileName.equalsIgnoreCase("")))
+			{
+				dynamicLog = orgFileName.substring(0,orgFileName.lastIndexOf("/")+1)+logDateFormat.format(date)+orgFileName.substring(orgFileName.lastIndexOf("/"));
+			}
+			d = new File(dynamicLog.substring(0,dynamicLog.lastIndexOf("/")));
+			d.mkdirs();
+			fl = new File(dynamicLog);
+			if(!fl.exists())
+				fl.createNewFile();
+			p.put("log4j.appender."+loggerName+".File", dynamicLog );
+
+			PropertyConfigurator.configure(p);
+			//System.out.println("Dynamic Logger Created");
+		}
+		catch(Exception e)
+		{
+			System.out.println("Exception in creating dynamic log :"+e);
+			e.printStackTrace();
+		}
+	}
+
+	private static int readMainPropFile()
+	{
+		Properties p = null;
+		try {
+
+			p = new Properties();
+			p.load(new FileInputStream(new File(System.getProperty("user.dir")+ File.separator + "ConfigFiles"+ File.separator+ "Main_Config.properties")));
+
+			Enumeration<?> names = p.propertyNames();
+
+			while (names.hasMoreElements())
+			{
+			    String name = (String) names.nextElement();
+			    mainPropMap.put(name, p.getProperty(name));
+			}
+
+		} catch (Exception e) {
+
+			return -1 ;
+		}
+		return 0;
+	}
+}

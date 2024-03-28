@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ClientInfo>
+	<ProviderUrl>corbaloc:iiop:</ProviderUrl>
+	<jndiServerName>127.0.0.1</jndiServerName>
+	<jndiServerPort>2809/NameServiceServerRoot</jndiServerPort>
+	<JndiContextFactory>com.sun.jndi.cosnaming.CNCtxFactory</JndiContextFactory>
+	<ClientLookUpName>com\.newgen\.omni\.jts\.txn\.NGOClientServiceHandlerHome</ClientLookUpName>
+	<AdminLookUpName>com\.newgen\.omni\.jts\.txn\.NGOAdminServiceHandlerHome</AdminLookUpName>  
+</ClientInfo>

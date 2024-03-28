@@ -1,0 +1,13 @@
+VolumeID=1
+QueueID=799
+SleepIntervalInMin=1
+AttributeNames=WINAME,ITEMTYPE,ITEMINDEX,PREV_WS,WorkItemName,PreviousStage,LAST_ATTACH_TRY_TIME
+ExtTableName=NG_DOB_EXTTABLE
+StartTime=00.00
+EndTime=23.59
+filePath=D:\\Arun PC\\eclipse workspace\\RAK_RLOS_DocumentUtility\\FalconDocumentAttach\\Input
+destFilePath=D:\\Arun PC\\eclipse workspace\\RAK_RLOS_DocumentUtility\\FalconDocumentAttach\\Success
+failDestFilePath=D:\\Arun PC\\eclipse workspace\\RAK_RLOS_DocumentUtility\\FalconDocumentAttach\\Error
+fileDownloadLoc=DownloadLoc
+MaxNoOfTries=3
+TimeIntervalBetweenTrialsInMin=15

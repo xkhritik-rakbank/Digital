@@ -1,0 +1,10 @@
+<!--Label Information for prouct Build-->
+<patch-label-properties>
+	<product_name>omnidocs</product_name>
+	<product_version>8.3 SP-2</product_version>
+	<date_of_build>08-03-2017</date_of_build>
+	<build_person>chetan_gupta@newgen.co.in</build_person>
+	<build_number>1</build_number>
+	<label>OD8.3SP2_08032017_RBL_004</label>
+		
+</patch-label-properties>

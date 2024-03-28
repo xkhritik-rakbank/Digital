@@ -1,0 +1,140 @@
+24-09-2022 07:39:14.432 GST	deepak	ngParam: <Attributes><Decision></Decision><overrideIncomeFromDectech>false</overrideIncomeFromDectech><CompanyStatusCC>RS</CompanyStatusCC><CompanyStatusPL>RS</CompanyStatusPL><EmployerCategoryPL>CB</EmployerCategoryPL><CC_ALOC_remarks>1) Original Salary Certifiacte is mandatory. &lt;NEXT LINE&gt; 2) Bank Statement as per ALOC &lt;NEXT LINE&gt; 3) Listing of new companies on ALOC through Relationship is not allowed.  &lt;NEXT LINE&gt; 4) Employees visa can be from Freezone. &lt;NEXT LINE&gt; 5) VISITING CARD SURROGATE Marked Opened. &lt;NEXT LINE&gt; 6) Company has been Restricted on 20.06.2017 and company category has been changed from "MID SIZED" to "RESTRICTED" basis  Negative FPU Feedback.</CC_ALOC_remarks><PL_ALOC_remarks>1) Loans can be sourced for Both UAE nationals and Expats. &lt;NEXT LINE&gt; 2) Company has been Restricted on 20.06.2017 and company category has been changed from "CAT B" to "NO CAT" basis Negative FPU Feedback</PL_ALOC_remarks></Attributes>
+24-09-2022 07:39:14.432 GST	deepak	eventType: S
+24-09-2022 07:39:14.433 GST	deepak	savetoServer: true
+24-09-2022 07:39:14.434 GST	deepak	modelModified: true
+24-09-2022 07:39:14.434 GST	deepak	ret: true
+24-09-2022 07:39:14.471 GST	deepak	wfInputXml: <?xml version="1.0"?><WMAssignWorkItemAttributes_Input><Option>WMAssignWorkItemAttributes</Option><EngineName>rakcas</EngineName><SessionId>235304458</SessionId><ProcessInstanceId>DCC-0000000955-process</ProcessInstanceId><WorkItemId>1</WorkItemId><ActivityId>10</ActivityId><ProcessDefId>43</ProcessDefId><LastModifiedTime></LastModifiedTime><ActivityType>10</ActivityType><WebServerAddress>https://10.15.12.163:9443</WebServerAddress><OAPWebServerAddress>https://10.15.12.163:9443</OAPWebServerAddress><UserDefVarFlag>Y</UserDefVarFlag><Attributes><Decision></Decision><overrideIncomeFromDectech>false</overrideIncomeFromDectech><CompanyStatusCC>RS</CompanyStatusCC><CompanyStatusPL>RS</CompanyStatusPL><EmployerCategoryPL>CB</EmployerCategoryPL><CC_ALOC_remarks>1) Original Salary Certifiacte is mandatory. &lt;NEXT LINE&gt; 2) Bank Statement as per ALOC &lt;NEXT LINE&gt; 3) Listing of new companies on ALOC through Relationship is not allowed.  &lt;NEXT LINE&gt; 4) Employees visa can be from Freezone. &lt;NEXT LINE&gt; 5) VISITING CARD SURROGATE Marked Opened. &lt;NEXT LINE&gt; 6) Company has been Restricted on 20.06.2017 and company category has been changed from "MID SIZED" to "RESTRICTED" basis  Negative FPU Feedback.</CC_ALOC_remarks><PL_ALOC_remarks>1) Loans can be sourced for Both UAE nationals and Expats. &lt;NEXT LINE&gt; 2) Company has been Restricted on 20.06.2017 and company category has been changed from "CAT B" to "NO CAT" basis Negative FPU Feedback</PL_ALOC_remarks></Attributes><IsDeleteInsertFlag>N</IsDeleteInsertFlag></WMAssignWorkItemAttributes_Input>
+24-09-2022 07:39:14.471 GST	deepak	OutputXml: <?xml version="1.0"?>
+<WFSetAttributes_Output>
+<Option>WFSetAttributes</Option>
+<Exception>
+<MainCode>0</MainCode>
+</Exception>
+</WFSetAttributes_Output>
+
+25-09-2022 02:32:58.664 GST	xgaurav	ngParam: <Attributes><Decision></Decision><CUSTOMERNAME>MARIA  GEORGE</CUSTOMERNAME><card_application_date>2022-09-20 00:00:00</card_application_date><Applied_card>TITANIUM_CARD</Applied_card><overrideIncomeFromDectech>false</overrideIncomeFromDectech></Attributes>
+25-09-2022 02:32:58.664 GST	xgaurav	eventType: S
+25-09-2022 02:32:58.664 GST	xgaurav	savetoServer: true
+25-09-2022 02:32:58.665 GST	xgaurav	modelModified: true
+25-09-2022 02:32:58.665 GST	xgaurav	ret: true
+25-09-2022 02:32:58.694 GST	xgaurav	wfInputXml: <?xml version="1.0"?><WMAssignWorkItemAttributes_Input><Option>WMAssignWorkItemAttributes</Option><EngineName>rakcas</EngineName><SessionId>-321065238</SessionId><ProcessInstanceId>DCC-0000000955-process</ProcessInstanceId><WorkItemId>1</WorkItemId><ActivityId>10</ActivityId><ProcessDefId>43</ProcessDefId><LastModifiedTime></LastModifiedTime><ActivityType>10</ActivityType><WebServerAddress>https://10.15.12.163:9443</WebServerAddress><OAPWebServerAddress>https://10.15.12.163:9443</OAPWebServerAddress><UserDefVarFlag>Y</UserDefVarFlag><Attributes><Decision></Decision><CUSTOMERNAME>MARIA  GEORGE</CUSTOMERNAME><card_application_date>2022-09-20 00:00:00</card_application_date><Applied_card>TITANIUM_CARD</Applied_card><overrideIncomeFromDectech>false</overrideIncomeFromDectech></Attributes><IsDeleteInsertFlag>N</IsDeleteInsertFlag></WMAssignWorkItemAttributes_Input>
+25-09-2022 02:32:58.694 GST	xgaurav	OutputXml: <?xml version="1.0"?>
+<WMAssignWorkItemAttributes_Output>
+<Option>WMAssignWorkItemAttributes</Option>
+<Status>15</Status><Error><Exception><MainCode>15</MainCode><SubErrorCode>801</SubErrorCode><TypeOfError>TEMPORARY</TypeOfError><Subject>The requested filter is invalid.</Subject><Description>String or binary data would be truncated.</Description></Exception></Error></WMAssignWorkItemAttributes_Output>
+
+************************************************************
+java.lang.Exception: 701
+Username: xgaurav
+Stack Trace:
+	com.newgen.wfdesktop.servlet.SaveFormHandler.handleServerSaveRequest(SaveFormHandler.java:626)
+	com.newgen.wfdesktop.servlet.SaveFormHandler.service(SaveFormHandler.java:185)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:668)
+	com.ibm.ws.webcontainer.servlet.ServletWrapper.service(ServletWrapper.java:1233)
+	com.ibm.ws.webcontainer.servlet.ServletWrapper.handleRequest(ServletWrapper.java:782)
+	com.ibm.ws.webcontainer.servlet.ServletWrapper.handleRequest(ServletWrapper.java:481)
+	com.ibm.ws.webcontainer.servlet.ServletWrapperImpl.handleRequest(ServletWrapperImpl.java:178)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.invokeTarget(WebAppFilterChain.java:136)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:97)
+	com.newgen.wfdesktop.filter.WDRequestLimiterFilter.doFilter(WDRequestLimiterFilter.java:136)
+	com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+	com.newgen.wfdesktop.filter.WDClickJackFilter.doFilter(WDClickJackFilter.java:224)
+	com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+	com.newgen.ibps.security.csrf.SECCSRFValidator.doFilter(SECCSRFValidator.java:126)
+	com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+	com.newgen.ibps.security.xss.SECRequestValidator.doFilter(SECRequestValidator.java:272)
+	com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+	com.newgen.wfdesktop.filter.InputUserSecurity.doFilter(InputUserSecurity.java:136)
+	com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+	com.newgen.wfdesktop.filter.HttpSessionWrapperFilter.doFilter(HttpSessionWrapperFilter.java:24)
+	com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+	com.ibm.ws.webcontainer.filter.WebAppFilterManager.doFilter(WebAppFilterManager.java:967)
+	com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters(WebAppFilterManager.java:1107)
+	com.ibm.ws.webcontainer.servlet.CacheServletWrapper.handleRequest(CacheServletWrapper.java:87)
+	com.ibm.ws.webcontainer.WebContainer.handleRequest(WebContainer.java:952)
+	com.ibm.ws.webcontainer.WSWebContainer.handleRequest(WSWebContainer.java:1817)
+	com.ibm.ws.webcontainer.channel.WCChannelLink.ready(WCChannelLink.java:213)
+	com.ibm.ws.http.channel.inbound.impl.HttpInboundLink.handleDiscrimination(HttpInboundLink.java:463)
+	com.ibm.ws.http.channel.inbound.impl.HttpInboundLink.handleNewRequest(HttpInboundLink.java:530)
+	com.ibm.ws.http.channel.inbound.impl.HttpInboundLink.processRequest(HttpInboundLink.java:316)
+	com.ibm.ws.http.channel.inbound.impl.HttpICLReadCallback.complete(HttpICLReadCallback.java:88)
+	com.ibm.ws.ssl.channel.impl.SSLReadServiceContext$SSLReadCompletedCallback.complete(SSLReadServiceContext.java:1833)
+	com.ibm.ws.tcp.channel.impl.AioReadCompletionListener.futureCompleted(AioReadCompletionListener.java:175)
+	com.ibm.io.async.AbstractAsyncFuture.invokeCallback(AbstractAsyncFuture.java:217)
+	com.ibm.io.async.AsyncChannelFuture.fireCompletionActions(AsyncChannelFuture.java:161)
+	com.ibm.io.async.AsyncFuture.completed(AsyncFuture.java:138)
+	com.ibm.io.async.ResultHandler.complete(ResultHandler.java:204)
+	com.ibm.io.async.ResultHandler.runEventProcessingLoop(ResultHandler.java:775)
+	com.ibm.io.async.ResultHandler$2.run(ResultHandler.java:905)
+	com.ibm.ws.util.ThreadPool$Worker.run(ThreadPool.java:1892)
+************************************************************
+25-09-2022 02:32:58.697 GST	xgaurav	responseJSON: {"ResponseCode":"500","ResponseMessage":"701"}
+25-09-2022 02:37:46.422 GST	xgaurav	ngParam: <Attributes><Decision></Decision><CUSTOMERNAME>MARIA  GEORGE</CUSTOMERNAME><card_application_date>2022-09-20 00:00:00</card_application_date><Applied_card>TITANIUM_CARD</Applied_card><overrideIncomeFromDectech>false</overrideIncomeFromDectech></Attributes>
+25-09-2022 02:37:46.422 GST	xgaurav	eventType: S
+25-09-2022 02:37:46.423 GST	xgaurav	savetoServer: true
+25-09-2022 02:37:46.423 GST	xgaurav	modelModified: true
+25-09-2022 02:37:46.423 GST	xgaurav	ret: true
+25-09-2022 02:37:46.442 GST	xgaurav	wfInputXml: <?xml version="1.0"?><WMAssignWorkItemAttributes_Input><Option>WMAssignWorkItemAttributes</Option><EngineName>rakcas</EngineName><SessionId>-1667070844</SessionId><ProcessInstanceId>DCC-0000000955-process</ProcessInstanceId><WorkItemId>1</WorkItemId><ActivityId>10</ActivityId><ProcessDefId>43</ProcessDefId><LastModifiedTime></LastModifiedTime><ActivityType>10</ActivityType><WebServerAddress>https://10.15.12.163:9443</WebServerAddress><OAPWebServerAddress>https://10.15.12.163:9443</OAPWebServerAddress><UserDefVarFlag>Y</UserDefVarFlag><Attributes><Decision></Decision><CUSTOMERNAME>MARIA  GEORGE</CUSTOMERNAME><card_application_date>2022-09-20 00:00:00</card_application_date><Applied_card>TITANIUM_CARD</Applied_card><overrideIncomeFromDectech>false</overrideIncomeFromDectech></Attributes><IsDeleteInsertFlag>N</IsDeleteInsertFlag></WMAssignWorkItemAttributes_Input>
+25-09-2022 02:37:46.442 GST	xgaurav	OutputXml: <?xml version="1.0"?>
+<WMAssignWorkItemAttributes_Output>
+<Option>WMAssignWorkItemAttributes</Option>
+<Status>15</Status><Error><Exception><MainCode>15</MainCode><SubErrorCode>801</SubErrorCode><TypeOfError>TEMPORARY</TypeOfError><Subject>The requested filter is invalid.</Subject><Description>String or binary data would be truncated.</Description></Exception></Error></WMAssignWorkItemAttributes_Output>
+
+************************************************************
+java.lang.Exception: 701
+Username: xgaurav
+Stack Trace:
+	com.newgen.wfdesktop.servlet.SaveFormHandler.handleServerSaveRequest(SaveFormHandler.java:626)
+	com.newgen.wfdesktop.servlet.SaveFormHandler.service(SaveFormHandler.java:185)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:668)
+	com.ibm.ws.webcontainer.servlet.ServletWrapper.service(ServletWrapper.java:1233)
+	com.ibm.ws.webcontainer.servlet.ServletWrapper.handleRequest(ServletWrapper.java:782)
+	com.ibm.ws.webcontainer.servlet.ServletWrapper.handleRequest(ServletWrapper.java:481)
+	com.ibm.ws.webcontainer.servlet.ServletWrapperImpl.handleRequest(ServletWrapperImpl.java:178)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.invokeTarget(WebAppFilterChain.java:136)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:97)
+	com.newgen.wfdesktop.filter.WDRequestLimiterFilter.doFilter(WDRequestLimiterFilter.java:136)
+	com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+	com.newgen.wfdesktop.filter.WDClickJackFilter.doFilter(WDClickJackFilter.java:224)
+	com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+	com.newgen.ibps.security.csrf.SECCSRFValidator.doFilter(SECCSRFValidator.java:126)
+	com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+	com.newgen.ibps.security.xss.SECRequestValidator.doFilter(SECRequestValidator.java:272)
+	com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+	com.newgen.wfdesktop.filter.InputUserSecurity.doFilter(InputUserSecurity.java:136)
+	com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+	com.newgen.wfdesktop.filter.HttpSessionWrapperFilter.doFilter(HttpSessionWrapperFilter.java:24)
+	com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:195)
+	com.ibm.ws.webcontainer.filter.WebAppFilterChain.doFilter(WebAppFilterChain.java:91)
+	com.ibm.ws.webcontainer.filter.WebAppFilterManager.doFilter(WebAppFilterManager.java:967)
+	com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters(WebAppFilterManager.java:1107)
+	com.ibm.ws.webcontainer.servlet.CacheServletWrapper.handleRequest(CacheServletWrapper.java:87)
+	com.ibm.ws.webcontainer.WebContainer.handleRequest(WebContainer.java:952)
+	com.ibm.ws.webcontainer.WSWebContainer.handleRequest(WSWebContainer.java:1817)
+	com.ibm.ws.webcontainer.channel.WCChannelLink.ready(WCChannelLink.java:213)
+	com.ibm.ws.http.channel.inbound.impl.HttpInboundLink.handleDiscrimination(HttpInboundLink.java:463)
+	com.ibm.ws.http.channel.inbound.impl.HttpInboundLink.handleNewRequest(HttpInboundLink.java:530)
+	com.ibm.ws.http.channel.inbound.impl.HttpInboundLink.processRequest(HttpInboundLink.java:316)
+	com.ibm.ws.http.channel.inbound.impl.HttpICLReadCallback.complete(HttpICLReadCallback.java:88)
+	com.ibm.ws.ssl.channel.impl.SSLReadServiceContext$SSLReadCompletedCallback.complete(SSLReadServiceContext.java:1833)
+	com.ibm.ws.tcp.channel.impl.AioReadCompletionListener.futureCompleted(AioReadCompletionListener.java:175)
+	com.ibm.io.async.AbstractAsyncFuture.invokeCallback(AbstractAsyncFuture.java:217)
+	com.ibm.io.async.AsyncChannelFuture.fireCompletionActions(AsyncChannelFuture.java:161)
+	com.ibm.io.async.AsyncFuture.completed(AsyncFuture.java:138)
+	com.ibm.io.async.ResultHandler.complete(ResultHandler.java:204)
+	com.ibm.io.async.ResultHandler.runEventProcessingLoop(ResultHandler.java:775)
+	com.ibm.io.async.ResultHandler$2.run(ResultHandler.java:905)
+	com.ibm.ws.util.ThreadPool$Worker.run(ThreadPool.java:1892)
+************************************************************
+25-09-2022 02:37:46.445 GST	xgaurav	responseJSON: {"ResponseCode":"500","ResponseMessage":"701"}

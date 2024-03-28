@@ -1,0 +1,69 @@
+29/Aug/2018 15:23:12 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : Media not found in SMS.
+29/Aug/2018 15:23:12 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : Media not found in SMS.
+29/Aug/2018 15:23:12 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : Media not found in SMS.
+29/Aug/2018 15:23:12 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : Media not found in SMS.
+29/Aug/2018 15:23:12 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : Media not found in SMS.
+29/Aug/2018 15:24:05 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : Media not found in SMS.
+29/Aug/2018 15:24:05 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : Media not found in SMS.
+29/Aug/2018 15:24:05 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : Media not found in SMS.
+29/Aug/2018 15:24:05 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : Media not found in SMS.
+29/Aug/2018 15:24:05 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : Media not found in SMS.
+10/Sep/2018 14:44:13 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : The specified Image File was not found.
+10/Sep/2018 14:44:13 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : The specified Image File was not found.
+10/Sep/2018 14:44:13 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : The specified Image File was not found.
+10/Sep/2018 14:44:13 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : The specified Image File was not found.
+10/Sep/2018 14:44:13 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : The specified Image File was not found.
+10/Sep/2018 14:55:27 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : The specified Image File was not found.
+10/Sep/2018 14:55:27 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : The specified Image File was not found.
+10/Sep/2018 14:55:27 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : The specified Image File was not found.
+10/Sep/2018 14:55:27 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : The specified Image File was not found.
+10/Sep/2018 14:55:27 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : The specified Image File was not found.
+10/Sep/2018 16:35:48 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : The specified Image File was not found.
+10/Sep/2018 16:35:48 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : The specified Image File was not found.
+10/Sep/2018 16:35:48 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : The specified Image File was not found.
+10/Sep/2018 16:35:48 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : The specified Image File was not found.
+10/Sep/2018 16:35:48 PM SMS[WriteFile] : SMS[WriteFile] : NSMS Error : The specified Image File was not found.
+12/Sep/2018 14:09:43 PM NSMS Exception : Stack Trace : java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at NSMS.CSMSRqstr.ConnectToSMS(CSMSRqstr.java:239)
+	at NSMS.CSMSRqstr.Connect(CSMSRqstr.java:546)
+	at ISPack.CPISIOInterface.ISConnectToRemoteSMS_MT(CPISIOInterface.java:5918)
+	at ISPack.CPISIOInterface.ISAddDoc_MT(CPISIOInterface.java:6553)
+	at ISPack.CPISDocumentTxn.AddDocument1_MT(CPISDocumentTxn.java:2574)
+	at ISPack.CPISDocumentTxn.AddDocument_MT(CPISDocumentTxn.java:1839)
+	at com.newgen.generate.GeneratePdf.attachDocument(GeneratePdf.java:318)
+	at com.newgen.generate.doComms.run(NG_Socket_Service.java:442)
+	at java.lang.Thread.run(Unknown Source)
+
+16/Sep/2018 14:05:09 PM NSMS Exception : Stack Trace : java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at NSMS.CSMSRqstr.ConnectToSMS(CSMSRqstr.java:239)
+	at NSMS.CSMSRqstr.Connect(CSMSRqstr.java:546)
+	at ISPack.CPISIOInterface.ISConnectToRemoteSMS_MT(CPISIOInterface.java:5918)
+	at ISPack.CPISIOInterface.ISAddDoc_MT(CPISIOInterface.java:6553)
+	at ISPack.CPISDocumentTxn.AddDocument1_MT(CPISDocumentTxn.java:2574)
+	at ISPack.CPISDocumentTxn.AddDocument_MT(CPISDocumentTxn.java:1839)
+	at com.newgen.generate.GeneratePdf.attachDocument(GeneratePdf.java:319)
+	at com.newgen.generate.doComms.run(NG_Socket_Service.java:449)
+	at java.lang.Thread.run(Unknown Source)
+
