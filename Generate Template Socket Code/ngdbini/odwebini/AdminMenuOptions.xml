@@ -1,0 +1,70 @@
+<MasterList>
+	<Links>
+		<LinkName>SystemAdmin</LinkName>
+		<LinkDescription>SystemAdminDescription</LinkDescription>
+		<JspName>/omnidocs/admin/ExtendSession.jsp</JspName>
+		<Display>true</Display>
+	</Links>
+	<Links>
+		<LinkName>DesktopConfigurator</LinkName>
+		<LinkDescription>DesktopConfiguratorDescription</LinkDescription>
+		<JspName>/omnidocs/webaccess/configurations/displayconfiguration.jsp</JspName>
+		<Display>true</Display>
+	</Links>
+	<Links>
+        <LinkName>SystemReports</LinkName>
+        <LinkDescription>SystemReportsDescription</LinkDescription>
+        <JspName>/omnidocs/report/reports.jsp</JspName>
+        <Display>true</Display>
+    </Links>
+	<Links>
+		<LinkName>ServiceManagement</LinkName>
+		<LinkDescription>ServiceManagementDescription</LinkDescription>
+		<JspName>/omnidocs/admin/serviceManagement.jsp</JspName>
+		<Display>true</Display>
+	</Links>
+	<Links>
+		<LinkName>WebApi</LinkName>
+		<LinkDescription>WebApiDescription</LinkDescription>
+		<JspName>/omnidocs/integration/registerunregister.jsp</JspName>
+		<Display>true</Display>
+	</Links>
+	<Links>
+		<LinkName>Ldap</LinkName>
+		<LinkDescription>LdapDescription</LinkDescription>
+		<JspName>/ldap/config.jsp</JspName>
+		<Display>false</Display>
+	</Links>
+	<Links>
+		<LinkName>LicenseManagement</LinkName>
+		<LinkDescription>LicenseMgmtDescription</LinkDescription>
+		<JspName>/omnidocs/admin/licmain1.jsp</JspName>
+		<Display>true</Display>
+	</Links>
+	<Links> 	
+		<LinkName>TrashManagement</LinkName>		
+		<LinkDescription>TrashMgmtDescription</LinkDescription>
+		<JspName>/omnidocs/admin/trashframes.jsp</JspName>
+		<Display>true</Display>
+	</Links>
+	<Links>
+		<LinkName>ConfigureSearchEngine</LinkName>
+		<LinkDescription>FederatedSearchdescription</LinkDescription>
+		<JspName>/omnidocs/federatedsearch/federatedsearchmain.jsp</JspName>
+		<Display>false</Display>
+	</Links>
+
+	<!--Links> 	
+		<LinkName>PurgeCompact</LinkName>		
+		<LinkDescription>PurgeCompactDescription</LinkDescription>
+		<JspName>/omnidocs/admin/purgecompactlink.jsp</JspName>
+		<Display>true</Display>
+	</Links -->
+	
+	<!-- Links>
+		<LinkName>ProfileManagement</LinkName>
+		<LinkDescription>ProfileManagementdescription</LinkDescription>
+		<JspName>/omnidocs/admin/profile/profile.jsp</JspName>
+		<Display>false</Display>
+	</Links -->
+</MasterList>

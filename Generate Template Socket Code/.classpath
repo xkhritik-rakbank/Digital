@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/aws-java-sdk-1.11.40.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/azure-storage-7.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/com.ibm.ws.ejb.thinclient_8.5.0.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/com.ibm.ws.orb_8.5.0.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/commons-discovery-0.2.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/dbStub.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/ejb.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/ejbclient.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/ISPack.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/iText-2.0.8.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/itextpdf-5.3.2.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/java-json.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/jboss-client.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/jcifs-1.3.17.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/jdts.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/jsoup-1.8.1.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/NGEjbCallBroker.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/nglogger.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/ngutility.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/NIPLJ.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/nsms.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/ofwebshared.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/omnishared.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/Populatepdf.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/SMSHelper.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/stubs.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/stubswfscustom.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/stubwfs.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/webdesktop.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/wfdesktop.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/wfsclient.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/wfsshared.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/wrapper.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/xercesImpl-2.8.1.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse_workplace/Generate Template Socket Code/lib/xmlworker-1.2.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

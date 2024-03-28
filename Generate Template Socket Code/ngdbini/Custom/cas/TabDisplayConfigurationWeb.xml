@@ -1,0 +1,26 @@
+<Tabs>
+	<Tab>
+		<DivName>FolderTree</DivName>
+		<DisplayName>Repository</DisplayName>
+		<FunctionName>loadTree</FunctionName>
+		<Display>true</Display>
+	</Tab>
+	<Tab>
+		<DivName>Criteria</DivName>
+		<DisplayName>Search</DisplayName>
+		<FunctionName>home</FunctionName>
+		<Display>true</Display>
+	</Tab>
+	<Tab>
+		<DivName>Tools</DivName>
+		<DisplayName>Omniprocess</DisplayName>
+		<FunctionName>tools</FunctionName>
+		<Display>true</Display>
+	</Tab>
+	<Tab>
+		<DivName>Reports</DivName>
+		<DisplayName>Reports</DisplayName>
+		<FunctionName>loadconfigReports</FunctionName>
+		<Display>true</Display>
+	</Tab>
+</Tabs>

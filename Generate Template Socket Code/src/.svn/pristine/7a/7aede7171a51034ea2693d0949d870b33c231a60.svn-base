@@ -1,0 +1,741 @@
+
+package com.newgen.generate;
+
+
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
+import java.util.Properties;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
+import com.newgen.generate.User;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import java.io.FileInputStream;
+import java.util.Set;
+
+public class NG_Socket_Service
+{
+ private static int port, maxConnections=10;
+ static String RunMode, s;
+public String err;
+ private static Logger logger = Logger.getLogger("consoleLogger");
+
+ static
+    {
+		 PropertyConfigurator.configure(System.getProperty("user.dir")+File.separator+"Config"+File.separator+"log4j_WebServiceWrapper.properties");
+		 
+		// **********Read the attributes from NG_SERVICE.xml****************
+      
+	}
+	
+ public static void main(String[] args) 
+ {
+	 try{
+	Properties propConfig = new Properties(); 
+	 propConfig.load(new FileInputStream(System.getProperty("user.dir")+File.separator+"Config"+File.separator+"Config.properties"));
+	 Set<Object> keys = propConfig.keySet();
+	 for(Object k:keys)
+		{
+				//configPropertyMap.put((String)k,propConfig.getProperty((String)k));
+				if("Utility_port".equals((String)k)){
+					port= Integer.parseInt(propConfig.getProperty((String)k));
+					break;
+				}
+		}
+	}catch(Exception ex){
+	//ex.printStackTrace();
+		logger.error("Exception occurred: ",ex);
+	}
+    int k=0;
+	ServerSocket listener = null;
+	Socket server=null;
+	//******* Establish connection *************
+    try {
+      listener = new ServerSocket(port);      
+		//logger.info(System.getProperty("user.dir"));
+		while(true)
+		{
+			try {
+			k=k+1;
+	        //doComms connection;
+			logger.info("Waiting for Request Count--" + k);
+			
+	        server = listener.accept();
+	        doComms conn_c= new doComms(server);
+	        Thread t = new Thread(conn_c);
+	        
+				t.start();
+			}catch(Exception ex) {
+				logger.info("IOException on socket listen:11111111 " + ex);
+				break;
+			}
+			
+		}
+		 if (null!=listener)
+			{
+				listener.close();
+				listener=null;
+				logger.info("Closing Listener");
+			}
+			if (null!=server)
+			{
+				server.close();
+				server=null;
+				
+				logger.info("Closing Server Socket");
+			}
+    } 
+    catch (IOException ioe) 
+	{
+	  logger.info("IOException on socket listen:11111111 " + ioe);
+	  try {
+		  if (null!=listener)
+			{
+				listener.close();
+				listener=null;
+				
+				logger.info("Closing Listener");
+			}
+			if (null!=server)
+			{
+				server.close();
+				server=null;
+				
+				logger.info("Closing Server Socket");
+			}
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		logger.info("Exception " + e.toString());
+	}
+     // ioe.printStackTrace();	 
+    }
+	finally
+	{
+		try
+		{
+			if (null!=listener)
+			{
+				listener.close();
+				listener=null;
+				
+				logger.info("Closing Listener");
+			}
+			if (null!=server)
+			{
+				server.close();
+				server=null;
+				
+				logger.info("Closing Server Socket");
+			}
+		}
+		catch(Exception e)
+		{
+			//e.printStackTrace();
+			logger.info("Exception " + e.toString());
+			
+		}
+	}
+  }
+
+}
+
+//--------------------------------------------------------------------------------------------------
+//********** Communicating Class I/O *****************
+class doComms implements Runnable
+{
+    private Socket server;
+    private String input;
+	private static Logger loggern = Logger.getLogger("consoleLoggerdocomms");
+	Properties property = new Properties();
+	 String XMLFileName 	 = null;
+	static String XSDFileName 	 = null;
+	 String XSDFileNameArray[]	= null;
+	static int flag=0;
+	public static String newFilename=null;
+	NG_Socket_Service N= new NG_Socket_Service();
+
+	static String docIndex= null;
+	 static String strPropertyPath;
+	 static Properties propConfig;
+	 static String cabinetName;
+	 static String jtsPort;
+	 static String serverPort;
+	 static String jtsIP;
+	 static String volId;
+	 static String sessionID;
+	 static String userName;
+	 static String password;
+	 static String mailFrom;
+	 static String ownerPwd;
+	 static String mailTo;
+	 static final Object lock1 = new Object();
+	 static User user_password = new User();
+	 
+ static Map <String,String> configPropertyMap = new HashMap<String, String>();
+ 
+
+	//DESedeEncryption D= new DESedeEncryption();
+
+    doComms(Socket server) 
+	{
+      this.server=server;
+    }
+	
+	static
+    {	 		 
+		// **********Read the attributes from NG_SERVICE.xml****************
+		
+	}
+	
+	
+	public static void readPropertyFile()
+	{
+		FileInputStream proConfigFileStream;
+       try 
+		{
+			
+			strPropertyPath=System.getProperty("user.dir")+File.separator+"Config"+File.separator+"Config.properties";
+			proConfigFileStream = new FileInputStream(strPropertyPath);
+			propConfig = new Properties();
+			propConfig.load(proConfigFileStream);
+			
+			configPropertyMap.clear();
+			Set<Object> keys = propConfig.keySet();
+			
+			for(Object k:keys)
+			{
+				configPropertyMap.put((String)k,propConfig.getProperty((String)k));
+			}
+			
+			strPropertyPath=null;proConfigFileStream=null;propConfig=null;keys=null;
+			
+			jtsIP = configPropertyMap.get("JTSIP");
+			jtsPort = configPropertyMap.get("JTSPORT");
+			serverPort = configPropertyMap.get("ServerPort");
+			cabinetName = configPropertyMap.get("CabinetName");
+			userName = user_password.getUsername();
+			password = user_password.getPassword();
+			volId = configPropertyMap.get("VolumeId");
+			mailFrom = configPropertyMap.get("MailFrom");
+			ownerPwd = configPropertyMap.get("ownerPassword");
+
+		} 
+		catch (FileNotFoundException e) 
+		{
+			loggern.info("Config.properties not found. "+e);
+		}
+		catch (IOException e) 
+		{
+			loggern.info("Config.properties Load/Read Failed with IOException. "+e);
+		}
+	}
+	public void writeData(DataOutputStream xmlDataOutputStream,String input) throws IOException
+    {	
+		DataOutputStream dout=null;
+		 try {
+			
+			 dout=new DataOutputStream(server.getOutputStream());  
+			
+			String return_message = input;
+			
+			 if (return_message != null && return_message.length() > 0) {
+				// synchronized (socket) 
+				 {
+				 //UTF-16LE
+					
+					dout.write(return_message.getBytes("UTF-8"));
+					dout.flush();
+				 }	
+			 };
+			 
+		 } catch (IOException i) {
+			 //i.printStackTrace();
+			 loggern.info("Exception " + i.toString());
+		} catch (Exception ie) {
+			 //ie.printStackTrace();
+			loggern.info("Exception " + ie.toString());
+		 }
+		finally{
+			try{
+				if(dout!=null)
+				{
+					dout.close();
+					dout=null;
+				}
+			}
+			catch(Exception e)
+			{
+				//e.printStackTrace();
+				loggern.info("Exception " + e.toString());
+			}
+		}
+         
+    }
+
+	private String readData(DataInputStream xmlDataInputStream)
+    {
+       
+		String recvedMessage="";
+		try {
+			boolean wait_flag = true;
+			int out_len=0;
+            byte[] readBuffer = new byte[50000];
+            int num = xmlDataInputStream.read(readBuffer);
+            //loggern.debug(" before sync block Message read: "+ num);
+			synchronized (lock1)
+			{
+			  if (num > 0) 
+			  {
+                byte[] arrayBytes = new byte[num];
+                System.arraycopy(readBuffer, 0, arrayBytes, 0, num);
+                recvedMessage = new String(arrayBytes, "UTF-8");
+
+                loggern.debug("Received message :" + recvedMessage);
+			  } 
+				else 
+				{
+					lock1.notifyAll();
+				}
+			}
+            
+            
+        } catch (SocketException se) {
+            loggern.error("Socket Exception Occured in Read Data :" + se);
+			return recvedMessage;
+        } catch (IOException i) {	
+           
+        	loggern.info("IO Exception Occured in Read Data " + i);
+		
+        }
+		 return recvedMessage;
+    }
+ 
+			
+    //************** Process according to input options *************
+	public void run () 
+		{
+	
+	    input="";
+	    DataInputStream in=null;
+	    DataOutputStream out=null;
+	    boolean moveFlag = false;
+		loggern.debug("==========Start Listening for local Port========== new:"+server.getRemoteSocketAddress());
+		
+		try 
+		{
+				// Get input from the client
+				in = new DataInputStream (new BufferedInputStream(server.getInputStream()));
+				out = new DataOutputStream(new DataOutputStream (server.getOutputStream()));
+				loggern.debug("$$$$$$$$ inputstream received from client: "+in);
+				input=readData(in);
+				
+				loggern.debug("$$$$$$$$ inputstream received from client input: "+input);
+	
+				readPropertyFile();
+				
+				String[] tempArr=input.split("~");
+				String attList="";
+				String wi_name="";
+				String DocName="";
+				String sessionId="";
+				File dir= null;
+				String statusAttach="";
+				String sFilePath="";
+				String docStatus="";
+				String outputDoc="";
+				String docIndex="";
+				String strDocISIndex="";
+				String generateStatus="";
+				String fileOut="";
+				String passwdReqd = null;
+				String passwdValue = null;
+				String mailStatus="";
+				String userMail="";
+				String prd_type="";
+				String portal_no="";
+				int noFile=0;
+				loggern.debug("$$$$$$$$ tempArr.toString() : "+tempArr.toString());
+				loggern.debug("$$$$$$$$ tempArr.length : "+tempArr.length);
+				 for(int i=0;i<tempArr.length;i++)
+				 {
+					 if(i==0) {
+						 attList=tempArr[i];
+						 loggern.debug("$$$$$$$$ attList "+attList);
+					 }
+					 else if(i==1) {
+						 wi_name=tempArr[i];
+						 loggern.debug("$$$$$$$$$$$ vwi_name "+wi_name);
+					 }
+					 else if(i==2) {
+						 DocName=tempArr[i];
+						 loggern.debug("$$$$$$$$ DocName "+DocName);
+					 }
+					 else if(i==3) {
+						 sessionId=tempArr[i];
+						 loggern.debug("$$$$$$$$$$ sessionId "+sessionId);
+					 }
+					 else if(i==4) {
+						 passwdReqd=tempArr[i];
+					 }
+					 else if(i==5) {
+						 passwdValue=tempArr[i];
+					 }
+					 else if(i==6) {
+						 userMail=tempArr[i];
+					 }
+					 else if(i==7){
+						 portal_no=tempArr[i];
+					 }
+					 
+				 }
+					
+				String target_file_loc=System.getProperty("user.dir")+File.separator+"GRTemplate"+File.separator+wi_name;				
+				
+				File file = new File(target_file_loc);
+				if (!file.exists()) 
+				{
+					file.mkdir();
+				}
+				loggern.debug("$$$$$$$$$$ DocName ::::: "+DocName);
+				// Changes done by shivang for Islamic Application Form
+			if(	"Application_Form_CDOB_C".equalsIgnoreCase(DocName) || "Cheque_Form_C".equalsIgnoreCase(DocName) || "CoverLetter_C".equalsIgnoreCase(DocName))
+			{
+				prd_type="Conventional";
+			}
+			else if("Application_Form_CDOB_I".equalsIgnoreCase(DocName) || "Cheque_Form_I".equalsIgnoreCase(DocName)|| "CoverLetter_I".equalsIgnoreCase(DocName))
+				{
+				prd_type="Islamic";
+			}
+				if("Application_Form".equalsIgnoreCase(DocName) || DocName.equalsIgnoreCase("Application_Form_Islamic") || "Application_Form_IM".equalsIgnoreCase(DocName) || DocName.contains("Welcome_Letter")
+					|| "Application_Form_CDOB_C".equalsIgnoreCase(DocName) || "Application_Form_CDOB_I".equalsIgnoreCase(DocName)
+					|| "Cheque_Form_C".equalsIgnoreCase(DocName) || "Cheque_Form_I".equalsIgnoreCase(DocName)
+					|| "CoverLetter_C".equalsIgnoreCase(DocName) || "CoverLetter_I".equalsIgnoreCase(DocName))
+				{
+					loggern.debug("$$$$$$$$$$ inside if of doc name "+DocName);
+					generateStatus=GeneratePdf.replaceGRTemplateArgs(file,attList,DocName,passwdReqd,passwdValue,ownerPwd);
+					loggern.debug(" $$$$$$$$$$ generateStatus --- " + generateStatus);
+				}
+				else
+				{
+					loggern.debug("$$$$$$$$$$ inside else of doc name "+DocName);
+					generateStatus=GeneratePdf.generateHTML(file,attList,DocName, wi_name, cabinetName,sessionId, jtsIP, serverPort);
+					loggern.debug(" $$$$$$$$$$$ generateStatus --- " + generateStatus);
+				}
+				if ("PDF Generated".equalsIgnoreCase(generateStatus) || "HTML generated".equalsIgnoreCase(generateStatus))
+				{
+					loggern.debug("inside statusPdf --- " );
+					File files[] = file.listFiles();
+					if(files==null)
+					{
+						loggern.debug("NO pdf to attach" );
+						
+					}
+					else
+					{
+						loggern.debug("Pdf to attach --- " +files.length);
+						for(noFile=0;noFile<files.length;noFile++)
+						{
+							/*if(files[noFile].getName().contains("NewCAMReport")){
+							fileOut = files[noFile].getName();
+							}*/
+							
+							fileOut = files[noFile].getName();
+						}
+							
+						sFilePath = ""+target_file_loc+"\\"+fileOut+"";
+						
+						if("CAM_REPORT_SALARIED_PL".equalsIgnoreCase(DocName))
+						{
+								DocName = "CAM_REPORT_SALARIED";
+						}
+						else if("Application_Form_IM".equalsIgnoreCase(DocName))
+						{
+								DocName = "Application_Form";
+						}
+						// Changes done by shivang for Islamic Application Form
+						else if("Application_Form_Islamic".equalsIgnoreCase(DocName))
+						{
+								DocName = "Application_Form";
+						}
+						else if("Application_Form_CDOB_C".equalsIgnoreCase(DocName) || "Application_Form_CDOB_I".equalsIgnoreCase(DocName))
+						{
+								moveFlag = true;
+								DocName = "Application_Form";
+						}
+						else if("Cheque_Form_C".equalsIgnoreCase(DocName) || "Cheque_Form_I".equalsIgnoreCase(DocName))
+						{
+								moveFlag = true;
+								DocName = "Cheque_Form";
+						}
+						else if("CoverLetter_C".equalsIgnoreCase(DocName) || "CoverLetter_I".equalsIgnoreCase(DocName))
+						{
+								moveFlag = true;
+								DocName = "Cover_Letter";
+						}
+						
+						statusAttach = GeneratePdf.attachDocument( sFilePath, wi_name, DocName, jtsIP, jtsPort, cabinetName, volId, userName,password,sessionId, serverPort);
+
+						String[] statusAttachArr =statusAttach.split("~"); 
+						for(int k=0;k<statusAttachArr.length;k++)
+						{
+							if(k==0)
+								docStatus=statusAttachArr[k];
+							if(k==1)
+								outputDoc=statusAttachArr[k];
+							if(k==2)
+								docIndex=statusAttachArr[k];
+							if(k==3)
+								strDocISIndex=statusAttachArr[k];
+						}
+						if("Y".equalsIgnoreCase(docStatus))
+						{
+						
+							if(DocName.contains("Welcome_Letter"))
+							{
+									loggern.debug("Inside Welcome_Letter--- " );
+								strDocISIndex = strDocISIndex+"#;";
+								
+								mailStatus = GeneratePdf.attachMail(cabinetName,sessionId,mailFrom,strDocISIndex,DocName,wi_name,jtsIP,serverPort,userMail);
+								if("Y".equals(mailStatus))
+								{
+									loggern.debug("mail attached successfully --- " );
+									try
+									{
+										File lobjFileTemp = new File(sFilePath);
+										File deleteFolder = new File(target_file_loc);
+										if (lobjFileTemp.exists()) 
+										{
+											loggern.debug("inside folder delete" );
+											if (!lobjFileTemp.isDirectory()) 
+											{
+												boolean test2=lobjFileTemp.delete();
+												deleteDir(deleteFolder);
+												loggern.debug("File deleted: " );
+											} 
+											else 
+											{
+												deleteDir(lobjFileTemp);
+												loggern.debug("folder deleted: " );
+											}
+										} 
+										else 
+										{
+											loggern.debug("No file/folder to delete: " );
+											lobjFileTemp = null;
+										//////////////
+										}
+									}
+									catch (Exception lobjExp) {
+									loggern.debug("Exception occurred while deleting  + ");
+									} 
+								}
+							}
+													
+							else
+							{
+								loggern.debug("document attached successfully --- " );
+								mailStatus="NA";
+								try
+								{
+									File lobjFileTemp = new File(sFilePath);
+									File deleteFolder = new File(target_file_loc);
+									if (lobjFileTemp.exists()) 
+									{
+										loggern.debug("inside folder delete" );
+										if (!lobjFileTemp.isDirectory()) 
+										{
+											/*code added for falcon application form to be moved to another folder before deleting: Bandana*/
+											if(moveFlag){
+												Copy(System.getProperty("user.dir")+File.separator+"Generated_Template_Falcon"+File.separator+prd_type+File.separator+portal_no+"_"+wi_name,System.getProperty("user.dir")+File.separator+"GRTemplate"+File.separator+wi_name,DocName,".pdf");
+											}
+											moveFlag = false;
+											/*code added for falcon application form to be moved to another folder before deleting: Bandana*/
+											boolean test2=lobjFileTemp.delete();
+											deleteDir(deleteFolder);
+											//loggern.debug("File deleted: " );
+										} 
+										else 
+										{
+											/*code added for falcon application form to be moved to another folder before deleting: Bandana*/
+											if(moveFlag){
+												Copy(System.getProperty("user.dir")+File.separator+"Generated_Template_Falcon"+File.separator+prd_type+File.separator+portal_no+"_"+wi_name,System.getProperty("user.dir")+File.separator+"GRTemplate"+File.separator+wi_name,DocName,".pdf");
+											}
+											moveFlag = false;
+											/*code added for falcon application form to be moved to another folder before deleting: Bandana*/
+											deleteDir(lobjFileTemp);
+											//loggern.debug("folder deleted: " );
+										}
+									} 
+									else 
+									{
+										//loggern.debug("No file/folder to delete: " );
+										lobjFileTemp = null;
+									//////////////
+									}
+								}
+								catch (Exception lobjExp) {
+								loggern.debug("Exception occurred while deleting  + ");
+								} 
+							
+							}
+							input = "Success"+"~"+outputDoc+"~"+docIndex+"~"+mailStatus;	
+							//input = "Success";
+							
+							//loggern.debug("input with outputDoc--- " + input);
+							
+						}
+						else
+						input = "Failure";
+					
+					}
+				}
+				else
+					input = "Failure";
+			// ************ Now write to the client ********************
+				
+				writeData(out,input);
+	
+					// server.close();
+			}
+		  
+		catch (IOException ioe) 
+		{
+			//ioe.printStackTrace();
+			loggern.info("Exception " + ioe.toString());
+			try
+			{
+				out = new DataOutputStream(new DataOutputStream (server.getOutputStream()));
+			}
+			catch(Exception e)
+			{
+				
+				N.err="Data Output Stream initialization error"+e.toString();
+				//e.printStackTrace();
+				loggern.info("Exception " + e.toString());
+			}
+	        
+			N.err="IOException on socket listen: "+ioe;
+			//input="<Status>FAILURE</Status>"+ N.err;
+			input=N.err;
+			
+			//loggern.info("		Returning " + input);
+			try
+			{
+				writeData(out,input);
+			}
+			catch(Exception e)
+			{
+				N.err="Write Data Exception "+e.toString();
+			}
+			loggern.debug("IOException on socket listen: " + ioe);
+	        //ioe.printStackTrace();		
+	    }
+		  
+		finally
+			{
+				try
+				{
+					if (server!=null)
+					{	
+						
+						loggern.debug("====Closing local Cient Socket======="+server.getRemoteSocketAddress());
+						server.close();
+						server=null;
+						
+						loggern.debug("====Successfuly Closed=======");
+					
+					}
+				 }
+				catch(Exception e)
+				{					
+					loggern.debug("Exception " + e.toString());
+					N.err=e.toString();
+					//input="<Status>FAILURE</Status>"+ N.err;
+					input=N.err;
+				}
+			}
+	 }
+	 
+	  public boolean deleteDir(File dir)
+	 {
+	        if (dir.isDirectory()) 
+	        {
+	            String[] lstrChildren = dir.list();
+	            for (int i = 0; i < lstrChildren.length; i++) 
+	            {
+	                boolean success = deleteDir(new File(dir, lstrChildren[i]));
+	                if (!success) 
+	                {
+	                    return false;
+	                }
+	            }
+	        }
+	        return dir.delete();
+	 }
+	  /*
+	   * Method added by bandana for Falcon Application forms,cheque forms and Cover Letters to move to another folder before deletion
+	   */
+	  public static void Copy(String  dest, String src, String docname, String fileType) throws IOException {
+		  loggern.info("Value of dest is : "+dest);
+		  loggern.info("Value of src is : "+src); 
+		  loggern.info("Value of docname is : "+docname);
+		  loggern.info("Value of docname is : "+fileType);
+		  
+		  InputStream is = null;
+		  OutputStream os = null;
+		  if (docname.contains("Application")){
+			  docname = "ApplicationForm";
+		  }
+		  if (docname.contains("Cheque")){
+			  docname = "Cheque";
+		  }
+		  try { 
+			  File destFolder = new File(dest);
+			  loggern.info("File object for dest folder created");
+			  if (!destFolder.exists()){
+				  destFolder.mkdir();
+				  loggern.info("Destination Folder created");
+			  }
+			  File srcFolder = new File(src);
+			 File[] f1 = srcFolder.listFiles();
+			 loggern.info("getting source folder lists");
+			 	String srcFile = f1[0].getName();
+			 	 loggern.info("First file read from src folder is "+f1[0].getName());
+			 
+			  File f = new File(destFolder.getPath()+File.separator+docname+fileType);
+			  loggern.info("Blank document create at destination");
+			  is = new FileInputStream(src+File.separator+srcFile);
+			  os = new FileOutputStream(f); // buffer size 1K 
+			  byte[] buf = new byte[3072];
+			  int bytesRead;
+			  loggern.info("starting to write file");
+			  while ((bytesRead = is.read(buf)) > 0) 
+			  { 
+				  os.write(buf, 0, bytesRead); 
+			  } 
+			  loggern.info("file writing complete");
+			  } catch(IOException e){
+				  
+			  }
+		  finally 
+		  { 
+			  is.close(); 
+			  os.close();
+		  } 
+	  }
+}
+
+//----------------------------------------------------------------------------------------------------------------

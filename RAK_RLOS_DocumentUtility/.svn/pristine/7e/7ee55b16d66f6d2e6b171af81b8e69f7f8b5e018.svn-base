@@ -1,0 +1,10 @@
+Utility_Port=4444
+UserName=arun1
+Password=:Q-D;c:E-C;c-D;A-D;C:2-D;W
+JTSIP=10.15.11.94
+JTSPort=3333
+SMSPort=10000
+CabinetName=cas
+Falcon_Document=Y
+GenerateFile=N
+CourierFile=N

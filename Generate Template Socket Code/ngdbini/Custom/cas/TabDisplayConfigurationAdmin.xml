@@ -1,0 +1,38 @@
+<Tabs>
+	<Tab>
+		<DivName>DesktopSetting</DivName>
+		<DisplayName>Desktop Setting</DisplayName>
+		<FunctionName>loadDesktopSettings</FunctionName>
+		<Display>true</Display>
+	</Tab>
+	<Tab>
+		<DivName>Criteria</DivName>
+		<DisplayName>Search Configurations</DisplayName>
+		<FunctionName>searchConfig</FunctionName>
+		<Display>true</Display>
+	</Tab>
+	<Tab>
+		<DivName>Tools</DivName>
+		<DisplayName>Omniprocess</DisplayName>
+		<FunctionName>searchConfigTools</FunctionName>
+		<Display>true</Display>
+	</Tab>
+	<Tab>
+		<DivName>Report</DivName>
+		<DisplayName>Reports</DisplayName>
+		<FunctionName>loadnewConfigForReport</FunctionName>
+		<Display>true</Display>
+	</Tab>
+	<!--<Tab>
+		<DivName>Snapshot</DivName>
+		<DisplayName>SnapShot</DisplayName>
+		<FunctionName>loadnewConfigForSnapshot</FunctionName>
+		<Display>true</Display>
+	</Tab>-->
+	<!--<Tab>
+		<DivName>enableImageEnabling</DivName>
+		<DisplayName>Image Enabling</DisplayName>
+		<FunctionName>imageEnable</FunctionName>
+		<Display>true</Display>
+	</Tab>-->
+</Tabs>

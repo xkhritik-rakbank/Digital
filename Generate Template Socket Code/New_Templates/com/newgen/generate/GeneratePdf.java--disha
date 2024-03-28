@@ -1,0 +1,510 @@
+
+package com.newgen.generate;
+
+import com.newgen.Populatepdf.Populatepdf;
+import com.newgen.mvcbeans.model.WorkdeskModel;
+import com.newgen.wfdesktop.session.WDSession;
+import java.io.File;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.StringReader;
+import java.io.FileWriter;
+import com.newgen.omni.wf.util.app.NGEjbClient;
+import com.newgen.wfdesktop.xmlapi.WFCallBroker;
+import com.newgen.wfdesktop.xmlapi.WFInputXml;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.*;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentType;
+import org.w3c.dom.Node;
+import org.w3c.dom.*;
+import org.w3c.dom.NodeList;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import java.io.IOException;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+public class GeneratePdf {
+
+	
+	static String sFilePath = "";
+	static  int sessionCheckInt=0;
+	static  int loopCount=50;
+	static  int waitLoop=50;
+	static String sessionID=null;
+	static  NGEjbClient ngEjbClient;
+	
+	
+ public static String replaceGRTemplateArgs(File targetFile, String argumentString) {
+HashMap<String,String> HtemData=new HashMap<String,String>();
+System.out.println("123---");
+//System.out.println("argumentString--- "+ argumentString);
+/*
+HtemData.put("<Current_date_time>","23/08/2018 16:00:00");
+HtemData.put("<WIname>","RAK-00001111-Process");
+HtemData.put("<NTB>","Yes");
+HtemData.put("<customer_name>","ABC XYZ");
+HtemData.put("<PAssportNo>","AA11224");
+HtemData.put("<gender>","Male");
+HtemData.put("<MotherName>","Qhghg Tdgdgd");
+HtemData.put("<MArtialStatus>","gfggfdg");
+HtemData.put("<CountryOFResidence>","India");
+HtemData.put("<yearsinUAE>","21");
+HtemData.put("<Designation>","fgfdgfdfdg");
+HtemData.put("<EmirateOfWork>","423");
+HtemData.put("<HeadOfficeEmirate>","retrtt");
+HtemData.put("<DOJ>","28/08/2018");
+HtemData.put("<JobConfirmed>","Yes"); */
+System.out.println("456---");
+String sInputPath=System.getProperty("user.dir")+File.separator+"Templates"+File.separator+"ApplicationForm.pdf";
+System.out.println("sInputPath---" + sInputPath);
+System.out.println("targetFile.getAbsolutePath()---" + targetFile.getAbsolutePath());
+//String sOutputPath=System.getProperty("user.dir")+File.separator+"Output"+File.separator+"Output"+targetFile.getName();
+
+//copytemplatefile(sInputPath,targetFile.getAbsolutePath().substring(0, targetFile.getAbsolutePath().lastIndexOf('.')) + ".pdf");
+HtemData = parser(argumentString);
+String[] hm=Populatepdf.ProcesspdfFile(true,sInputPath,HtemData,targetFile.getAbsolutePath());
+System.out.println("Done");
+        /**
+         * templateFile -> Original Template File targetFile -> Output File
+         * argumentString -> Argument String (with values and type)
+         *  Hook to replace the arguments of generate response template.
+        Write custom code here to replace the arguments from the template and write the output in the target file. Finally,
+        after writing into target file, client need to return true from the hook.
+        If client returns true from the hook then system will not replace the arguments
+        from the template.
+         */
+	System.out.println("targetFile --" + targetFile);
+		
+        return "PDF Generated";
+    }	
+
+	
+	   public boolean copytemplatefile(String inputfilepath, String targetFilePath){
+
+		File inputfile =new File(inputfilepath);
+	   if(inputfile.renameTo(new File(targetFilePath))){
+		   System.out.println("copied----");
+		return true;
+	   }else{
+		   System.out.println("Not copied");
+		return false;
+	   }
+    }
+	
+	
+public static HashMap<String,String> parser(String strArgList){
+        HashMap<String,String> HtemData=new HashMap<String,String>();
+        //String strArgList = "&<Current_date_time>&@23/08/2018&<WIname>&@POS-2005WEB98371w7&<NTB>&@asfghjkl&<customer_name>&@Azmal&<PAssportNo>&@232893724290&<gender>&Male&<MotherName>&@ShahBano&<MArtialStatus>&@Unmarried&<CountryOFResidence>&@UAE&<yearsinUAE>&@12&<Designation>&@CEO&<EmirateOfWork>&@IT&<HeadOfficeEmirate>&@YES&<DOJ>&@23/08/2018&<JobConfirmed>&@Yes";    
+        String[] values = strArgList.split("&");
+        for(int i=1;i<values.length;i++){
+            if(i%2==0){
+                StringBuilder sb = new StringBuilder(values[i]);
+                sb.deleteCharAt(0);
+                values[i] = sb.toString();
+            }
+            //System.out.println(values[i]+" "+i);
+        }
+        
+        for(int i=1;i<values.length-1;i++){
+            HtemData.put(values[i],values[i+1]);
+            i++;
+        }
+        
+        return HtemData;
+        
+    }
+	
+	public static String attachDocument(String docIndex, String workItemName, String cabinetName, String jtsIP, String jtsPort,String volId, String userName, String password, String DocName)
+	{
+		String sQueryFoldIndex="";
+		String folderInputXML ="";
+		sessionCheckInt=0;
+		String DocAttach=null;
+		String APSelectOutputFoldIndex="";
+		try
+		{
+			if(sessionID==null)
+			{
+				sessionID=getSessionIDFirstTime(cabinetName,jtsIP, jtsPort,userName, password);
+			}
+			while(sessionCheckInt<loopCount)
+			{
+				sQueryFoldIndex = "SELECT FOLDERINDEX FROM PDBFOLDER WHERE NAME ='" + workItemName + "'";
+			
+				String APSelectInputFoldIndex = ExecuteQuery_APSelect(sQueryFoldIndex,cabinetName,sessionID);
+				System.out.println("APSelectInputFoldIndex : " + APSelectInputFoldIndex);
+				
+				try
+				{
+					APSelectOutputFoldIndex=WFNGExecute(APSelectInputFoldIndex,jtsIP,jtsPort,1);
+				}
+				catch(Exception e)
+				{
+					System.out.println("Exception in Execute : " + e);
+					sessionCheckInt++;
+					waiteloopExecute(waitLoop);
+					sessionID = getConnectInputXML(cabinetName,userName,password);
+					continue;
+				}
+				System.out.println("APSelectOutputFoldIndex : " + APSelectOutputFoldIndex);
+				sessionCheckInt++;
+				if (getTagValue(APSelectOutputFoldIndex,"MainCode").equalsIgnoreCase("11"))
+				{
+					sessionID = getConnectInputXML(cabinetName,userName,password);
+				}
+				else
+				{
+					sessionCheckInt++;
+					break;
+				}
+			}
+			
+			if (!getTagValue(APSelectOutputFoldIndex,"MainCode").equalsIgnoreCase("0")  )
+			{
+				DocAttach="N";
+			}
+			if (getTagValue(APSelectOutputFoldIndex,"MainCode").equalsIgnoreCase("0"))
+			{
+				String folderIndex=getTagValue(APSelectOutputFoldIndex,"td");
+				System.out.println("folderIndex : "+folderIndex);
+				String APSelectOutputDocSize="";
+				
+				String tempArr[]=docIndex.split("#");
+				String intISIndex="";
+				
+					 for(int i=0;i<tempArr.length;i++)
+					 {
+						 if(i==0)
+						   intISIndex=tempArr[i];
+					
+					 }
+				sessionCheckInt=0;
+				while(sessionCheckInt<loopCount)
+				{
+					String sQueryDocSize = "select DOCSIZE from isdoc WHERE docindex ='" + intISIndex + "' and volumeid = '"+volId+"' order by docsize desc";
+					String APSelectInputDocSize = ExecuteQuery_APSelect(sQueryFoldIndex,cabinetName,sessionID);
+					System.out.println("APSelectInputDocSize : " + APSelectInputDocSize);
+					
+					try
+					{
+						APSelectOutputDocSize=WFNGExecute(APSelectInputDocSize,jtsIP,jtsPort,1);
+					}
+					catch(Exception e)
+					{
+						System.out.println("Exception in Execute : " + e);
+						sessionCheckInt++;
+						waiteloopExecute(waitLoop);
+						sessionID = getConnectInputXML(cabinetName,userName,password);
+						continue;
+					}					
+					System.out.println("APSelectOutputDocSize : " + APSelectOutputDocSize);
+					sessionCheckInt++;
+					if (getTagValue(APSelectOutputDocSize,"MainCode").equalsIgnoreCase("11"))
+					{
+						sessionID = getConnectInputXML(cabinetName,userName,password);
+					}
+					else
+					{
+						sessionCheckInt++;
+						break;
+					}
+				}
+				if (!getTagValue(APSelectOutputDocSize,"MainCode").equalsIgnoreCase("0")  )
+				{
+					DocAttach="N";
+				}
+			
+				if (getTagValue(APSelectOutputDocSize,"MainCode").equalsIgnoreCase("0"))
+				{
+					String docSize="";
+					docSize=getTagValue(APSelectOutputDocSize,"MainCode");
+					
+					String intISIndexVolId = docIndex+"#";
+					System.out.println("intISIndexVolId "+intISIndexVolId);
+					String wiAddDocumentOutputXML="";
+					sessionCheckInt=0;
+					while(sessionCheckInt<loopCount)
+					{
+						String wiAddDocumentInputXML = get_NGOAddDocument_Input(cabinetName,sessionID,folderIndex,docSize,DocName,intISIndexVolId);
+
+						System.out.println("wiAddDocumentInputXML "+wiAddDocumentInputXML);
+						
+						try
+						{
+							wiAddDocumentOutputXML = WFNGExecute(wiAddDocumentInputXML,jtsIP,jtsPort,1);
+						}
+						catch(Exception e)
+						{
+							System.out.println("Exception in Execute : " + e);
+							sessionCheckInt++;
+							waiteloopExecute(waitLoop);
+							sessionID = getConnectInputXML(cabinetName,userName,password);
+							continue;
+						}					
+						System.out.println("wiAddDocumentOutputXML : "+wiAddDocumentOutputXML);
+						sessionCheckInt++;
+						if (getTagValue(wiAddDocumentOutputXML,"MainCode").equalsIgnoreCase("11"))
+						{
+							sessionID = getConnectInputXML(cabinetName,userName,password);
+						}
+						else
+						{
+							sessionCheckInt++;
+							break;
+						}
+					}
+					String mainCodeforCreateWI = "";
+					mainCodeforCreateWI=getTagValue(wiAddDocumentOutputXML,"Status");
+					if (!mainCodeforCreateWI.equalsIgnoreCase("0"))
+					{
+						DocAttach="N";
+					}
+					else 
+						DocAttach="Y";
+				}
+				
+			}
+			return DocAttach;
+		}
+		catch(Exception e)
+		{
+			return  "N";
+		}
+				
+	}
+	
+	public static String ExecuteQuery_APSelectWithColumnNames(String sQuery,String sEngineName,String sSessionId)
+	{
+		WFInputXml wfInputXml = new WFInputXml();
+
+		wfInputXml.appendStartCallName("APSelectWithColumnNames", "Input");
+		wfInputXml.appendTagAndValue("Query",sQuery);
+		wfInputXml.appendTagAndValue("EngineName",sEngineName);
+		wfInputXml.appendTagAndValue("SessionId",sSessionId);
+		wfInputXml.appendEndCallName("APSelectWithColumnNames","Input");
+		return wfInputXml.toString();
+	}
+	
+	public static String ExecuteQuery_APSelect(String sQuery,String sEngineName,String sSessionId)
+	{
+		WFInputXml wfInputXml = new WFInputXml();
+
+		wfInputXml.appendStartCallName("APSelect", "Input");
+		wfInputXml.appendTagAndValue("Query",sQuery);
+		wfInputXml.appendTagAndValue("EngineName",sEngineName);
+		wfInputXml.appendTagAndValue("SessionId",sSessionId);
+		wfInputXml.appendEndCallName("APSelect","Input");
+		return wfInputXml.toString();
+	}
+	
+	public static String get_NGOAddDocument_Input(String cabinetName, String sessionID, String folderIndex,String docSize,String DocumentName,String strISIndex)
+	{
+		StringBuffer ipXMLBuffer=new StringBuffer();
+		
+		ipXMLBuffer.append("?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+		ipXMLBuffer.append("<NGOAddDocument_Input>\n");
+		ipXMLBuffer.append("<Option>NGOAddDocument</Option>\n");
+		ipXMLBuffer.append("<CabinetName>");
+		ipXMLBuffer.append(cabinetName);
+		ipXMLBuffer.append("</CabinetName>\n");
+		ipXMLBuffer.append("<UserDBId>");
+		ipXMLBuffer.append(sessionID);
+		ipXMLBuffer.append("</UserDBId>\n");
+		ipXMLBuffer.append("<GroupIndex>0</GroupIndex>\n");
+		ipXMLBuffer.append("<Document>\n");
+		ipXMLBuffer.append("<ParentFolderIndex>");
+		ipXMLBuffer.append(folderIndex);
+		ipXMLBuffer.append("</ParentFolderIndex>\n");
+		ipXMLBuffer.append("<NoOfPages>1</NoOfPages>\n");
+		ipXMLBuffer.append("<AccessType>I</AccessType>\n");
+		ipXMLBuffer.append("<DocumentName>");
+		ipXMLBuffer.append(DocumentName);
+		ipXMLBuffer.append("</DocumentName>\n");
+		ipXMLBuffer.append("<CreatedByAppName>pdf</CreatedByAppName>\n");
+		ipXMLBuffer.append("<ISIndex>");
+		ipXMLBuffer.append(strISIndex);
+		ipXMLBuffer.append("</ISIndex>\n");
+		ipXMLBuffer.append("<NoOfPages>1</NoOfPages>");
+		ipXMLBuffer.append("<DocumentType>N</DocumentType>\n");
+		ipXMLBuffer.append("<DocumentSize>");
+		ipXMLBuffer.append(docSize);
+		ipXMLBuffer.append("</DocumentSize>\n");
+		ipXMLBuffer.append("<ODMADocumentIndex></ODMADocumentIndex><Comment></Comment><EnableLog>Y</EnableLog>\n");
+		ipXMLBuffer.append("<FTSFlag>PP</FTSFlag>");
+		ipXMLBuffer.append("</Document>\n");
+		ipXMLBuffer.append("</NGOAddDocument_Input>");
+		   
+		return ipXMLBuffer.toString();   
+	}
+	
+	public static String getConnectInputXML(String cabinetName,	String username, String password)
+	{
+		StringBuffer ipXMLBuffer=new StringBuffer();
+		
+		ipXMLBuffer.append("<?xml version=\"1.0\"?>");
+		ipXMLBuffer.append("<WMConnect_Input>");
+		ipXMLBuffer.append("<Option>WMConnect</Option>");
+		ipXMLBuffer.append("<EngineName>");
+		ipXMLBuffer.append(cabinetName);
+		ipXMLBuffer.append("</EngineName>\n");
+		ipXMLBuffer.append("<ApplicationInfo></ApplicationInfo>\n");
+		ipXMLBuffer.append("<Participant>\n");
+		ipXMLBuffer.append("<Name>");
+		ipXMLBuffer.append(username);
+		ipXMLBuffer.append("</Name>\n");
+		ipXMLBuffer.append("<Password>");
+		ipXMLBuffer.append(password);
+		ipXMLBuffer.append("</Password>\n");
+		ipXMLBuffer.append("<Scope></Scope>\n");
+		ipXMLBuffer.append("<UserExist>N</UserExist>\n");
+		ipXMLBuffer.append("<Locale>en-us</Locale>\n");
+		ipXMLBuffer.append("<ParticipantType>U</ParticipantType>\n");
+		ipXMLBuffer.append("</Participant>");
+		ipXMLBuffer.append("</WMConnect_Input>");
+		
+		return ipXMLBuffer.toString(); 
+	}
+	
+	private static String WFNGExecute(String ipXML, String jtsServerIP, String serverPort,int flag) throws IOException,Exception
+	{
+
+		try{
+		if(serverPort.startsWith("33"))
+			return WFCallBroker.execute(ipXML,jtsServerIP,Integer.parseInt(serverPort),1);
+		else
+			return ngEjbClient.makeCall(jtsServerIP,serverPort,"WebSphere",ipXML);
+		}
+		catch(Exception e){
+			System.out.println("Exception Occured in WF NG Execute : "+e.getMessage());	
+			return "Error";
+		}
+	}
+	
+	public static String getTagValue(String xml,String tag) throws ParserConfigurationException, SAXException, IOException
+	{
+		Document doc=getDocument(xml);
+		NodeList nodeList = doc.getElementsByTagName(tag);
+
+		int length = nodeList.getLength();
+
+		if (length > 0)
+		{
+			Node node =  nodeList.item(0);
+			// System.out.println("Node : " + node);
+			if (node.getNodeType() == Node.ELEMENT_NODE)
+			{
+				NodeList childNodes = node.getChildNodes();
+				String value = "";
+				int count = childNodes.getLength();
+				for (int i = 0; i < count; i++)
+				{
+					Node item = childNodes.item(i);
+					if (item.getNodeType() == Node.TEXT_NODE)
+					{
+						value += item.getNodeValue();
+					}
+				}
+				return value;
+			}
+			else if (node.getNodeType() == Node.TEXT_NODE)
+			{
+				return node.getNodeValue();
+			}
+		}
+		return "";
+	}
+	
+	public static Document getDocument(String xml) throws ParserConfigurationException, SAXException, IOException
+	{
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		DocumentBuilder db = dbf.newDocumentBuilder();
+		Document doc = db.parse(new InputSource(new StringReader(xml)));
+		return doc;
+	}
+	
+	private static String getSessionIDFirstTime(String cabName,String JTSIP, String JTSPORT,String userName, String password)
+	{
+		String sessionID="";
+		int i = -9;
+		String desc = null;
+		try
+		{
+			String connectInput = getConnectInputXML(cabName, userName, password);
+
+			System.out.println("Input XML for wmconnect : " + connectInput);
+			
+			String wmconnectOP="";
+			int sessionCheckInt=loopCount-1;
+			while(sessionCheckInt<loopCount)
+			{
+				try
+				{
+					wmconnectOP=WFNGExecute(connectInput,JTSIP,JTSPORT,1);
+					break;
+				}
+				catch(Exception e)
+				{
+					System.out.println("Exception in Execute of getsession ID: " + e);
+					sessionCheckInt++;
+					waiteloopExecute(waitLoop);
+					continue;
+				}
+			}
+
+			System.out.println("wmconnect output: " + wmconnectOP);
+			if (!(getTagValue(wmconnectOP,"Option").equalsIgnoreCase("WMConnect")))
+			{
+				return "Error Invalid Workflow Server IP and Port are registered.";
+			}
+			i = Integer.parseInt(getTagValue(wmconnectOP,"MainCode"));
+			if (i == 0)
+			{
+				sessionID = getTagValue(wmconnectOP,"SessionId");
+				return sessionID;
+			}
+			else
+			{
+				desc = getTagValue(wmconnectOP,"Description");
+
+				i = Integer.parseInt(getTagValue(wmconnectOP,"SubErrorCode"));
+			}
+		}
+		catch (Exception lExcp)
+		{
+			System.out.println("Execption occurred in getsessionid" + ": " + lExcp.toString());
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			lExcp.printStackTrace(pw);
+			System.out.println("Exception in getSessionID : "+sw);
+		}
+		return "Error " + desc;
+	}
+	
+	private static void waiteloopExecute(long wtime)
+	{
+        try
+		{
+            for (int i = 0; i < 10; i++)
+			{
+                Thread.yield();
+                Thread.sleep(wtime / 10);
+            }
+        }
+		catch (InterruptedException e)
+		{
+           System.out.println(e.toString());
+        }
+    }
+
+}   /*  End of the TestXIRR class. */

@@ -1,0 +1,169 @@
+ Time Taken in WMConnect is  :   129
+Data Sent in bytes= 297   Data Received= 540
+<?xml version="1.0"?>
+<WMConnect_Input>
+<Option>WMConnect</Option>
+<EngineName>rakcas</EngineName>
+<Participant>
+<Name>arun1</Name>
+<Password>system123#</Password>
+<Scope></Scope>
+<UserExist>N</UserExist>
+<Locale>en-us</Locale>
+<ParticipantType>U</ParticipantType>
+</Particpant>
+</WMConnect_Input>
+
+<?xml version="1.0"?>
+<WMConnect_Output>
+<Option>WMConnect</Option>
+<Exception>
+<MainCode>0</MainCode>
+</Exception>
+<Participant>
+<SessionId>-681593443</SessionId><ID>1417</ID><LastLoginTime>2024-01-19 16:06:23.607</LastLoginTime><IsAdmin>Y</IsAdmin><Privileges>1111111111111111</Privileges>
+</Participant>
+<LastLoginTime>2024-01-19 16:06:23.607</LastLoginTime><LastLoginFailureTime></LastLoginFailureTime><FailureAttemptCount>0</FailureAttemptCount><TimeZoneInfo><DBServer><OffSet>240</OffSet></DBServer></TimeZoneInfo></WMConnect_Output>
+
+
+ Time Taken in APSelectWithColumnNames is  :   11
+Data Sent in bytes= 307   Data Received= 321
+<?xml version="1.0"?>
+<APSelect_Input>
+<Option>APSelectWithColumnNames</Option>
+<Query>select randomnumber from pdbconnection with(nolock) where userindex in (select userindex from pdbuser with(nolock) where username='arun1')</Query>
+<EngineName>rakcas</EngineName>
+<SessionId></SessionId>
+</APSelect_Input>
+
+<?xml version="1.0"?>
+<APSelectWithColumnNames_Output>
+<Option>APSelectWithColumnNames</Option>
+<Exception>
+<MainCode>0</MainCode>
+</Exception>
+<Output>
+	<Records>
+		<Record>
+			<randomnumber>-681593443</randomnumber>
+		</Record>
+	</Records>
+	<TotalRetrieved>1</TotalRetrieved>
+</Output></APSelectWithColumnNames_Output>
+
+
+ Time Taken in WMConnect is  :   141
+Data Sent in bytes= 297   Data Received= 535
+<?xml version="1.0"?>
+<WMConnect_Input>
+<Option>WMConnect</Option>
+<EngineName>rakcas</EngineName>
+<Participant>
+<Name>arun1</Name>
+<Password>system123#</Password>
+<Scope></Scope>
+<UserExist>N</UserExist>
+<Locale>en-us</Locale>
+<ParticipantType>U</ParticipantType>
+</Particpant>
+</WMConnect_Input>
+
+<?xml version="1.0"?>
+<WMConnect_Output>
+<Option>WMConnect</Option>
+<Exception>
+<MainCode>0</MainCode>
+</Exception>
+<Participant>
+<SessionId>328913890</SessionId><ID>1417</ID><LastLoginTime>2024-01-23 16:06:50.9</LastLoginTime><IsAdmin>Y</IsAdmin><Privileges>1111111111111111</Privileges>
+</Participant>
+<LastLoginTime>2024-01-23 16:06:50.9</LastLoginTime><LastLoginFailureTime></LastLoginFailureTime><FailureAttemptCount>0</FailureAttemptCount><TimeZoneInfo><DBServer><OffSet>240</OffSet></DBServer></TimeZoneInfo></WMConnect_Output>
+
+
+ Time Taken in APSelectWithColumnNames is  :   13
+Data Sent in bytes= 307   Data Received= 320
+<?xml version="1.0"?>
+<APSelect_Input>
+<Option>APSelectWithColumnNames</Option>
+<Query>select randomnumber from pdbconnection with(nolock) where userindex in (select userindex from pdbuser with(nolock) where username='arun1')</Query>
+<EngineName>rakcas</EngineName>
+<SessionId></SessionId>
+</APSelect_Input>
+
+<?xml version="1.0"?>
+<APSelectWithColumnNames_Output>
+<Option>APSelectWithColumnNames</Option>
+<Exception>
+<MainCode>0</MainCode>
+</Exception>
+<Output>
+	<Records>
+		<Record>
+			<randomnumber>328913890</randomnumber>
+		</Record>
+	</Records>
+	<TotalRetrieved>1</TotalRetrieved>
+</Output></APSelectWithColumnNames_Output>
+
+
+ Time Taken in APSelectWithColumnNames is  :   51
+Data Sent in bytes= 265   Data Received= 382
+<?xml version="1.0"?>
+<APSelect_Input>
+<Option>APSelectWithColumnNames</Option>
+<Query>SELECT wi_name,Status,insertion_date FROM NG_DCC_FTS_DOC WITH (NOLOCK) WHERE Status='R'</Query>
+<EngineName>rakcas</EngineName>
+<SessionId>328913890</SessionId>
+</APSelect_Input>
+
+<?xml version="1.0"?>
+<APSelectWithColumnNames_Output>
+<Option>APSelectWithColumnNames</Option>
+<Exception>
+<MainCode>0</MainCode>
+</Exception>
+<Output>
+	<Records>
+		<Record>
+			<wi_name>DCC-0000028640-process</wi_name>
+			<Status>R</Status>
+			<insertion_date></insertion_date>
+		</Record>
+	</Records>
+	<TotalRetrieved>1</TotalRetrieved>
+</Output></APSelectWithColumnNames_Output>
+
+
+ Time Taken in APSelectWithColumnNames is  :   31
+Data Sent in bytes= 327   Data Received= 539
+<?xml version="1.0"?>
+<APSelect_Input>
+<Option>APSelectWithColumnNames</Option>
+<Query>SELECT itemindex,CURR_WSNAME,Wi_Name,CIF,MobileNo,ECRN,PassportNo,EmirateID FROM NG_DCC_EXTTABLE WITH (NOLOCK) WHERE Wi_Name='DCC-0000028640-process'</Query>
+<EngineName>rakcas</EngineName>
+<SessionId>328913890</SessionId>
+</APSelect_Input>
+
+<?xml version="1.0"?>
+<APSelectWithColumnNames_Output>
+<Option>APSelectWithColumnNames</Option>
+<Exception>
+<MainCode>0</MainCode>
+</Exception>
+<Output>
+	<Records>
+		<Record>
+			<itemindex>447632</itemindex>
+			<CURR_WSNAME>Reject</CURR_WSNAME>
+			<Wi_Name>DCC-0000028640-process</Wi_Name>
+			<CIF></CIF>
+			<MobileNo>509662903</MobileNo>
+			<ECRN></ECRN>
+			<PassportNo>IN9208581</PassportNo>
+			<EmirateID>784199425267506</EmirateID>
+		</Record>
+	</Records>
+	<TotalRetrieved>1</TotalRetrieved>
+</Output></APSelectWithColumnNames_Output>
+
+
